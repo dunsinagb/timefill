@@ -1,0 +1,6 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -scheme TimeFill -destination "platform=iOS,name=AOI iPhone" clean build
+
+2025-10-05 19:46:41.892 xcodebuild[6376:679712] Writing error result bundle to /var/folders/cq/rhsvs6p10qz6nz1r61_vgqdw0000gq/T/ResultBundle_2025-05-10_19-46-0041.xcresult
+xcodebuild: error: The directory /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill does not contain an Xcode project, workspace or package.
+
