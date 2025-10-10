@@ -295,7 +295,7 @@ struct EditEventView: View {
 
         // Music & Entertainment
         "music.note", "music.note.list", "music.mic", "guitar",
-        "headphones", "hifispeaker.fill", "radio.fill",
+        "headphones", "speaker.wave.2.fill", "radio",
         "film.fill", "tv.fill", "gamecontroller.fill",
         "dice.fill", "puzzlepiece.fill",
 
