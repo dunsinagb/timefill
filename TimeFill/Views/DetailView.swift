@@ -268,29 +268,26 @@ struct EditEventView: View {
     private let icons = [
         // Celebrations & Events
         "birthday.cake.fill", "gift.fill", "party.popper.fill", "balloon.fill",
-        "sparkles", "star.fill", "trophy.fill", "rosette", "crown.fill",
+        "sparkles", "star.fill", "trophy.fill", "crown.fill",
 
         // Love & Relationships
         "heart.fill", "heart.circle.fill", "suit.heart.fill", "face.smiling.fill",
-        "hands.sparkles.fill", "figure.2.and.child.holdinghands", "figure.wave",
 
         // Travel & Transportation
         "airplane", "airplane.departure", "airplane.arrival", "car.fill",
-        "bus.fill", "train.side.front.car", "ferry.fill", "bicycle",
-        "sailboat.fill", "map.fill", "globe.americas.fill", "globe.europe.africa.fill",
-        "location.fill", "signpost.right.fill", "building.2.fill", "house.fill",
+        "bus.fill", "ferry.fill", "bicycle",
+        "sailboat.fill", "map.fill", "location.fill", "building.2.fill", "house.fill",
 
         // Work & Career
         "briefcase.fill", "bag.fill", "case.fill", "graduationcap.fill",
-        "book.closed.fill", "bookmark.fill", "pencil", "pencil.and.ruler.fill",
-        "chart.bar.fill", "chart.line.uptrend.xyaxis", "lightbulb.fill",
-        "brain.fill", "medal.fill", "person.badge.shield.checkmark.fill",
+        "book.closed.fill", "bookmark.fill", "pencil",
+        "chart.bar.fill", "lightbulb.fill", "brain.fill", "medal.fill",
 
         // Health & Fitness
-        "heart.text.square.fill", "cross.fill", "pills.fill", "syringe.fill",
-        "bed.double.fill", "figure.run", "figure.walk", "figure.yoga",
-        "dumbbell.fill", "tennis.racket", "football.fill", "basketball.fill",
-        "baseball.fill", "soccerball.inverse", "hockey.puck.fill",
+        "heart.text.square.fill", "cross.fill", "pills.fill",
+        "bed.double.fill", "figure.run", "figure.walk",
+        "dumbbell.fill", "football.fill", "basketball.fill",
+        "baseball.fill", "soccerball.inverse",
 
         // Food & Dining
         "fork.knife", "cup.and.saucer.fill", "wineglass.fill", "mug.fill",
@@ -298,15 +295,15 @@ struct EditEventView: View {
 
         // Music & Entertainment
         "music.note", "music.note.list", "music.mic", "guitars.fill",
-        "pianokeys.inverse", "headphones", "hifispeaker.fill", "radio.fill",
+        "headphones", "hifispeaker.fill", "radio.fill",
         "film.fill", "tv.fill", "gamecontroller.fill",
-        "dice.fill", "puzzlepiece.fill", "theatermasks.fill",
+        "dice.fill", "puzzlepiece.fill",
 
         // Nature & Weather
         "sun.max.fill", "moon.fill", "moon.stars.fill",
         "cloud.fill", "cloud.rain.fill", "cloud.snow.fill", "snowflake",
         "flame.fill", "drop.fill", "tree.fill",
-        "mountain.2.fill", "beach.umbrella.fill", "water.waves",
+        "mountain.2.fill", "water.waves",
 
         // Animals
         "dog.fill", "cat.fill", "bird.fill", "fish.fill",
@@ -315,22 +312,19 @@ struct EditEventView: View {
 
         // Technology
         "desktopcomputer", "laptopcomputer", "iphone", "ipad",
-        "applewatch", "airpodspro", "homepod.fill",
-        "camera.fill", "video.fill", "phone.fill", "envelope.fill",
-        "paperplane.fill", "message.fill", "bubble.left.and.bubble.right.fill",
+        "applewatch", "camera.fill", "video.fill", "phone.fill", "envelope.fill",
+        "paperplane.fill", "message.fill",
 
         // Time & Calendar
         "calendar", "calendar.badge.clock", "clock.fill", "timer",
-        "stopwatch.fill", "alarm.fill", "hourglass", "hourglass.bottomhalf.filled",
+        "stopwatch.fill", "alarm.fill", "hourglass",
 
         // Money & Shopping
         "dollarsign.circle.fill", "creditcard.fill", "banknote.fill",
-        "bag.circle.fill", "giftcard.fill",
+        "giftcard.fill",
 
         // Home & Living
-        "building.fill", "door.left.hand.closed",
-        "lamp.desk.fill", "sofa.fill", "toilet.fill", "shower.fill",
-        "washer.fill", "refrigerator.fill", "oven.fill",
+        "building.fill", "lamp.desk.fill", "bed.double.fill",
 
         // Creative & Hobbies
         "paintbrush.fill", "paintpalette.fill", "photo.fill",
@@ -338,21 +332,17 @@ struct EditEventView: View {
         "books.vertical.fill", "magazine.fill", "newspaper.fill",
 
         // Symbols & Misc
-        "flag.fill", "flag.checkered", "flag.checkered.2.crossed",
+        "flag.fill", "flag.checkered",
         "bell.fill", "megaphone.fill", "speaker.wave.3.fill",
         "bolt.fill", "bolt.heart.fill", "exclamationmark.triangle.fill",
         "checkmark.circle.fill", "xmark.circle.fill", "questionmark.circle.fill",
         "info.circle.fill", "plus.circle.fill", "minus.circle.fill",
-        "arrow.up.circle.fill", "arrow.down.circle.fill", "arrow.right.circle.fill",
-        "arrow.left.circle.fill", "arrow.uturn.left.circle.fill",
 
         // Special Occasions
-        "balloon.2.fill", "fireworks", "candle.fill", "cross.case.fill",
-        "staroflife.fill", "ticket.fill",
+        "balloon.2.fill", "fireworks", "ticket.fill",
 
         // Space & Science
-        "atom", "fossil.shell.fill",
-        "testtube.2", "aqi.medium", "wind", "tornado",
+        "atom", "wind",
 
         // Seasonal
         "umbrella.fill"
