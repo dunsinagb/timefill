@@ -48,14 +48,14 @@ struct AddEventView: View {
         "heart.text.square.fill", "cross.fill", "pills.fill",
         "bed.double.fill", "figure.run", "figure.walk",
         "dumbbell.fill", "football.fill", "basketball.fill",
-        "baseball.fill", "soccerball.inverse",
+        "baseball.fill", "soccerball",
 
         // Food & Dining
         "fork.knife", "cup.and.saucer.fill", "wineglass.fill", "mug.fill",
         "carrot.fill", "leaf.fill", "cart.fill",
 
         // Music & Entertainment
-        "music.note", "music.note.list", "music.mic", "guitars.fill",
+        "music.note", "music.note.list", "music.mic", "guitar",
         "headphones", "hifispeaker.fill", "radio.fill",
         "film.fill", "tv.fill", "gamecontroller.fill",
         "dice.fill", "puzzlepiece.fill",
@@ -64,7 +64,7 @@ struct AddEventView: View {
         "sun.max.fill", "moon.fill", "moon.stars.fill",
         "cloud.fill", "cloud.rain.fill", "cloud.snow.fill", "snowflake",
         "flame.fill", "drop.fill", "tree.fill",
-        "mountain.2.fill", "water.waves",
+        "mountain.2.fill", "leaf",
 
         // Animals
         "dog.fill", "cat.fill", "bird.fill", "fish.fill",
@@ -100,7 +100,7 @@ struct AddEventView: View {
         "info.circle.fill", "plus.circle.fill", "minus.circle.fill",
 
         // Special Occasions
-        "balloon.2.fill", "fireworks", "ticket.fill",
+        "ticket.fill",
 
         // Space & Science
         "atom", "wind",
