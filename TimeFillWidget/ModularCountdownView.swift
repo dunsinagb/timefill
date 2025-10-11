@@ -85,7 +85,14 @@ struct ModularCountdownView: View {
             // Icon and countdown - horizontally aligned in center
             HStack(alignment: .center, spacing: 12) {
                 // Icon - changes based on event state at entry time
-                if entry.isCompletedAtEntry {
+                if event.isScheduled {
+                    // Scheduled icon for future events
+                    Image(systemName: "clock.fill")
+                        .font(.system(size: 38, weight: .semibold))
+                        .foregroundStyle(event.color)
+                        .frame(width: 44, height: 44)
+                        .minimumScaleFactor(0.8)
+                } else if entry.isCompletedAtEntry {
                     // Checkmark when completed
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 38, weight: .semibold))
@@ -111,7 +118,13 @@ struct ModularCountdownView: View {
                 // Countdown number + label
                 VStack(alignment: .center, spacing: 2) {
                     // Large number - shows seconds in final minute
-                    if entry.isCompletedAtEntry {
+                    if event.isScheduled {
+                        Text("\(event.daysUntilStart)")
+                            .font(.system(size: 48, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                    } else if entry.isCompletedAtEntry {
                         Text("DONE")
                             .font(.system(size: 32, weight: .bold, design: .rounded))
                             .foregroundStyle(event.color)
@@ -132,7 +145,13 @@ struct ModularCountdownView: View {
                     }
 
                     // Label - changes based on state
-                    if entry.isCompletedAtEntry {
+                    if event.isScheduled {
+                        Text("STARTS IN")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .tracking(1.5)
+                            .textCase(.uppercase)
+                    } else if entry.isCompletedAtEntry {
                         Text("")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                     } else if entry.isInFinalMinuteAtEntry {

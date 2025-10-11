@@ -118,7 +118,32 @@ struct DetailView: View {
                     .padding(.vertical)
 
                     // Countdown display
-                    if !isCompleted {
+                    if event.isScheduled {
+                        // Scheduled event - show days until start
+                        VStack(spacing: 12) {
+                            Image(systemName: "clock.fill")
+                                .font(.system(size: 64))
+                                .foregroundStyle(Color(hex: event.colorHex))
+
+                            Text("Starts in \(event.daysUntilStart) days")
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+
+                            Text("Countdown begins on")
+                                .font(.system(.subheadline, design: .rounded))
+                                .foregroundStyle(.gray)
+
+                            Text(event.createdDate, format: .dateTime.weekday().month().day().year())
+                                .font(.system(.body, design: .rounded))
+                                .foregroundStyle(.white)
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color(hex: event.colorHex).opacity(0.2))
+                        )
+                    } else if !isCompleted {
                         HStack(spacing: 0) {
                             CountdownUnit(value: daysRemaining, label: "Days")
                             CountdownUnit(value: hoursRemaining, label: "Hours")
@@ -266,22 +291,32 @@ struct EditEventView: View {
     }
 
     private let icons = [
-        // Celebrations & Events
-        "birthday.cake.fill", "gift.fill", "party.popper.fill", "balloon.fill",
-        "sparkles", "star.fill", "trophy.fill", "crown.fill",
+        // Most Popular - Top Row
+        "heart.fill", "star.fill", "calendar", "gift.fill",
+        "birthday.cake.fill", "airplane", "car.fill", "house.fill",
+        "bell.fill", "flag.fill", "trophy.fill", "crown.fill",
+
+        // Celebrations & Special Occasions
+        "party.popper.fill", "balloon.fill", "sparkles", "ticket.fill",
 
         // Love & Relationships
-        "heart.fill", "heart.circle.fill", "suit.heart.fill", "face.smiling.fill",
+        "heart.circle.fill", "suit.heart.fill", "face.smiling.fill",
 
         // Travel & Transportation
-        "airplane", "airplane.departure", "airplane.arrival", "car.fill",
-        "bus.fill", "ferry.fill", "bicycle",
-        "sailboat.fill", "map.fill", "location.fill", "building.2.fill", "house.fill",
+        "airplane.departure", "airplane.arrival", "map.fill", "location.fill",
+        "bus.fill", "ferry.fill", "bicycle", "sailboat.fill", "building.2.fill",
 
         // Work & Career
-        "briefcase.fill", "bag.fill", "case.fill", "graduationcap.fill",
+        "briefcase.fill", "bag.fill", "graduationcap.fill",
         "book.closed.fill", "bookmark.fill", "pencil",
         "chart.bar.fill", "lightbulb.fill", "brain.fill", "medal.fill",
+
+        // Time & Productivity
+        "calendar.badge.clock", "clock.fill", "timer",
+        "stopwatch.fill", "alarm.fill", "hourglass",
+
+        // Communication & Social
+        "phone.fill", "envelope.fill", "message.fill", "paperplane.fill",
 
         // Health & Fitness
         "heart.text.square.fill", "cross.fill", "pills.fill",
@@ -291,33 +326,29 @@ struct EditEventView: View {
 
         // Food & Dining
         "fork.knife", "cup.and.saucer.fill", "wineglass.fill", "mug.fill",
-        "carrot.fill", "leaf.fill", "cart.fill",
+        "carrot.fill", "cart.fill",
 
         // Music & Entertainment
         "music.note", "music.note.list", "music.mic", "guitar",
-        "headphones", "speaker.wave.2.fill", "radio",
+        "headphones", "radio",
         "film.fill", "tv.fill", "gamecontroller.fill",
         "dice.fill", "puzzlepiece.fill",
 
         // Nature & Weather
         "sun.max.fill", "moon.fill", "moon.stars.fill",
         "cloud.fill", "cloud.rain.fill", "cloud.snow.fill", "snowflake",
-        "flame.fill", "drop.fill", "tree.fill",
-        "mountain.2.fill", "leaf",
+        "flame.fill", "drop.fill", "tree.fill", "leaf",
+        "mountain.2.fill", "umbrella.fill",
 
-        // Animals
+        // Animals & Pets
         "dog.fill", "cat.fill", "bird.fill", "fish.fill",
         "hare.fill", "tortoise.fill", "pawprint.fill", "ant.fill",
         "ladybug.fill", "lizard.fill",
 
-        // Technology
-        "desktopcomputer", "laptopcomputer", "iphone", "ipad",
-        "applewatch", "camera.fill", "video.fill", "phone.fill", "envelope.fill",
-        "paperplane.fill", "message.fill",
-
-        // Time & Calendar
-        "calendar", "calendar.badge.clock", "clock.fill", "timer",
-        "stopwatch.fill", "alarm.fill", "hourglass",
+        // Technology & Devices
+        "iphone", "ipad", "applewatch",
+        "desktopcomputer", "laptopcomputer",
+        "camera.fill", "video.fill",
 
         // Money & Shopping
         "dollarsign.circle.fill", "creditcard.fill", "banknote.fill",
@@ -331,21 +362,12 @@ struct EditEventView: View {
         "scissors", "paperclip", "pin.fill",
         "books.vertical.fill", "magazine.fill", "newspaper.fill",
 
-        // Symbols & Misc
-        "flag.fill", "flag.checkered",
-        "bell.fill", "megaphone.fill", "speaker.wave.3.fill",
+        // Symbols & Actions
+        "flag.checkered", "megaphone.fill", "speaker.wave.3.fill",
         "bolt.fill", "bolt.heart.fill", "exclamationmark.triangle.fill",
         "checkmark.circle.fill", "xmark.circle.fill", "questionmark.circle.fill",
         "info.circle.fill", "plus.circle.fill", "minus.circle.fill",
-
-        // Special Occasions
-        "ticket.fill",
-
-        // Space & Science
-        "atom", "wind",
-
-        // Seasonal
-        "umbrella.fill"
+        "case.fill", "atom", "wind"
     ]
 
     var body: some View {

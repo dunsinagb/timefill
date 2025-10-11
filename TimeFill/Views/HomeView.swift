@@ -262,8 +262,20 @@ struct EventCardView: View {
                     .font(.system(size: 24))
                     .foregroundStyle(Color(hex: event.colorHex))
 
+                // Scheduled badge for future events
+                if event.isScheduled {
+                    Circle()
+                        .fill(Color.timeFillDarkBg)
+                        .frame(width: 20, height: 20)
+                        .overlay(
+                            Image(systemName: "clock.fill")
+                                .font(.system(size: 20))
+                                .foregroundStyle(Color(hex: event.colorHex))
+                        )
+                        .offset(x: 18, y: -18)
+                }
                 // Checkmark badge for completed events
-                if currentProgress >= 1.0 {
+                else if currentProgress >= 1.0 {
                     Circle()
                         .fill(Color.timeFillDarkBg)
                         .frame(width: 20, height: 20)
@@ -285,9 +297,16 @@ struct EventCardView: View {
                     .lineLimit(2)
                     .truncationMode(.tail)
 
-                Text("\(event.daysRemaining)D · \(Int(currentProgress * 100))%")
-                    .font(.system(.subheadline, design: .rounded))
-                    .foregroundStyle(.gray)
+                // Show "Starts in X days" for scheduled events
+                if event.isScheduled {
+                    Text("Starts in \(event.daysUntilStart)D")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundStyle(.gray)
+                } else {
+                    Text("\(event.daysRemaining)D · \(Int(currentProgress * 100))%")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundStyle(.gray)
+                }
             }
 
             Spacer()

@@ -61,6 +61,18 @@ class NotificationManager: ObservableObject {
         // Schedule notifications based on preferences
         var scheduledDates: [Date] = []
 
+        // For scheduled events, notify when countdown starts
+        if event.isScheduled && event.createdDate > now {
+            if let startDayMorning = calendar.date(
+                bySettingHour: 9,
+                minute: 0,
+                second: 0,
+                of: event.createdDate
+            ), startDayMorning > now {
+                scheduledDates.append(startDayMorning)
+            }
+        }
+
         // On event day
         if notificationPreferences.onEventDay {
             if let eventDayMorning = calendar.date(
@@ -122,31 +134,39 @@ class NotificationManager: ObservableObject {
 
         // Create notifications for each scheduled date
         for (index, date) in scheduledDates.enumerated() {
-            let daysUntil = calendar.dateComponents([.day], from: date, to: event.targetDate).day ?? 0
-
             let content = UNMutableNotificationContent()
             content.title = "Time Fill"
 
+            // Check if this is the countdown start notification (for scheduled events)
+            if event.isScheduled && calendar.isDate(date, inSameDayAs: event.createdDate) {
+                content.subtitle = event.name
+                content.body = "⏱️ Your countdown begins today!"
+            }
             // Check if this is the exact event time
-            if calendar.isDate(date, inSameDayAs: event.targetDate) &&
+            else if calendar.isDate(date, inSameDayAs: event.targetDate) &&
                abs(date.timeIntervalSince(event.targetDate)) < 60 {
                 content.subtitle = event.name
                 content.body = "🎊 The moment has arrived! Your countdown is complete!"
-            } else if daysUntil == 0 {
-                content.subtitle = event.name
-                content.body = "🎉 Today is the day!"
-            } else if daysUntil == 1 {
-                content.subtitle = event.name
-                content.body = "📅 Tomorrow is the big day!"
-            } else if daysUntil == 7 {
-                content.subtitle = event.name
-                content.body = "⏰ One week to go!"
-            } else if daysUntil >= 28 && daysUntil <= 31 {
-                content.subtitle = event.name
-                content.body = "📆 One month away!"
-            } else {
-                content.subtitle = event.name
-                content.body = "\(daysUntil) days to go"
+            }
+            else {
+                let daysUntil = calendar.dateComponents([.day], from: date, to: event.targetDate).day ?? 0
+
+                if daysUntil == 0 {
+                    content.subtitle = event.name
+                    content.body = "🎉 Today is the day!"
+                } else if daysUntil == 1 {
+                    content.subtitle = event.name
+                    content.body = "📅 Tomorrow is the big day!"
+                } else if daysUntil == 7 {
+                    content.subtitle = event.name
+                    content.body = "⏰ One week to go!"
+                } else if daysUntil >= 28 && daysUntil <= 31 {
+                    content.subtitle = event.name
+                    content.body = "📆 One month away!"
+                } else {
+                    content.subtitle = event.name
+                    content.body = "\(daysUntil) days to go"
+                }
             }
 
             content.sound = .default

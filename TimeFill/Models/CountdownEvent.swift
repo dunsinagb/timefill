@@ -50,8 +50,23 @@ final class CountdownEvent {
         return max(components.second ?? 0, 0)
     }
 
+    // Check if countdown is scheduled for future
+    var isScheduled: Bool {
+        Date() < createdDate
+    }
+
+    // Days until countdown starts (for scheduled events)
+    var daysUntilStart: Int {
+        guard isScheduled else { return 0 }
+        let components = Calendar.current.dateComponents([.day], from: Date(), to: createdDate)
+        return max(components.day ?? 0, 0)
+    }
+
     // Calculate progress percentage (0.0 to 1.0)
     var progress: Double {
+        // If scheduled, progress is 0
+        guard !isScheduled else { return 0.0 }
+
         let totalTime = targetDate.timeIntervalSince(createdDate)
         let elapsedTime = Date().timeIntervalSince(createdDate)
         let progress = min(max(elapsedTime / totalTime, 0.0), 1.0)

@@ -49,7 +49,15 @@ struct MinimalCountdownView: View {
                     .frame(maxHeight: .infinity)  // Push icon down slightly
 
                 // Event icon - changes based on event state at entry time
-                if entry.isCompletedAtEntry {
+                if event.isScheduled {
+                    // Scheduled icon for future events
+                    Image(systemName: "clock.fill")
+                        .font(.system(size: 42, weight: .semibold))
+                        .foregroundStyle(event.color)
+                        .frame(width: 48, height: 48)
+                        .minimumScaleFactor(0.8)
+                        .padding(.bottom, 12)
+                } else if entry.isCompletedAtEntry {
                     // Checkmark when completed
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 42, weight: .semibold))
@@ -76,7 +84,14 @@ struct MinimalCountdownView: View {
                 }
 
                 // Large countdown number - changes based on state
-                if entry.isCompletedAtEntry {
+                if event.isScheduled {
+                    Text("\(event.daysUntilStart)")
+                        .font(.system(size: 68, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
+                        .padding(.bottom, 4)
+                } else if entry.isCompletedAtEntry {
                     Text("DONE")
                         .font(.system(size: 48, weight: .bold, design: .rounded))
                         .foregroundStyle(event.color)
@@ -100,7 +115,13 @@ struct MinimalCountdownView: View {
                 }
 
                 // Label - changes based on state
-                if entry.isCompletedAtEntry {
+                if event.isScheduled {
+                    Text("STARTS IN")
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .tracking(1.8)
+                        .textCase(.uppercase)
+                } else if entry.isCompletedAtEntry {
                     Text("")
                         .font(.system(size: 11, weight: .semibold, design: .rounded))
                         .padding(.bottom, 4)
