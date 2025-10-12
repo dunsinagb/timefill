@@ -17,6 +17,7 @@ struct DetailView: View {
     @State private var currentTime = Date()
     @State private var showingEdit = false
     @State private var showingDeleteAlert = false
+    @State private var showingInfo = false
     @State private var showingCompletionAnimation = false
     @State private var triggerHeatmapAnimation = false
     @State private var forceHeatmapReAnimate = false
@@ -42,6 +43,22 @@ struct DetailView: View {
 
     private var secondsRemaining: Int {
         let components = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: currentTime, to: event.targetDate)
+        return max(components.second ?? 0, 0)
+    }
+
+    // Calculate time until countdown starts (for scheduled events)
+    private var hoursUntilStart: Int {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: currentTime, to: event.createdDate)
+        return max(components.hour ?? 0, 0)
+    }
+
+    private var minutesUntilStart: Int {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: currentTime, to: event.createdDate)
+        return max(components.minute ?? 0, 0)
+    }
+
+    private var secondsUntilStart: Int {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: currentTime, to: event.createdDate)
         return max(components.second ?? 0, 0)
     }
 
@@ -119,30 +136,57 @@ struct DetailView: View {
 
                     // Countdown display
                     if event.isScheduled {
-                        // Scheduled event - show days until start
-                        VStack(spacing: 12) {
-                            Image(systemName: "clock.fill")
-                                .font(.system(size: 64))
-                                .foregroundStyle(Color(hex: event.colorHex))
+                        // Scheduled event - show days until start or time if today
+                        if event.daysUntilStart == 0 {
+                            // Starts today - show time countdown
+                            VStack(spacing: 12) {
+                                Image(systemName: "clock.fill")
+                                    .font(.system(size: 64))
+                                    .foregroundStyle(Color(hex: event.colorHex))
 
-                            Text("Starts in \(event.daysUntilStart) days")
-                                .font(.system(.title2, design: .rounded))
-                                .fontWeight(.bold)
-                                .foregroundStyle(.white)
+                                Text("Starts Today")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
 
-                            Text("Countdown begins on")
-                                .font(.system(.subheadline, design: .rounded))
-                                .foregroundStyle(.gray)
+                                // Time countdown box
+                                HStack(spacing: 0) {
+                                    CountdownUnit(value: hoursUntilStart, label: "Hours")
+                                    CountdownUnit(value: minutesUntilStart, label: "Minutes")
+                                    CountdownUnit(value: secondsUntilStart, label: "Seconds")
+                                }
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(hex: event.colorHex).opacity(0.2))
+                            )
+                        } else {
+                            // Multiple days until start
+                            VStack(spacing: 12) {
+                                Image(systemName: "clock.fill")
+                                    .font(.system(size: 64))
+                                    .foregroundStyle(Color(hex: event.colorHex))
 
-                            Text(event.createdDate, format: .dateTime.weekday().month().day().year())
-                                .font(.system(.body, design: .rounded))
-                                .foregroundStyle(.white)
+                                Text("Starts in \(event.daysUntilStart) \(event.daysUntilStart == 1 ? "day" : "days")")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+
+                                Text("Countdown begins on")
+                                    .font(.system(.subheadline, design: .rounded))
+                                    .foregroundStyle(.gray)
+
+                                Text(event.createdDate, format: .dateTime.weekday().month().day().year())
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundStyle(.white)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(hex: event.colorHex).opacity(0.2))
+                            )
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color(hex: event.colorHex).opacity(0.2))
-                        )
                     } else if !isCompleted {
                         HStack(spacing: 0) {
                             CountdownUnit(value: daysRemaining, label: "Days")
@@ -162,7 +206,7 @@ struct DetailView: View {
                                 .font(.system(size: 64))
                                 .foregroundStyle(Color(hex: event.colorHex))
 
-                            Text("Event Complete!")
+                            Text("Countdown Complete!")
                                 .font(.system(.title2, design: .rounded))
                                 .fontWeight(.bold)
                                 .foregroundStyle(.white)
@@ -178,17 +222,26 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    Button(action: { showingEdit = true }) {
-                        Label("Edit", systemImage: "slider.horizontal.3")
+                HStack(spacing: 16) {
+                    // Info button
+                    Button(action: { showingInfo = true }) {
+                        Image(systemName: "info.circle")
+                            .foregroundStyle(.white)
                     }
 
-                    Button(role: .destructive, action: { showingDeleteAlert = true }) {
-                        Label("Delete", systemImage: "trash")
+                    // Menu button
+                    Menu {
+                        Button(action: { showingEdit = true }) {
+                            Label("Edit", systemImage: "slider.horizontal.3")
+                        }
+
+                        Button(role: .destructive, action: { showingDeleteAlert = true }) {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .foregroundStyle(.white)
                     }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .foregroundStyle(.white)
                 }
             }
         }
@@ -200,6 +253,9 @@ struct DetailView: View {
         }
         .onReceive(timer) { time in
             currentTime = time
+        }
+        .sheet(isPresented: $showingInfo) {
+            EventInfoSheet(event: event)
         }
         .sheet(isPresented: $showingEdit) {
             EditEventView(event: event)
@@ -243,6 +299,14 @@ struct CountdownUnit: View {
     let value: Int
     let label: String
 
+    private var displayLabel: String {
+        if value == 1 {
+            // Remove 's' from end for singular
+            return label.hasSuffix("s") ? String(label.dropLast()) : label
+        }
+        return label
+    }
+
     var body: some View {
         VStack(spacing: 4) {
             Text("\(value)")
@@ -251,7 +315,7 @@ struct CountdownUnit: View {
                 .foregroundStyle(.white)
                 .frame(minWidth: 60)
 
-            Text(label)
+            Text(displayLabel)
                 .font(.system(.caption, design: .rounded))
                 .foregroundStyle(.gray)
         }
@@ -408,16 +472,43 @@ struct EditEventView: View {
                                     .font(.system(.caption, design: .rounded))
                                     .foregroundStyle(.gray)
 
-                                DatePicker(
-                                    "Start Date",
-                                    selection: $startDate,
-                                    displayedComponents: [.date, .hourAndMinute]
-                                )
-                                .datePickerStyle(.compact)
-                                .labelsHidden()
-                                .padding()
-                                .background(Color.white.opacity(0.1))
-                                .cornerRadius(12)
+                                if startMode == .past {
+                                    DatePicker(
+                                        "Start Date",
+                                        selection: $startDate,
+                                        in: ...Date(),
+                                        displayedComponents: [.date, .hourAndMinute]
+                                    )
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                                    .padding()
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(12)
+                                    .onChange(of: startDate) { _, newStartDate in
+                                        // If target date is before or equal to new start date, adjust it
+                                        if targetDate <= newStartDate {
+                                            targetDate = Calendar.current.date(byAdding: .day, value: 30, to: newStartDate) ?? newStartDate
+                                        }
+                                    }
+                                } else {
+                                    DatePicker(
+                                        "Start Date",
+                                        selection: $startDate,
+                                        in: Date()...,
+                                        displayedComponents: [.date, .hourAndMinute]
+                                    )
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                                    .padding()
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(12)
+                                    .onChange(of: startDate) { _, newStartDate in
+                                        // If target date is before or equal to new start date, adjust it
+                                        if targetDate <= newStartDate {
+                                            targetDate = Calendar.current.date(byAdding: .day, value: 30, to: newStartDate) ?? newStartDate
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -430,6 +521,7 @@ struct EditEventView: View {
                             DatePicker(
                                 "Target Date",
                                 selection: $targetDate,
+                                in: startDate...,
                                 displayedComponents: [.date, .hourAndMinute]
                             )
                             .datePickerStyle(.compact)
@@ -437,6 +529,13 @@ struct EditEventView: View {
                             .padding()
                             .background(Color.white.opacity(0.1))
                             .cornerRadius(12)
+
+                            // Validation message
+                            if targetDate <= startDate {
+                                Text("Event date must be after countdown start")
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundStyle(.red.opacity(0.8))
+                            }
                         }
 
                         // Color picker
@@ -551,4 +650,130 @@ struct EditEventView: View {
         DetailView(event: sampleEvent)
     }
     .modelContainer(container)
+}
+
+// MARK: - Event Info Sheet
+struct EventInfoSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Bindable var event: CountdownEvent
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color.timeFillDarkBg
+                    .ignoresSafeArea()
+
+                VStack(spacing: 24) {
+                    // Event icon and name
+                    VStack(spacing: 12) {
+                        ZStack {
+                            Circle()
+                                .fill(Color(hex: event.colorHex).opacity(0.2))
+                                .frame(width: 80, height: 80)
+
+                            Image(systemName: event.iconName)
+                                .font(.system(size: 40))
+                                .foregroundStyle(Color(hex: event.colorHex))
+                        }
+
+                        Text(event.name)
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(.top, 20)
+
+                    // Info cards
+                    VStack(spacing: 16) {
+                        // Countdown started on
+                        InfoCard(
+                            title: "Countdown Started On",
+                            date: event.createdDate,
+                            icon: "clock.arrow.circlepath",
+                            color: Color(hex: event.colorHex)
+                        )
+
+                        // Event was created on
+                        InfoCard(
+                            title: "Event Was Created On",
+                            date: event.addedToAppDate,
+                            icon: "calendar.badge.plus",
+                            color: Color.timeFillCyan
+                        )
+
+                        // Event scheduled for
+                        InfoCard(
+                            title: "Event Scheduled For",
+                            date: event.targetDate,
+                            icon: "calendar.badge.clock",
+                            color: .orange
+                        )
+                    }
+                    .padding(.horizontal)
+
+                    Spacer()
+                }
+            }
+            .navigationTitle("Event Info")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.timeFillDarkBg, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .foregroundStyle(Color.timeFillCyan)
+                }
+            }
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - Info Card
+struct InfoCard: View {
+    let title: String
+    let date: Date
+    let icon: String
+    let color: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundStyle(color)
+                    .frame(width: 30)
+
+                Text(title)
+                    .font(.system(.subheadline, design: .rounded))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.gray)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(date, format: .dateTime.weekday().month().day().year())
+                    .font(.system(.body, design: .rounded))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+
+                Text(date, format: .dateTime.hour().minute())
+                    .font(.system(.body, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.7))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.05))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(color.opacity(0.3), lineWidth: 1)
+        )
+    }
 }

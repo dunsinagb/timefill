@@ -27,7 +27,24 @@ struct TimeFillApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            // If migration fails due to schema change, recreate the database
+            // This will delete existing data but is acceptable for development
+            print("⚠️ ModelContainer creation failed: \(error)")
+            print("⚠️ Attempting to reset database...")
+
+            // Get default database location and remove it
+            let appSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let storeURL = appSupportURL.appendingPathComponent("default.store")
+
+            try? FileManager.default.removeItem(at: storeURL)
+            try? FileManager.default.removeItem(at: appSupportURL.appendingPathComponent("default.store-shm"))
+            try? FileManager.default.removeItem(at: appSupportURL.appendingPathComponent("default.store-wal"))
+
+            do {
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer even after reset: \(error)")
+            }
         }
     }()
 

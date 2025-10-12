@@ -154,18 +154,47 @@ struct AddEventView: View {
                                     .foregroundStyle(.gray)
                                     .textCase(.lowercase)
 
-                                DatePicker(
-                                    "Start Date",
-                                    selection: $startDate,
-                                    displayedComponents: [.date, .hourAndMinute]
-                                )
-                                .datePickerStyle(.compact)
-                                .labelsHidden()
-                                .padding()
-                                .background(Color.white.opacity(0.1))
-                                .cornerRadius(12)
-                                .colorScheme(.dark)
-                                .environment(\.locale, Locale(identifier: "en_US"))
+                                if startMode == .past {
+                                    DatePicker(
+                                        "Start Date",
+                                        selection: $startDate,
+                                        in: ...Date(),
+                                        displayedComponents: [.date, .hourAndMinute]
+                                    )
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                                    .padding()
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(12)
+                                    .colorScheme(.dark)
+                                    .environment(\.locale, Locale(identifier: "en_US"))
+                                    .onChange(of: startDate) { _, newStartDate in
+                                        // If target date is before or equal to new start date, adjust it
+                                        if targetDate <= newStartDate {
+                                            targetDate = Calendar.current.date(byAdding: .day, value: 30, to: newStartDate) ?? newStartDate
+                                        }
+                                    }
+                                } else {
+                                    DatePicker(
+                                        "Start Date",
+                                        selection: $startDate,
+                                        in: Date()...,
+                                        displayedComponents: [.date, .hourAndMinute]
+                                    )
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                                    .padding()
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(12)
+                                    .colorScheme(.dark)
+                                    .environment(\.locale, Locale(identifier: "en_US"))
+                                    .onChange(of: startDate) { _, newStartDate in
+                                        // If target date is before or equal to new start date, adjust it
+                                        if targetDate <= newStartDate {
+                                            targetDate = Calendar.current.date(byAdding: .day, value: 30, to: newStartDate) ?? newStartDate
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -179,6 +208,7 @@ struct AddEventView: View {
                             DatePicker(
                                 "Target Date",
                                 selection: $targetDate,
+                                in: startDate...,
                                 displayedComponents: [.date, .hourAndMinute]
                             )
                             .datePickerStyle(.compact)
@@ -188,6 +218,13 @@ struct AddEventView: View {
                             .cornerRadius(12)
                             .colorScheme(.dark)
                             .environment(\.locale, Locale(identifier: "en_US"))
+
+                            // Validation message
+                            if targetDate <= startDate {
+                                Text("Event date must be after countdown start")
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundStyle(.red.opacity(0.8))
+                            }
                         }
 
                         // Color picker
@@ -278,7 +315,7 @@ struct AddEventView: View {
                         saveEvent()
                     }
                     .foregroundStyle(Color.timeFillCyan)
-                    .disabled(eventName.isEmpty)
+                    .disabled(eventName.isEmpty || targetDate <= startDate)
                 }
             }
             .sheet(isPresented: $showingCalendarImport) {

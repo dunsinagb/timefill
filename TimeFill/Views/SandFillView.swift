@@ -235,7 +235,7 @@ struct LargeSandFillView: View {
                     Text("\(elapsedDays)")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
-                    Text("days passed")
+                    Text(elapsedDays == 1 ? "day passed" : "days passed")
                         .font(.system(size: 11, design: .rounded))
                         .foregroundStyle(.gray)
                 }
@@ -244,7 +244,7 @@ struct LargeSandFillView: View {
                     Text("\(totalDays - elapsedDays)")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
-                    Text("days left")
+                    Text((totalDays - elapsedDays) == 1 ? "day left" : "days left")
                         .font(.system(size: 11, design: .rounded))
                         .foregroundStyle(.gray)
                 }

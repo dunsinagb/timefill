@@ -138,11 +138,12 @@ class NotificationManager: ObservableObject {
             content.title = "Time Fill"
 
             // Check if this is the countdown start notification (for scheduled events)
-            if event.isScheduled && calendar.isDate(date, inSameDayAs: event.createdDate) {
+            // Use calendar comparison instead of event.isScheduled since that changes over time
+            if calendar.isDate(date, inSameDayAs: event.createdDate) && event.createdDate > now {
                 content.subtitle = event.name
                 content.body = "⏱️ Your countdown begins today!"
             }
-            // Check if this is the exact event time
+            // Check if this is the exact event time (when countdown reaches 0)
             else if calendar.isDate(date, inSameDayAs: event.targetDate) &&
                abs(date.timeIntervalSince(event.targetDate)) < 60 {
                 content.subtitle = event.name
@@ -165,7 +166,7 @@ class NotificationManager: ObservableObject {
                     content.body = "📆 One month away!"
                 } else {
                     content.subtitle = event.name
-                    content.body = "\(daysUntil) days to go"
+                    content.body = "\(daysUntil) \(daysUntil == 1 ? "day" : "days") to go"
                 }
             }
 

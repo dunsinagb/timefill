@@ -13,7 +13,8 @@ final class CountdownEvent {
     var id: UUID
     var name: String
     var targetDate: Date
-    var createdDate: Date
+    var createdDate: Date  // Countdown start date (can be past/now/future)
+    var addedToAppDate: Date = Date()  // When event was actually created in the app (default to now)
     var colorHex: String
     var iconName: String
 
@@ -22,6 +23,7 @@ final class CountdownEvent {
         self.name = name
         self.targetDate = targetDate
         self.createdDate = Date()
+        self.addedToAppDate = Date()  // Always set to now when created
         self.colorHex = colorHex
         self.iconName = iconName
     }
