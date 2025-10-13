@@ -118,60 +118,92 @@ struct NotificationSettingsView: View {
 
                         if preferences.isEnabled {
                             Section {
-                                Toggle(isOn: $preferences.onEventDay) {
-                                    VStack(alignment: .leading, spacing: 4) {
+                                VStack(spacing: 0) {
+                                    Toggle(isOn: $preferences.onEventDay) {
                                         Text("On Event Day")
                                             .font(.system(.body, design: .rounded))
-                                        Text("9:00 AM on the event day")
-                                            .font(.system(.caption, design: .rounded))
-                                            .foregroundStyle(.gray)
+                                    }
+                                    .tint(Color.timeFillCyan)
+                                    .onChange(of: preferences.onEventDay) { _, _ in
+                                        rescheduleAll()
+                                    }
+
+                                    if preferences.onEventDay {
+                                        NotificationTimePicker(
+                                            minutes: $preferences.eventDayTime,
+                                            label: "Notification Time"
+                                        )
+                                        .onChange(of: preferences.eventDayTime) { _, _ in
+                                            rescheduleAll()
+                                        }
+                                        .padding(.top, 12)
                                     }
                                 }
-                                .tint(Color.timeFillCyan)
-                                .onChange(of: preferences.onEventDay) { _, _ in
-                                    rescheduleAll()
-                                }
 
-                                Toggle(isOn: $preferences.oneDayBefore) {
-                                    VStack(alignment: .leading, spacing: 4) {
+                                VStack(spacing: 0) {
+                                    Toggle(isOn: $preferences.oneDayBefore) {
                                         Text("1 Day Before")
                                             .font(.system(.body, design: .rounded))
-                                        Text("6:00 PM the day before")
-                                            .font(.system(.caption, design: .rounded))
-                                            .foregroundStyle(.gray)
+                                    }
+                                    .tint(Color.timeFillCyan)
+                                    .onChange(of: preferences.oneDayBefore) { _, _ in
+                                        rescheduleAll()
+                                    }
+
+                                    if preferences.oneDayBefore {
+                                        NotificationTimePicker(
+                                            minutes: $preferences.oneDayBeforeTime,
+                                            label: "Notification Time"
+                                        )
+                                        .onChange(of: preferences.oneDayBeforeTime) { _, _ in
+                                            rescheduleAll()
+                                        }
+                                        .padding(.top, 12)
                                     }
                                 }
-                                .tint(Color.timeFillCyan)
-                                .onChange(of: preferences.oneDayBefore) { _, _ in
-                                    rescheduleAll()
-                                }
 
-                                Toggle(isOn: $preferences.oneWeekBefore) {
-                                    VStack(alignment: .leading, spacing: 4) {
+                                VStack(spacing: 0) {
+                                    Toggle(isOn: $preferences.oneWeekBefore) {
                                         Text("1 Week Before")
                                             .font(.system(.body, design: .rounded))
-                                        Text("6:00 PM one week before")
-                                            .font(.system(.caption, design: .rounded))
-                                            .foregroundStyle(.gray)
                                     }
-                                }
-                                .tint(Color.timeFillCyan)
-                                .onChange(of: preferences.oneWeekBefore) { _, _ in
-                                    rescheduleAll()
+                                    .tint(Color.timeFillCyan)
+                                    .onChange(of: preferences.oneWeekBefore) { _, _ in
+                                        rescheduleAll()
+                                    }
+
+                                    if preferences.oneWeekBefore {
+                                        NotificationTimePicker(
+                                            minutes: $preferences.oneWeekBeforeTime,
+                                            label: "Notification Time"
+                                        )
+                                        .onChange(of: preferences.oneWeekBeforeTime) { _, _ in
+                                            rescheduleAll()
+                                        }
+                                        .padding(.top, 12)
+                                    }
                                 }
 
-                                Toggle(isOn: $preferences.oneMonthBefore) {
-                                    VStack(alignment: .leading, spacing: 4) {
+                                VStack(spacing: 0) {
+                                    Toggle(isOn: $preferences.oneMonthBefore) {
                                         Text("1 Month Before")
                                             .font(.system(.body, design: .rounded))
-                                        Text("6:00 PM one month before")
-                                            .font(.system(.caption, design: .rounded))
-                                            .foregroundStyle(.gray)
                                     }
-                                }
-                                .tint(Color.timeFillCyan)
-                                .onChange(of: preferences.oneMonthBefore) { _, _ in
-                                    rescheduleAll()
+                                    .tint(Color.timeFillCyan)
+                                    .onChange(of: preferences.oneMonthBefore) { _, _ in
+                                        rescheduleAll()
+                                    }
+
+                                    if preferences.oneMonthBefore {
+                                        NotificationTimePicker(
+                                            minutes: $preferences.oneMonthBeforeTime,
+                                            label: "Notification Time"
+                                        )
+                                        .onChange(of: preferences.oneMonthBeforeTime) { _, _ in
+                                            rescheduleAll()
+                                        }
+                                        .padding(.top, 12)
+                                    }
                                 }
                             } header: {
                                 Text("Notification Timing")
@@ -247,6 +279,43 @@ struct NotificationFeatureRow: View {
         .padding()
         .background(Color.white.opacity(0.05))
         .cornerRadius(12)
+    }
+}
+
+struct NotificationTimePicker: View {
+    @Binding var minutes: Int
+    let label: String
+
+    private var timeDate: Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        var dateComponents = components
+        dateComponents.hour = minutes / 60
+        dateComponents.minute = minutes % 60
+        return Calendar.current.date(from: dateComponents) ?? Date()
+    }
+
+    var body: some View {
+        HStack {
+            Text(label)
+                .font(.system(.caption, design: .rounded))
+                .foregroundStyle(.gray)
+
+            Spacer()
+
+            DatePicker(
+                "",
+                selection: Binding(
+                    get: { timeDate },
+                    set: { newDate in
+                        let components = Calendar.current.dateComponents([.hour, .minute], from: newDate)
+                        minutes = (components.hour ?? 0) * 60 + (components.minute ?? 0)
+                    }
+                ),
+                displayedComponents: .hourAndMinute
+            )
+            .labelsHidden()
+            .colorScheme(.dark)
+        }
     }
 }
 

@@ -1,0 +1,771 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project TimeFill.xcodeproj -scheme TimeFill -configuration Debug build
+
+2025-10-10 14:05:05.206 xcodebuild[23603:4811816] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, arch:arm64, id:361266CF-81F8-40E3-85A2-2E7C74835A10, OS:26.0, name:iPad (A16) }
+{ platform:iOS Simulator, arch:arm64, id:F8B8646A-1666-4D21-A67E-DB0E262DB013, OS:26.0, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:137D5612-3EC6-4010-B5CF-358141412490, OS:26.0, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:D046DAC0-F3B5-402A-A5FF-2856B546EB25, OS:26.0, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:2E6FCD0D-1677-45FC-A267-ADB8EDF561B2, OS:26.0, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:36DC595E-CD2E-4ABB-8BF7-9F5122BB1B1D, OS:26.0, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:arm64, id:1A11BA08-1831-4733-9F27-92FFBCCD9837, OS:26.0, name:iPhone 16e }
+{ platform:iOS Simulator, arch:arm64, id:F4EA243F-8F2B-4A86-AA3A-4523F4F684D4, OS:26.0, name:iPhone 17 }
+{ platform:iOS Simulator, arch:arm64, id:3EA3CC69-E06A-48FD-BAE1-B416D2CC2232, OS:26.0, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:arm64, id:3C962102-1D3D-4A04-B693-402C9F6FE2AA, OS:26.0, name:iPhone 17 Pro Max }
+{ platform:iOS Simulator, arch:arm64, id:E11B455E-157B-477A-ADA2-99C30C97F696, OS:26.0, name:iPhone Air }
+{ platform:iOS, arch:arm64, id:00008140-001E04583802201C, name:AOI iPhone }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (2 targets)
+    Target 'TimeFill' in project 'TimeFill'
+        ➜ Explicit dependency on target 'TimeFillWidgetExtension' in project 'TimeFill'
+    Target 'TimeFillWidgetExtension' in project 'TimeFill' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: d312c07d039d238efc6995abf8faf889
+Build description path: /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/XCBuildData/d312c07d039d238efc6995abf8faf889.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache
+
+CreateBuildDirectory /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill.xcodeproj
+    builtin-create-build-directory /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos
+
+CreateBuildDirectory /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill.xcodeproj
+    builtin-create-build-directory /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill-6bd6df37d4e64dfeda8bf163f1ed269d-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill.xcodeproj
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill-6bd6df37d4e64dfeda8bf163f1ed269d-VFS-iphoneos/all-product-headers.yaml
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-non-framework-target-headers.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyStaticMetadataFileList (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyMetadataFileList (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/Entitlements.plist (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/Entitlements.plist
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-project-headers.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-project-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/empty-TimeFill.plist (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/empty-TimeFill.plist
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-own-target-headers.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-generated-files.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-generated-files.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-target-headers.hmap (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugEntryPoint-normal-arm64.txt (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugEntryPoint-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibPath-normal-arm64.txt (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibInstallName-normal-arm64.txt (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_const_extract_protocols.json (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftConstValuesFileList (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.LinkFileList (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.LinkFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-OutputFileMap.json (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyStaticMetadataFileList (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyMetadataFileList (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-project-headers.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-project-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-own-target-headers.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-generated-files.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-generated-files.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-target-headers.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-non-framework-target-headers.hmap (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibPath-normal-arm64.txt (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibInstallName-normal-arm64.txt (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_const_extract_protocols.json (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftConstValuesFileList (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.LinkFileList (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.LinkFileList
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-OutputFileMap.json (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/Entitlements.plist (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    write-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/Entitlements.plist
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app
+
+ProcessProductPackaging /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidgetExtension.entitlements /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "5YC4QBHFLS.com.timefill.app.TimeFillWidget";
+    "com.apple.developer.team-identifier" = 5YC4QBHFLS;
+    "com.apple.security.application-groups" =     (
+        "group.com.timefill.app"
+    );
+    "get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidgetExtension.entitlements -entitlements -format xml -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent
+
+ProcessProductPackaging /Users/DunsinAgbolabori1/Library/Developer/Xcode/UserData/Provisioning\ Profiles/c6377bbd-b6f5-43c6-98d7-845f7ebc2330.mobileprovision /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/embedded.mobileprovision (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-productPackagingUtility /Users/DunsinAgbolabori1/Library/Developer/Xcode/UserData/Provisioning\ Profiles/c6377bbd-b6f5-43c6-98d7-845f7ebc2330.mobileprovision -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/embedded.mobileprovision
+
+ProcessProductPackagingDER /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent.der (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /usr/bin/derq query -f xml -i /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent.der --raw
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/__preview.dylib normal (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios26.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -install_name @rpath/TimeFillWidgetExtension.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_dependency_info.dat -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/__preview.dylib
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/unthinned (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/unthinned
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/thinned (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/thinned
+
+GenerateAssetSymbols /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Assets.xcassets (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Assets.xcassets --compile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex --output-format human-readable-text --notices --warnings --export-dependency-info /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_dependencies --output-partial-info-plist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist --accent-color AccentColor --widget-background-color WidgetBackground --compress-pngs --enable-on-demand-resources NO --standalone-icon-behavior all --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 26.0 --platform iphoneos --bundle-identifier com.timefill.app.TimeFillWidget --generate-swift-asset-symbols /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CompileAssetCatalogVariant thinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Assets.xcassets (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Assets.xcassets --compile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist_thinned --accent-color AccentColor --widget-background-color WidgetBackground --compress-pngs --enable-on-demand-resources NO --standalone-icon-behavior all --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 26.0 --platform iphoneos
+/* com.apple.actool.compilation-results */
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist_thinned
+
+
+LinkAssetCatalog /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Assets.xcassets (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-linkAssetCatalog --thinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/thinned --thinned-dependencies /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist_unthinned --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex --plist-output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist
+
+ProcessInfoPlistFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/Info.plist /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Info.plist (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-infoPlistUtility /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/Info.plist -producttype com.apple.product-type.app-extension -expandbuildsettings -format binary -platform iphoneos -additionalcontentfile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/assetcatalog_generated_info.plist -requiredArchitecture arm64 -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/Info.plist
+
+SwiftDriver TimeFillWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFillWidgetExtension -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios26.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+SwiftCompile normal arm64 Compiling\ TimeFillWidgetControl.swift,\ TimeFillWidgetLiveActivity.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetControl.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetLiveActivity.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetControl.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetLiveActivity.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ AppIntent.swift,\ CountdownEntry.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/AppIntent.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/CountdownEntry.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/AppIntent.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/CountdownEntry.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ TimeFillWidgetExtension (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+EmitSwiftModule normal arm64 (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ WidgetSandFillView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/WidgetSandFillView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/WidgetSandFillView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ TimeFillWidget.swift,\ TimeFillWidgetBundle.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidget.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetBundle.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidget.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/TimeFillWidgetBundle.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ ModularCountdownView.swift,\ SetupGuideView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/ModularCountdownView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/SetupGuideView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/ModularCountdownView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/SetupGuideView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ WidgetEventSelection.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/WidgetEventSelection.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/WidgetEventSelection.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ GeneratedAssetSymbols.swift /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ CountdownProvider.swift,\ MinimalCountdownView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/CountdownProvider.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/MinimalCountdownView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/CountdownProvider.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFillWidget/MinimalCountdownView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling GeneratedAssetSymbols.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for TimeFillWidgetExtension (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WidgetSandFillView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WidgetEventSelection.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling TimeFillWidget.swift, TimeFillWidgetBundle.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriver\ Compilation\ Requirements TimeFillWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFillWidgetExtension -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios26.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/TimeFillWidgetExtension-Swift.h /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-Swift.h (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-swiftHeaderTool -arch arm64 /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-Swift.h -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/TimeFillWidgetExtension-Swift.h
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.swiftmodule /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.swiftmodule
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.swiftdoc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftdoc (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftdoc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.swiftdoc
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.abi.json /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.abi.json (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.abi.json /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftsourceinfo (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftsourceinfo /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling AppIntent.swift, CountdownEntry.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+ProcessProductPackaging /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/TimeFill.entitlements /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "5YC4QBHFLS.com.timefill.app";
+    "com.apple.developer.team-identifier" = 5YC4QBHFLS;
+    "com.apple.security.application-groups" =     (
+        "group.com.timefill.app"
+    );
+    "get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/TimeFill.entitlements -entitlements -format xml -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent
+
+ProcessProductPackaging /Users/DunsinAgbolabori1/Library/Developer/Xcode/UserData/Provisioning\ Profiles/3f747adc-3c4d-45ef-98f7-fc8950cd19f7.mobileprovision /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/embedded.mobileprovision (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-productPackagingUtility /Users/DunsinAgbolabori1/Library/Developer/Xcode/UserData/Provisioning\ Profiles/3f747adc-3c4d-45ef-98f7-fc8950cd19f7.mobileprovision -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/embedded.mobileprovision
+
+ProcessProductPackagingDER /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent.der (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /usr/bin/derq query -f xml -i /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent.der --raw
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned
+
+MkDir /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/unthinned (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /bin/mkdir -p /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/unthinned
+
+GenerateAssetSymbols /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets --compile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_dependencies --output-partial-info-plist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --minimum-deployment-target 17.0 --platform iphoneos --bundle-identifier com.timefill.app --generate-swift-asset-symbols /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CompileAssetCatalogVariant thinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets --compile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --minimum-deployment-target 17.0 --platform iphoneos
+objc[23764]: Class _NoAnimationDelegate is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23A343/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.0.simruntime/Contents/Resources/RuntimeRoot/System/Library/Frameworks/SwiftUICore.framework/SwiftUICore (0x141aa8130) and /Library/Developer/CoreSimulator/Volumes/iOS_23A343/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.0.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore (0x13ec11198). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+/* com.apple.actool.notices */
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets: warning: Accent color ‘AccentColor’ is not present in any asset catalogs.
+/* com.apple.actool.compilation-results */
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist_thinned
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned/AppIcon60x60@2x.png
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned/AppIcon76x76@2x~ipad.png
+/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriverJobDiscovery normal arm64 Compiling TimeFillWidgetControl.swift, TimeFillWidgetLiveActivity.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriver TimeFill normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFill -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Compiling ModularCountdownView.swift, SetupGuideView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ TimeFill (in target 'TimeFill' from project 'TimeFill')
+
+EmitSwiftModule normal arm64 (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ WidgetDataManager.swift,\ SettingsView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/WidgetDataManager.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/SettingsView.swift (in target 'TimeFill' from project 'TimeFill')
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/WidgetDataManager.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/SettingsView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ LandingView.swift,\ TimeFillApp.swift,\ ContentView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/LandingView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/TimeFillApp.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/ContentView.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/LandingView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/TimeFillApp.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/TimeFillApp.swift:89:29: warning: 'alert' was deprecated in iOS 14.0
+        completionHandler([.alert, .sound, .badge])
+                            ^
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/ContentView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ CalendarImportView.swift,\ NotificationManager.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/CalendarImportView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/NotificationManager.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/CalendarImportView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/NotificationManager.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/NotificationManager.swift:168:71: warning: capture of 'content' with non-Sendable type 'UNMutableNotificationContent' in a '@Sendable' closure
+                    print("✅ Scheduled notification for \(date) - \(content.body)")
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UNNotificationContent.h:98:12: note: class 'UNMutableNotificationContent' does not conform to the 'Sendable' protocol
+@interface UNMutableNotificationContent : UNNotificationContent
+           ^
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/NotificationManager.swift:9:1: warning: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'UserNotifications'
+import UserNotifications
+^
+@preconcurrency 
+
+SwiftCompile normal arm64 Compiling\ EventTimelineView.swift,\ CalendarImporter.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/EventTimelineView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/CalendarImporter.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/EventTimelineView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/CalendarImporter.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/CalendarImporter.swift:28:61: warning: 'authorized' was deprecated in iOS 17.0: Check for full access or write only access
+        isAuthorized = (status == .fullAccess || status == .authorized)
+                                                            ^
+/Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/CalendarImporter.swift:75:13: warning: no 'async' operations occur within 'await' expression
+            await NotificationManager.shared.scheduleNotifications(for: importedEvents)
+            ^
+
+SwiftCompile normal arm64 Compiling\ HomeView.swift,\ AddEventView.swift,\ DetailView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/HomeView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/AddEventView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/DetailView.swift (in target 'TimeFill' from project 'TimeFill')
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/HomeView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/AddEventView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/DetailView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ NotificationSettingsView.swift,\ ReanimationKey.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/NotificationSettingsView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/ReanimationKey.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/NotificationSettingsView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/ReanimationKey.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling CountdownProvider.swift, MinimalCountdownView.swift (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for TimeFill (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriver\ Compilation TimeFillWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFillWidgetExtension -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios26.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+SwiftDriver\ Compilation\ Requirements TimeFill normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFill -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib normal (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios26.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -filelist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.LinkFileList -install_name @rpath/TimeFillWidgetExtension.debug.dylib -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/../../Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_dependency_info.dat -fapplication-extension -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.swiftmodule @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension-linker-args.resp -Xlinker -alias -Xlinker _NSExtensionMain -Xlinker ___debug_main_executable_dylib_entry_point -framework SwiftUI -framework WidgetKit -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib
+
+SwiftMergeGeneratedHeaders /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/TimeFill-Swift.h /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-Swift.h (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-swiftHeaderTool -arch arm64 /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-Swift.h -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/TimeFill-Swift.h
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.swiftmodule /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.swiftmodule
+
+ConstructStubExecutorLinkFileList /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-ExecutorLinkFileList-normal-arm64.txt (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    construct-stub-executor-link-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.swiftdoc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftdoc (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftdoc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.swiftdoc
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension normal (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios26.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/../../Frameworks -rdynamic -Xlinker -no_deduplicate -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_entry -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugEntryPoint-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension-ExecutorLinkFileList-normal-arm64.txt /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.abi.json /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.abi.json (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.abi.json /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftsourceinfo (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftsourceinfo /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftCompile normal arm64 Compiling\ DetailViewEnvironmentKey.swift,\ GeneratedAssetSymbols.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/DetailViewEnvironmentKey.swift /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/DetailViewEnvironmentKey.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 Compiling\ CountdownEvent.swift,\ ColorExtensions.swift,\ SandFillView.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Models/CountdownEvent.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/ColorExtensions.swift /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/SandFillView.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Models/CountdownEvent.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Utils/ColorExtensions.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftCompile normal arm64 /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Views/SandFillView.swift (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling EventTimelineView.swift, CalendarImporter.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling LandingView.swift, TimeFillApp.swift, ContentView.swift (in target 'TimeFill' from project 'TimeFill')
+
+ExtractAppIntentsMetadata (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name TimeFillWidgetExtension --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk --xcode-version 17A400 --platform-family iOS --deployment-target 26.0 --bundle-identifier com.timefill.app.TimeFillWidget --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex --target-triple arm64-apple-ios26.0 --binary-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension --dependency-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension_dependency_info.dat --stringsdata-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftFileList --metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyMetadataFileList --static-metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyStaticMetadataFileList --swift-const-vals-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/Objects-normal/arm64/TimeFillWidgetExtension.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2025-10-10 14:05:17.999 appintentsmetadataprocessor[23802:4812681] Starting appintentsmetadataprocessor export
+2025-10-10 14:05:18.350 appintentsmetadataprocessor[23802:4812681] Writing Metadata.appintents
+2025-10-10 14:05:18.350 appintentsmetadataprocessor[23802:4812681] Metadata root: /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/Metadata.appintents
+
+SwiftDriverJobDiscovery normal arm64 Compiling DetailViewEnvironmentKey.swift, GeneratedAssetSymbols.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling NotificationSettingsView.swift, ReanimationKey.swift (in target 'TimeFill' from project 'TimeFill')
+
+AppIntentsSSUTraining (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/Info.plist --temp-dir-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/ssu --bundle-id com.timefill.app.TimeFillWidget --product-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex --extracted-metadata-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/Metadata.appintents --metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.DependencyMetadataFileList --archive-ssu-assets
+2025-10-10 14:05:18.485 appintentsnltrainingprocessor[23807:4812701] Parsing options for appintentsnltrainingprocessor
+2025-10-10 14:05:18.486 appintentsnltrainingprocessor[23807:4812701] Starting AppIntents SSU YAML Generation
+2025-10-10 14:05:18.522 appintentsnltrainingprocessor[23807:4812701] No AppShortcuts found - Skipping.
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app.TimeFillWidget"
+                          (c6377bbd-b6f5-43c6-98d7-845f7ebc2330)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/TimeFillWidgetExtension.debug.dylib
+
+SwiftDriverJobDiscovery normal arm64 Compiling CalendarImportView.swift, NotificationManager.swift (in target 'TimeFill' from project 'TimeFill')
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/__preview.dylib (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app.TimeFillWidget"
+                          (c6377bbd-b6f5-43c6-98d7-845f7ebc2330)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex/__preview.dylib
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app.TimeFillWidget"
+                          (c6377bbd-b6f5-43c6-98d7-845f7ebc2330)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --entitlements /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFillWidgetExtension.build/TimeFillWidgetExtension.appex.xcent --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex
+
+RegisterExecutionPolicyException /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-RegisterExecutionPolicyException /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex
+
+Touch /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex (in target 'TimeFillWidgetExtension' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /usr/bin/touch -c /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/__preview.dylib normal (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -install_name @rpath/TimeFill.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_dependency_info.dat -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/__preview.dylib
+
+SwiftDriverJobDiscovery normal arm64 Compiling CountdownEvent.swift, ColorExtensions.swift, SandFillView.swift (in target 'TimeFill' from project 'TimeFill')
+
+LinkAssetCatalog /Users/DunsinAgbolabori1/timefill/TimeFill/TimeFill/Assets.xcassets (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-linkAssetCatalog --thinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/thinned --thinned-dependencies /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist_unthinned --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app --plist-output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/AppIcon60x60@2x.png (in target 'TimeFill' from project 'TimeFill')
+note: Emplaced /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Assets.car (in target 'TimeFill' from project 'TimeFill')
+note: Emplaced /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/AppIcon76x76@2x~ipad.png (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WidgetDataManager.swift, SettingsView.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HomeView.swift, AddEventView.swift, DetailView.swift (in target 'TimeFill' from project 'TimeFill')
+
+SwiftDriver\ Compilation TimeFill normal arm64 com.apple.xcode.tools.swift.compiler (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name TimeFill -Onone -enforce-exclusivity\=checked @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -output-file-map /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_const_extract_protocols.json -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-generated-files.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-own-target-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-all-target-headers.hmap -Xcc -iquote -Xcc /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-project-headers.hmap -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/include -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources-normal/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources/arm64 -Xcc -I/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-Swift.h -working-directory /Users/DunsinAgbolabori1/timefill/TimeFill -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib normal (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -filelist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.LinkFileList -install_name @rpath/TimeFill.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.swiftmodule @/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-ExecutorLinkFileList-normal-arm64.txt (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    construct-stub-executor-link-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'TimeFill' from project 'TimeFill')
+
+Ld /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill normal (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -O0 -L/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -F/Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill-ExecutorLinkFileList-normal-arm64.txt /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill
+
+Copy /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns/TimeFillWidgetExtension.appex /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks -remove-static-executable /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFillWidgetExtension.appex /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns
+
+ProcessInfoPlistFile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Info.plist /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/empty-TimeFill.plist (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-infoPlistUtility /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/empty-TimeFill.plist -producttype com.apple.product-type.application -genpkginfo /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -additionalcontentfile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/assetcatalog_generated_info.plist -scanforprivacyfile /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns/TimeFillWidgetExtension.appex -requiredArchitecture arm64 -o /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Info.plist
+
+CopySwiftLibs /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-swiftStdLibTool --copy --verbose --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --scan-executable /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib --scan-folder /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Frameworks --scan-folder /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns --scan-folder /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/SystemExtensions --scan-folder /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+ExtractAppIntentsMetadata (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name TimeFill --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk --xcode-version 17A400 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.timefill.app --output /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app --target-triple arm64-apple-ios17.0 --binary-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill --dependency-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill_dependency_info.dat --stringsdata-file /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftFileList --metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyMetadataFileList --static-metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyStaticMetadataFileList --swift-const-vals-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/Objects-normal/arm64/TimeFill.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2025-10-10 14:05:31.973 appintentsmetadataprocessor[23915:4813186] Starting appintentsmetadataprocessor export
+2025-10-10 14:05:32.203 appintentsmetadataprocessor[23915:4813186] Extracted no relevant App Intents symbols, skipping writing output
+
+AppIntentsSSUTraining (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Info.plist --temp-dir-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/ssu --bundle-id com.timefill.app --product-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app --extracted-metadata-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Metadata.appintents --metadata-file-list /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.DependencyMetadataFileList --archive-ssu-assets
+2025-10-10 14:05:32.236 appintentsnltrainingprocessor[23916:4813202] Parsing options for appintentsnltrainingprocessor
+2025-10-10 14:05:32.237 appintentsnltrainingprocessor[23916:4813202] No AppShortcuts found - Skipping.
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app"
+                          (3f747adc-3c4d-45ef-98f7-fc8950cd19f7)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/TimeFill.debug.dylib
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/__preview.dylib (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app"
+                          (3f747adc-3c4d-45ef-98f7-fc8950cd19f7)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/__preview.dylib
+
+CodeSign /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    
+    Signing Identity:     "Apple Development: agbolaboridunsin2@gmail.com (572Y6Y9FNW)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.timefill.app"
+                          (3f747adc-3c4d-45ef-98f7-fc8950cd19f7)
+    
+    /usr/bin/codesign --force --sign 97EE723BC02C6E1A8F91324CDC830DBB4F059610 --entitlements /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Intermediates.noindex/TimeFill.build/Debug-iphoneos/TimeFill.build/TimeFill.app.xcent --timestamp\=none --generate-entitlement-der /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app
+
+ValidateEmbeddedBinary /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns/TimeFillWidgetExtension.appex (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /Applications/Xcode.app/Contents/Developer/usr/bin/embeddedBinaryValidationUtility /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/PlugIns/TimeFillWidgetExtension.appex -signing-cert 97EE723BC02C6E1A8F91324CDC830DBB4F059610 -info-plist-path /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app/Info.plist
+
+RegisterExecutionPolicyException /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-RegisterExecutionPolicyException /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app
+
+Validate /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    builtin-validationUtility /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app (in target 'TimeFill' from project 'TimeFill')
+    cd /Users/DunsinAgbolabori1/timefill/TimeFill
+    /usr/bin/touch -c /Users/DunsinAgbolabori1/Library/Developer/Xcode/DerivedData/TimeFill-bakruoqlldjiqoekvrphofebhjkr/Build/Products/Debug-iphoneos/TimeFill.app
+
+** BUILD SUCCEEDED **
+

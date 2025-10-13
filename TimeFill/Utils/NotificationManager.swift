@@ -75,13 +75,14 @@ class NotificationManager: ObservableObject {
 
         // On event day
         if notificationPreferences.onEventDay {
-            if let eventDayMorning = calendar.date(
-                bySettingHour: 9,
-                minute: 0,
+            let timeComponents = notificationPreferences.timeComponents(from: notificationPreferences.eventDayTime)
+            if let eventDayTime = calendar.date(
+                bySettingHour: timeComponents.hour,
+                minute: timeComponents.minute,
                 second: 0,
                 of: event.targetDate
-            ), eventDayMorning > now {
-                scheduledDates.append(eventDayMorning)
+            ), eventDayTime > now {
+                scheduledDates.append(eventDayTime)
             }
         }
 
@@ -93,9 +94,10 @@ class NotificationManager: ObservableObject {
         // 1 day before
         if notificationPreferences.oneDayBefore {
             if let oneDayBefore = calendar.date(byAdding: .day, value: -1, to: event.targetDate) {
+                let timeComponents = notificationPreferences.timeComponents(from: notificationPreferences.oneDayBeforeTime)
                 if let notificationTime = calendar.date(
-                    bySettingHour: 18,
-                    minute: 0,
+                    bySettingHour: timeComponents.hour,
+                    minute: timeComponents.minute,
                     second: 0,
                     of: oneDayBefore
                 ), notificationTime > now {
@@ -107,9 +109,10 @@ class NotificationManager: ObservableObject {
         // 1 week before
         if notificationPreferences.oneWeekBefore {
             if let oneWeekBefore = calendar.date(byAdding: .day, value: -7, to: event.targetDate) {
+                let timeComponents = notificationPreferences.timeComponents(from: notificationPreferences.oneWeekBeforeTime)
                 if let notificationTime = calendar.date(
-                    bySettingHour: 18,
-                    minute: 0,
+                    bySettingHour: timeComponents.hour,
+                    minute: timeComponents.minute,
                     second: 0,
                     of: oneWeekBefore
                 ), notificationTime > now {
@@ -121,9 +124,10 @@ class NotificationManager: ObservableObject {
         // 1 month before
         if notificationPreferences.oneMonthBefore {
             if let oneMonthBefore = calendar.date(byAdding: .month, value: -1, to: event.targetDate) {
+                let timeComponents = notificationPreferences.timeComponents(from: notificationPreferences.oneMonthBeforeTime)
                 if let notificationTime = calendar.date(
-                    bySettingHour: 18,
-                    minute: 0,
+                    bySettingHour: timeComponents.hour,
+                    minute: timeComponents.minute,
                     second: 0,
                     of: oneMonthBefore
                 ), notificationTime > now {
@@ -236,12 +240,35 @@ struct NotificationPreferences: Codable {
     var oneWeekBefore: Bool = true
     var oneMonthBefore: Bool = false
 
+    // Custom notification times (stored as minutes from midnight, 0-1439)
+    var eventDayTime: Int = 540       // 9:00 AM (9 * 60)
+    var oneDayBeforeTime: Int = 1080  // 6:00 PM (18 * 60)
+    var oneWeekBeforeTime: Int = 1080 // 6:00 PM (18 * 60)
+    var oneMonthBeforeTime: Int = 1080 // 6:00 PM (18 * 60)
+
     enum CodingKeys: String, CodingKey {
         case isEnabled
         case onEventDay
         case oneDayBefore
         case oneWeekBefore
         case oneMonthBefore
+        case eventDayTime
+        case oneDayBeforeTime
+        case oneWeekBeforeTime
+        case oneMonthBeforeTime
+    }
+
+    // Helper to convert minutes from midnight to Date components
+    func timeComponents(from minutes: Int) -> (hour: Int, minute: Int) {
+        let hour = minutes / 60
+        let minute = minutes % 60
+        return (hour, minute)
+    }
+
+    // Helper to convert Date to minutes from midnight
+    static func minutesFromMidnight(date: Date) -> Int {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        return (components.hour ?? 0) * 60 + (components.minute ?? 0)
     }
 }
 
