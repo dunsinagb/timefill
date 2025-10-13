@@ -103,6 +103,8 @@ struct CompactSandFillView: View {
                     .frame(width: max(76 * animatedProgress, 0), height: 20)
                     .padding(.leading, 2)
             }
+            .frame(width: 80, height: 24)
+            .clipped()
 
             // Battery tip
             RoundedRectangle(cornerRadius: 1)
