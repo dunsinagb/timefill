@@ -25,7 +25,7 @@ class CalendarImporter: ObservableObject {
     // Check current authorization status
     func checkAuthorizationStatus() {
         let status = EKEventStore.authorizationStatus(for: .event)
-        isAuthorized = (status == .fullAccess || status == .authorized)
+        isAuthorized = (status == .fullAccess)
     }
 
     // Request calendar access
@@ -71,8 +71,8 @@ class CalendarImporter: ObservableObject {
         }
 
         // Schedule notifications for all imported events
-        Task {
-            await NotificationManager.shared.scheduleNotifications(for: importedEvents)
+        Task { @MainActor in
+            NotificationManager.shared.scheduleNotifications(for: importedEvents)
         }
 
         isImporting = false

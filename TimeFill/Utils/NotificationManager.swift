@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UserNotifications
+@preconcurrency import UserNotifications
 import SwiftData
 
 @MainActor
@@ -186,11 +186,13 @@ class NotificationManager: ObservableObject {
             let identifier = "\(event.id.uuidString)-\(index)"
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
+            // Capture necessary values before async closure
+            let notificationBody = content.body
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
                     print("❌ Error scheduling notification: \(error)")
                 } else {
-                    print("✅ Scheduled notification for \(date) - \(content.body)")
+                    print("✅ Scheduled notification for \(date) - \(notificationBody)")
                 }
             }
         }
