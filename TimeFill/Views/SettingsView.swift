@@ -72,7 +72,6 @@ struct SettingsView: View {
                                 FeatureRow(text: "Smart Reminders", subtitle: "Notifications 1 month, 1 week, or 1 day before")
                                 FeatureRow(text: "Instant Calendar Import", subtitle: "Add events from your calendar in seconds")
                                 FeatureRow(text: "100% Private & Offline", subtitle: "No tracking, no cloud, no data collection")
-                                FeatureRow(text: "Completely Free Forever", subtitle: "Unlimited countdowns, no ads, no subscriptions")
                             }
                             .padding()
                             .background(
