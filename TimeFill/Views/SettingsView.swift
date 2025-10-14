@@ -327,45 +327,6 @@ struct SettingsView: View {
                             }
                         }
 
-                        // Support the Developer
-                        VStack(spacing: 12) {
-                            SectionHeader(title: "Support the Developer")
-
-                            Button(action: supportDeveloper) {
-                                HStack {
-                                    Image(systemName: "cup.and.saucer.fill")
-                                        .foregroundStyle(Color.timeFillCyan)
-                                        .frame(width: 24)
-
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Buy Me a Coffee ☕️")
-                                            .font(.system(.body, design: .rounded))
-                                            .fontWeight(.medium)
-                                            .foregroundStyle(.white)
-
-                                        Text("Support Time Fill's development")
-                                            .font(.system(.caption, design: .rounded))
-                                            .foregroundStyle(.gray)
-                                    }
-
-                                    Spacer()
-
-                                    Image(systemName: "arrow.up.right")
-                                        .font(.caption)
-                                        .foregroundStyle(.gray)
-                                }
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.white.opacity(0.05))
-                                )
-                            }
-
-                            Text("If Time Fill makes your day better, consider supporting its development. Every coffee helps keep the lights on! 🌟")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.gray)
-                                .multilineTextAlignment(.center)
-                        }
                     }
 
                     // Footer
@@ -396,13 +357,6 @@ struct SettingsView: View {
     private func rateApp() {
         // App Store rating URL - will need to be updated with actual App ID
         if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
-            UIApplication.shared.open(url)
-        }
-    }
-
-    private func supportDeveloper() {
-        // Open Buy Me a Coffee link
-        if let url = URL(string: "https://buymeacoffee.com/dunsinagb") {
             UIApplication.shared.open(url)
         }
     }
