@@ -13,13 +13,18 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var events: [CountdownEvent]
     @AppStorage("autoDeleteCompleted") private var autoDeleteCompleted = false
+    @AppStorage("hapticsEnabled") private var hapticsEnabled = true
     @State private var showingContactPopup = false
     @State private var showingShareSheet = false
     @StateObject private var notificationManager = NotificationManager.shared
     @State private var showingNotificationSettings = false
 
     private var shareText: String {
-        "Check out Time Fill - A beautiful countdown app to track your important moments! 🎉"
+        "Check out Time Fill - A beautiful countdown app to track your important moments! 🎉\n\nDownload now: https://apps.apple.com/us/app/time-fill/id6753778108"
+    }
+
+    private var shareURL: URL? {
+        URL(string: "https://apps.apple.com/us/app/time-fill/id6753778108")
     }
 
     var body: some View {
@@ -291,6 +296,36 @@ struct SettingsView: View {
                             )
                         }
 
+                        // Haptic Feedback
+                        VStack(spacing: 12) {
+                            SectionHeader(title: "Haptic Feedback")
+
+                            Toggle(isOn: $hapticsEnabled) {
+                                HStack {
+                                    Image(systemName: "hand.tap.fill")
+                                        .foregroundStyle(Color.timeFillCyan)
+                                        .frame(width: 24)
+
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Enable Haptics")
+                                            .font(.system(.body, design: .rounded))
+                                            .fontWeight(.medium)
+                                            .foregroundStyle(.white)
+
+                                        Text("Feel vibrations when interacting with the app")
+                                            .font(.system(.caption, design: .rounded))
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                            }
+                            .tint(Color.timeFillCyan)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white.opacity(0.05))
+                            )
+                        }
+
                         // Share App
                         VStack(spacing: 12) {
                             SectionHeader(title: "Share App")
@@ -348,14 +383,18 @@ struct SettingsView: View {
                 NotificationSettingsView(events: events)
             }
             .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [shareText])
+                if let url = shareURL {
+                    ShareSheet(items: [shareText, url])
+                } else {
+                    ShareSheet(items: [shareText])
+                }
             }
         }
     }
 
     private func rateApp() {
         // App Store rating URL - will need to be updated with actual App ID
-        if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
+        if let url = URL(string: "https://apps.apple.com/us/app/time-fill/id6753778108") {
             UIApplication.shared.open(url)
         }
     }

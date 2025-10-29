@@ -160,9 +160,20 @@ struct LargeSandFillView: View {
     let elapsedDays: Int
     let shouldAnimate: Bool
     var forceReAnimate: Bool = false
+    var hoursRemaining: Int? = nil // Optional: hours remaining if < 24h
+    var targetDate: Date? = nil // Optional: for calculating hours
+    var actualDaysRemaining: Int? = nil // Pass actual days from countdown timer
 
     @State private var animatedDays: Int = 0
     @State private var hasAnimated = false
+
+    // Calculate hours remaining if targetDate is provided
+    private var calculatedHoursRemaining: Int? {
+        guard let targetDate = targetDate else { return hoursRemaining }
+        let interval = targetDate.timeIntervalSince(Date())
+        let hours = Int(interval / 3600)
+        return hours < 24 && hours >= 0 ? hours : nil
+    }
 
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
@@ -243,12 +254,24 @@ struct LargeSandFillView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("\(totalDays - elapsedDays)")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white)
-                    Text((totalDays - elapsedDays) == 1 ? "day left" : "days left")
-                        .font(.system(size: 11, design: .rounded))
-                        .foregroundStyle(.gray)
+                    if let hours = calculatedHoursRemaining {
+                        // Show hours if within 24 hours
+                        Text("\(hours)")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                        Text(hours == 1 ? "hour left" : "hours left")
+                            .font(.system(size: 11, design: .rounded))
+                            .foregroundStyle(.gray)
+                    } else {
+                        // Show days - use actual days from countdown timer if provided
+                        let daysLeft = actualDaysRemaining ?? (totalDays - elapsedDays)
+                        Text("\(daysLeft)")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                        Text(daysLeft == 1 ? "day left" : "days left")
+                            .font(.system(size: 11, design: .rounded))
+                            .foregroundStyle(.gray)
+                    }
                 }
 
                 Spacer()

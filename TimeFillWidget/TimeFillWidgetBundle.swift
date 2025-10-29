@@ -11,9 +11,12 @@ import SwiftUI
 @main
 struct TimeFillWidgetBundle: WidgetBundle {
     var body: some Widget {
-        // Countdown widgets
+        // Home screen countdown widgets
         MinimalCountdownWidget()
         ModularCountdownWidget()
+
+        // Lock screen countdown widget
+        LockScreenCountdownWidget()
 
         // Keep existing widgets if needed
         // TimeFillWidgetControl()

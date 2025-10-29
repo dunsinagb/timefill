@@ -85,12 +85,22 @@ struct MinimalCountdownView: View {
 
                 // Large countdown number - changes based on state
                 if event.isScheduled {
-                    Text("\(event.daysUntilStart)")
-                        .font(.system(size: 68, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .minimumScaleFactor(0.7)
-                        .lineLimit(1)
-                        .padding(.bottom, 4)
+                    // Show hours if starting within 24 hours, otherwise days
+                    if event.startsToday {
+                        Text("\(event.hoursUntilStart)")
+                            .font(.system(size: 68, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
+                            .padding(.bottom, 4)
+                    } else {
+                        Text("\(event.daysUntilStart)")
+                            .font(.system(size: 68, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
+                            .padding(.bottom, 4)
+                    }
                 } else if entry.isCompletedAtEntry {
                     Text("DONE")
                         .font(.system(size: 48, weight: .bold, design: .rounded))
@@ -105,6 +115,13 @@ struct MinimalCountdownView: View {
                         .minimumScaleFactor(0.7)
                         .lineLimit(1)
                         .padding(.bottom, 4)
+                } else if event.isToday {
+                    Text("\(event.hoursRemaining)")
+                        .font(.system(size: 68, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
+                        .padding(.bottom, 4)
                 } else {
                     Text("\(event.daysRemaining)")
                         .font(.system(size: 68, weight: .bold, design: .rounded))
@@ -116,17 +133,32 @@ struct MinimalCountdownView: View {
 
                 // Label - changes based on state
                 if event.isScheduled {
-                    Text("STARTS IN")
-                        .font(.system(size: 11, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(hex: "#8E8E8E"))
-                        .tracking(1.8)
-                        .textCase(.uppercase)
+                    // Show appropriate label for scheduled events
+                    if event.startsToday {
+                        Text(event.hoursUntilStart == 1 ? "HOUR" : "HOURS")
+                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .tracking(1.8)
+                            .textCase(.uppercase)
+                    } else {
+                        Text("STARTS IN")
+                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .tracking(1.8)
+                            .textCase(.uppercase)
+                    }
                 } else if entry.isCompletedAtEntry {
                     Text("")
                         .font(.system(size: 11, weight: .semibold, design: .rounded))
                         .padding(.bottom, 4)
                 } else if entry.isInFinalMinuteAtEntry {
                     Text("SECONDS")
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .tracking(1.8)
+                        .textCase(.uppercase)
+                } else if event.isToday {
+                    Text(event.hoursRemaining == 1 ? "HOUR" : "HOURS")
                         .font(.system(size: 11, weight: .semibold, design: .rounded))
                         .foregroundStyle(Color(hex: "#8E8E8E"))
                         .tracking(1.8)

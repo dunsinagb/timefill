@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Color {
     init(hex: String) {
@@ -63,8 +64,68 @@ struct ColorTheme: Identifiable {
         ColorTheme(hex: "#FFB4B4", name: "Rose"),
         ColorTheme(hex: "#FFD4E5", name: "Pink"),
         ColorTheme(hex: "#FFF4B4", name: "Yellow"),
-        ColorTheme(hex: "#B4D4E4", name: "Sky"),
-        ColorTheme(hex: "#D4C4E4", name: "Purple"),
-        ColorTheme(hex: "#808080", name: "Gray")
+        ColorTheme(hex: "#D4C4E4", name: "Purple")
     ]
+}
+
+// MARK: - Color to Hex Extension
+extension Color {
+    func toHex() -> String {
+        // Convert SwiftUI Color to UIColor, then extract RGB components
+        let uiColor = UIColor(self)
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        let rgb = Int(red * 255) << 16 | Int(green * 255) << 8 | Int(blue * 255)
+        return String(format: "#%06X", rgb)
+    }
+}
+
+// MARK: - Native iOS Color Picker
+// Directly shows UIColorPickerViewController with Grid/Spectrum/Sliders/Eyedropper
+struct ColorPickerViewController: UIViewControllerRepresentable {
+    @Binding var selectedColor: Color
+    let onColorSelected: (Color) -> Void
+    @Environment(\.dismiss) private var dismiss
+
+    func makeUIViewController(context: Context) -> UIColorPickerViewController {
+        let picker = UIColorPickerViewController()
+        picker.selectedColor = UIColor(selectedColor)
+        picker.supportsAlpha = false
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIColorPickerViewController, context: Context) {
+        uiViewController.selectedColor = UIColor(selectedColor)
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UIColorPickerViewControllerDelegate {
+        let parent: ColorPickerViewController
+
+        init(_ parent: ColorPickerViewController) {
+            self.parent = parent
+        }
+
+        func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+            // Called when user dismisses the picker
+            parent.dismiss()
+        }
+
+        func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+            // Update color as user picks
+            parent.selectedColor = Color(color)
+            if !continuously {
+                parent.onColorSelected(Color(color))
+            }
+        }
+    }
 }

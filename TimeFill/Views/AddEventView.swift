@@ -25,6 +25,16 @@ struct AddEventView: View {
     @State private var selectedIcon = "heart.fill"
     @State private var startMode: CountdownStartMode = .now
     @State private var showingCalendarImport = false
+    @State private var repeatType = "Never"
+    @State private var repeatInterval = 1
+    @State private var yearlyRepeatStyle = "fixedDate"
+    @State private var showingRepeatOptions = false
+    @State private var attemptedSave = false
+
+    // Custom color picker
+    @State private var showingCustomColorPicker = false
+    @State private var customPickedColor: Color = .blue
+    @State private var customColorTheme: ColorTheme? = nil
 
     private let icons = [
         // Most Popular - Top Row
@@ -128,8 +138,8 @@ struct AddEventView: View {
                                 .cornerRadius(12)
                                 .foregroundStyle(.white)
 
-                            // Validation message
-                            if eventName.isEmpty {
+                            // Validation message - only show after save attempt
+                            if attemptedSave && eventName.isEmpty {
                                 Text("Please enter an event name")
                                     .font(.system(.caption, design: .rounded))
                                     .foregroundStyle(.red.opacity(0.8))
@@ -227,6 +237,187 @@ struct AddEventView: View {
                             }
                         }
 
+                        // Repeat selector
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("repeat")
+                                .font(.system(.caption, design: .rounded))
+                                .foregroundStyle(.gray)
+                                .textCase(.lowercase)
+
+                            Button(action: { showingRepeatOptions.toggle() }) {
+                                HStack {
+                                    Image(systemName: "repeat")
+                                        .foregroundStyle(Color.timeFillCyan)
+                                        .frame(width: 24)
+
+                                    Text(repeatType == "Never" ? "Never" : "Every \(repeatInterval) \(repeatTypeLabel())")
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundStyle(.white)
+
+                                    Spacer()
+
+                                    Image(systemName: showingRepeatOptions ? "chevron.up" : "chevron.down")
+                                        .font(.caption)
+                                        .foregroundStyle(.gray)
+                                }
+                                .padding()
+                                .background(Color.white.opacity(0.1))
+                                .cornerRadius(12)
+                            }
+
+                            // Repeat options panel
+                            if showingRepeatOptions {
+                                VStack(spacing: 12) {
+                                    // Repeat type buttons
+                                    VStack(spacing: 8) {
+                                        ForEach(["Never", "Daily", "Weekly", "Monthly", "Yearly"], id: \.self) { type in
+                                            Button(action: {
+                                                repeatType = type
+                                                if type == "Never" {
+                                                    repeatInterval = 1
+                                                }
+                                            }) {
+                                                HStack {
+                                                    Image(systemName: repeatType == type ? "checkmark.circle.fill" : "circle")
+                                                        .foregroundStyle(repeatType == type ? Color.timeFillCyan : .gray)
+
+                                                    Text(type)
+                                                        .font(.system(.body, design: .rounded))
+                                                        .foregroundStyle(.white)
+
+                                                    Spacer()
+                                                }
+                                                .padding(.vertical, 10)
+                                                .padding(.horizontal, 12)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 8)
+                                                        .fill(repeatType == type ? Color.timeFillCyan.opacity(0.2) : Color.white.opacity(0.05))
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    // Interval picker (only show if not "Never")
+                                    if repeatType != "Never" {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            Text("repeat every")
+                                                .font(.system(.caption, design: .rounded))
+                                                .foregroundStyle(.gray)
+                                                .textCase(.lowercase)
+
+                                            HStack {
+                                                Button(action: {
+                                                    if repeatInterval > 1 {
+                                                        repeatInterval -= 1
+                                                    }
+                                                }) {
+                                                    Image(systemName: "minus.circle.fill")
+                                                        .font(.title2)
+                                                        .foregroundStyle(repeatInterval > 1 ? Color.timeFillCyan : .gray)
+                                                }
+                                                .disabled(repeatInterval <= 1)
+
+                                                Text("\(repeatInterval)")
+                                                    .font(.system(.title2, design: .rounded))
+                                                    .fontWeight(.bold)
+                                                    .foregroundStyle(.white)
+                                                    .frame(minWidth: 40)
+
+                                                Button(action: {
+                                                    if repeatInterval < 99 {
+                                                        repeatInterval += 1
+                                                    }
+                                                }) {
+                                                    Image(systemName: "plus.circle.fill")
+                                                        .font(.title2)
+                                                        .foregroundStyle(repeatInterval < 99 ? Color.timeFillCyan : .gray)
+                                                }
+                                                .disabled(repeatInterval >= 99)
+
+                                                Text(repeatTypeLabel())
+                                                    .font(.system(.body, design: .rounded))
+                                                    .foregroundStyle(.gray)
+                                                    .padding(.leading, 8)
+                                            }
+                                            .padding()
+                                            .background(Color.white.opacity(0.1))
+                                            .cornerRadius(12)
+                                        }
+
+                                        // Yearly repeat style option (only show for Yearly)
+                                        if repeatType == "Yearly" {
+                                            VStack(alignment: .leading, spacing: 8) {
+                                                Text("repeat style")
+                                                    .font(.system(.caption, design: .rounded))
+                                                    .foregroundStyle(.gray)
+                                                    .textCase(.lowercase)
+
+                                                VStack(spacing: 8) {
+                                                    Button(action: {
+                                                        yearlyRepeatStyle = "fixedDate"
+                                                    }) {
+                                                        HStack {
+                                                            Image(systemName: yearlyRepeatStyle == "fixedDate" ? "checkmark.circle.fill" : "circle")
+                                                                .foregroundStyle(yearlyRepeatStyle == "fixedDate" ? Color.timeFillCyan : .gray)
+
+                                                            VStack(alignment: .leading, spacing: 2) {
+                                                                Text("Fixed Date")
+                                                                    .font(.system(.body, design: .rounded))
+                                                                    .foregroundStyle(.white)
+                                                                Text(yearlyFixedDateExample())
+                                                                    .font(.system(.caption, design: .rounded))
+                                                                    .foregroundStyle(.gray)
+                                                            }
+
+                                                            Spacer()
+                                                        }
+                                                        .padding(.vertical, 10)
+                                                        .padding(.horizontal, 12)
+                                                        .background(
+                                                            RoundedRectangle(cornerRadius: 8)
+                                                                .fill(yearlyRepeatStyle == "fixedDate" ? Color.timeFillCyan.opacity(0.2) : Color.white.opacity(0.05))
+                                                        )
+                                                    }
+
+                                                    Button(action: {
+                                                        yearlyRepeatStyle = "relativeWeekday"
+                                                    }) {
+                                                        HStack {
+                                                            Image(systemName: yearlyRepeatStyle == "relativeWeekday" ? "checkmark.circle.fill" : "circle")
+                                                                .foregroundStyle(yearlyRepeatStyle == "relativeWeekday" ? Color.timeFillCyan : .gray)
+
+                                                            VStack(alignment: .leading, spacing: 2) {
+                                                                Text("Relative Weekday")
+                                                                    .font(.system(.body, design: .rounded))
+                                                                    .foregroundStyle(.white)
+                                                                Text(yearlyRelativeWeekdayExample())
+                                                                    .font(.system(.caption, design: .rounded))
+                                                                    .foregroundStyle(.gray)
+                                                            }
+
+                                                            Spacer()
+                                                        }
+                                                        .padding(.vertical, 10)
+                                                        .padding(.horizontal, 12)
+                                                        .background(
+                                                            RoundedRectangle(cornerRadius: 8)
+                                                                .fill(yearlyRepeatStyle == "relativeWeekday" ? Color.timeFillCyan.opacity(0.2) : Color.white.opacity(0.05))
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.white.opacity(0.03))
+                                )
+                                .transition(.opacity.combined(with: .move(edge: .top)))
+                            }
+                        }
+
                         // Color picker
                         VStack(alignment: .leading, spacing: 12) {
                             Text("color")
@@ -235,6 +426,7 @@ struct AddEventView: View {
                                 .textCase(.lowercase)
 
                             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 4), spacing: 12) {
+                                // Preset colors
                                 ForEach(ColorTheme.themes) { theme in
                                     Circle()
                                         .fill(theme.color)
@@ -247,7 +439,42 @@ struct AddEventView: View {
                                             selectedColor = theme
                                         }
                                 }
+
+                                // Custom color picker button (last option)
+                                // ALWAYS shows palette icon, even after selecting a color
+                                ZStack {
+                                    Circle()
+                                        .fill(customColorTheme?.color ?? Color.white.opacity(0.2))
+                                        .frame(width: 60, height: 60)
+
+                                    // Always show palette icon to indicate this is the custom picker
+                                    Image(systemName: "paintpalette.fill")
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(.white.opacity(customColorTheme == nil ? 0.5 : 0.9))
+                                        .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
+                                }
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: customColorTheme != nil && selectedColor.id == customColorTheme!.id ? 3 : 0)
+                                )
+                                .onTapGesture {
+                                    showingCustomColorPicker = true
+                                }
                             }
+                        }
+                        .sheet(isPresented: $showingCustomColorPicker) {
+                            ColorPickerViewController(
+                                selectedColor: $customPickedColor,
+                                onColorSelected: { color in
+                                    // Create custom theme from picked color
+                                    let hexString = color.toHex()
+                                    let newCustomTheme = ColorTheme(hex: hexString, name: "Custom")
+                                    customColorTheme = newCustomTheme
+                                    selectedColor = newCustomTheme
+                                }
+                            )
+                            .presentationDetents([.height(580)])
+                            .presentationDragIndicator(.visible)
                         }
 
                         // Icon picker
@@ -315,7 +542,7 @@ struct AddEventView: View {
                         saveEvent()
                     }
                     .foregroundStyle(Color.timeFillCyan)
-                    .disabled(eventName.isEmpty || targetDate <= startDate)
+                    .disabled(targetDate <= startDate)
                 }
             }
             .sheet(isPresented: $showingCalendarImport) {
@@ -329,11 +556,18 @@ struct AddEventView: View {
     }
 
     private func saveEvent() {
+        // Validate event name
+        attemptedSave = true
+        guard !eventName.isEmpty else { return }
+
         let newEvent = CountdownEvent(
             name: eventName,
             targetDate: targetDate,
             colorHex: selectedColor.hex,
-            iconName: selectedIcon
+            iconName: selectedIcon,
+            repeatType: repeatType,
+            repeatInterval: repeatInterval,
+            yearlyRepeatStyle: yearlyRepeatStyle
         )
         // Set start date based on mode
         if startMode == .now {
@@ -349,7 +583,80 @@ struct AddEventView: View {
             NotificationManager.shared.scheduleNotifications(for: newEvent)
         }
 
+        // If event repeats, create next occurrence
+        if repeatType != "Never" {
+            createNextOccurrence(from: newEvent)
+        }
+
         dismiss()
+    }
+
+    private func repeatTypeLabel() -> String {
+        switch repeatType {
+        case "Daily":
+            return repeatInterval == 1 ? "day" : "days"
+        case "Weekly":
+            return repeatInterval == 1 ? "week" : "weeks"
+        case "Monthly":
+            return repeatInterval == 1 ? "month" : "months"
+        case "Yearly":
+            return repeatInterval == 1 ? "year" : "years"
+        default:
+            return ""
+        }
+    }
+
+    private func yearlyFixedDateExample() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        return "e.g., \(formatter.string(from: targetDate))"
+    }
+
+    private func yearlyRelativeWeekdayExample() -> String {
+        let calendar = Calendar.current
+        let dayOfMonth = calendar.component(.day, from: targetDate)
+        let weekdayOrdinal = (dayOfMonth - 1) / 7 + 1
+
+        let ordinalWords = ["", "First", "Second", "Third", "Fourth", "Fifth"]
+        let ordinalWord = weekdayOrdinal <= 5 ? ordinalWords[weekdayOrdinal] : "\(weekdayOrdinal)th"
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE" // Full weekday name
+        let weekdayName = formatter.string(from: targetDate)
+
+        formatter.dateFormat = "MMM" // Short month name
+        let monthName = formatter.string(from: targetDate)
+
+        return "e.g., \(ordinalWord) \(weekdayName) of \(monthName)"
+    }
+
+    private func createNextOccurrence(from event: CountdownEvent) {
+        guard let nextDate = event.nextOccurrenceDate(after: event.targetDate) else { return }
+
+        let nextEvent = CountdownEvent(
+            name: event.name,
+            targetDate: nextDate,
+            colorHex: event.colorHex,
+            iconName: event.iconName,
+            repeatType: event.repeatType,
+            repeatInterval: event.repeatInterval,
+            yearlyRepeatStyle: event.yearlyRepeatStyle,
+            isRepeatOccurrence: true  // Mark as auto-created repeat occurrence
+        )
+
+        // Calculate the time difference between original start and target
+        let timeDifference = event.targetDate.timeIntervalSince(event.createdDate)
+
+        // Set the created date for next event based on the new target date
+        nextEvent.createdDate = Date(timeInterval: -timeDifference, since: nextDate)
+
+        modelContext.insert(nextEvent)
+
+        // Schedule notifications for the next occurrence
+        let preferences = NotificationPreferences.load()
+        if preferences.isEnabled {
+            NotificationManager.shared.scheduleNotifications(for: nextEvent)
+        }
     }
 }
 

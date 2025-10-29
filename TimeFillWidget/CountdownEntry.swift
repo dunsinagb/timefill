@@ -57,10 +57,34 @@ struct WidgetEventData {
         return max(components.day ?? 0, 0)
     }
 
-    // Calculate days remaining
+    // Hours until countdown starts (total hours, for scheduled events)
+    var hoursUntilStart: Int {
+        guard isScheduled else { return 0 }
+        let interval = createdDate.timeIntervalSince(Date())
+        return max(Int(interval / 3600), 0)
+    }
+
+    // Check if countdown starts today (within 24 hours)
+    var startsToday: Bool {
+        guard isScheduled else { return false }
+        return hoursUntilStart < 24 && hoursUntilStart >= 0
+    }
+
+    // Calculate days remaining (actual full days)
     var daysRemaining: Int {
-        let components = Calendar.current.dateComponents([.day], from: Date(), to: targetDate)
+        let components = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: targetDate)
         return max(components.day ?? 0, 0)
+    }
+
+    // Calculate hours remaining
+    var hoursRemaining: Int {
+        let interval = targetDate.timeIntervalSince(Date())
+        return max(Int(interval / 3600), 0)
+    }
+
+    // Check if event is today (within 24 hours)
+    var isToday: Bool {
+        return hoursRemaining < 24 && hoursRemaining >= 0
     }
 
     // Calculate progress (0.0 to 1.0)
@@ -93,6 +117,22 @@ struct WidgetEventData {
     // Get color from hex
     var color: Color {
         Color(hex: colorHex)
+    }
+
+    // Formatted target date for display (e.g., "Tue 28" or "Nov 2")
+    var formattedTargetDate: String {
+        let formatter = DateFormatter()
+        let calendar = Calendar.current
+
+        // If target date is within this month, show "Day DD" (e.g., "Tue 28")
+        if calendar.isDate(targetDate, equalTo: Date(), toGranularity: .month) {
+            formatter.dateFormat = "EEE d"  // Tue 28
+        } else {
+            // Different month - show "MMM d" (e.g., "Nov 2")
+            formatter.dateFormat = "MMM d"
+        }
+
+        return formatter.string(from: targetDate)
     }
 }
 

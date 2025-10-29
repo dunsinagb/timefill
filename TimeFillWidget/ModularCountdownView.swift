@@ -117,13 +117,21 @@ struct ModularCountdownView: View {
 
                 // Countdown number + label
                 VStack(alignment: .center, spacing: 2) {
-                    // Large number - shows seconds in final minute
+                    // Large number - shows hours for scheduled if < 24h
                     if event.isScheduled {
-                        Text("\(event.daysUntilStart)")
-                            .font(.system(size: 48, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
+                        if event.startsToday {
+                            Text("\(event.hoursUntilStart)")
+                                .font(.system(size: 48, weight: .bold, design: .rounded))
+                                .foregroundStyle(.white)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        } else {
+                            Text("\(event.daysUntilStart)")
+                                .font(.system(size: 48, weight: .bold, design: .rounded))
+                                .foregroundStyle(.white)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        }
                     } else if entry.isCompletedAtEntry {
                         Text("DONE")
                             .font(.system(size: 32, weight: .bold, design: .rounded))
@@ -136,6 +144,12 @@ struct ModularCountdownView: View {
                             .foregroundStyle(.orange)
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
+                    } else if event.isToday {
+                        Text("\(event.hoursRemaining)")
+                            .font(.system(size: 48, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
                     } else {
                         Text("\(event.daysRemaining)")
                             .font(.system(size: 48, weight: .bold, design: .rounded))
@@ -146,16 +160,30 @@ struct ModularCountdownView: View {
 
                     // Label - changes based on state
                     if event.isScheduled {
-                        Text("STARTS IN")
-                            .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
-                            .tracking(1.5)
-                            .textCase(.uppercase)
+                        if event.startsToday {
+                            Text(event.hoursUntilStart == 1 ? "HOUR" : "HOURS")
+                                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                                .foregroundStyle(Color(hex: "#8E8E8E"))
+                                .tracking(1.5)
+                                .textCase(.uppercase)
+                        } else {
+                            Text("STARTS IN")
+                                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                                .foregroundStyle(Color(hex: "#8E8E8E"))
+                                .tracking(1.5)
+                                .textCase(.uppercase)
+                        }
                     } else if entry.isCompletedAtEntry {
                         Text("")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                     } else if entry.isInFinalMinuteAtEntry {
                         Text("SECONDS")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .tracking(1.5)
+                            .textCase(.uppercase)
+                    } else if event.isToday {
+                        Text(event.hoursRemaining == 1 ? "HOUR" : "HOURS")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                             .foregroundStyle(Color(hex: "#8E8E8E"))
                             .tracking(1.5)
@@ -187,7 +215,14 @@ struct ModularCountdownView: View {
                 // Left side - Large icon centered vertically (changes based on state)
                 VStack {
                     Spacer()
-                    if entry.isCompletedAtEntry {
+                    if event.isScheduled {
+                        // Scheduled icon for future events
+                        Image(systemName: "clock.fill")
+                            .font(.system(size: 50, weight: .semibold))
+                            .foregroundStyle(event.color)
+                            .frame(width: 56, height: 56)
+                            .minimumScaleFactor(0.8)
+                    } else if entry.isCompletedAtEntry {
                         // Checkmark when completed
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 50, weight: .semibold))
@@ -229,7 +264,21 @@ struct ModularCountdownView: View {
                     // Countdown number with progress percentage
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
                         // Large countdown number - changes based on state
-                        if entry.isCompletedAtEntry {
+                        if event.isScheduled {
+                            if event.startsToday {
+                                Text("\(event.hoursUntilStart)")
+                                    .font(.system(size: 68, weight: .bold, design: .rounded))
+                                    .foregroundStyle(.white)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                            } else {
+                                Text("\(event.daysUntilStart)")
+                                    .font(.system(size: 68, weight: .bold, design: .rounded))
+                                    .foregroundStyle(.white)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                            }
+                        } else if entry.isCompletedAtEntry {
                             Text("DONE")
                                 .font(.system(size: 48, weight: .bold, design: .rounded))
                                 .foregroundStyle(event.color)
@@ -239,6 +288,12 @@ struct ModularCountdownView: View {
                             Text("\(entry.secondsRemainingAtEntry)")
                                 .font(.system(size: 68, weight: .bold, design: .rounded))
                                 .foregroundStyle(.orange)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        } else if event.isToday {
+                            Text("\(event.hoursRemaining)")
+                                .font(.system(size: 68, weight: .bold, design: .rounded))
+                                .foregroundStyle(.white)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.7)
                         } else {
@@ -252,13 +307,33 @@ struct ModularCountdownView: View {
                         // Label + progress aligned with number baseline
                         VStack(alignment: .leading, spacing: 3) {
                             // Label - changes based on state
-                            if entry.isCompletedAtEntry {
+                            if event.isScheduled {
+                                if event.startsToday {
+                                    Text(event.hoursUntilStart == 1 ? "HOUR" : "HOURS")
+                                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                                        .tracking(1.6)
+                                        .textCase(.uppercase)
+                                } else {
+                                    Text("STARTS IN")
+                                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                                        .tracking(1.6)
+                                        .textCase(.uppercase)
+                                }
+                            } else if entry.isCompletedAtEntry {
                                 Text("100%")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                                     .foregroundStyle(event.color)
                                     .tracking(1.6)
                             } else if entry.isInFinalMinuteAtEntry {
                                 Text("SECONDS")
+                                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                                    .tracking(1.6)
+                                    .textCase(.uppercase)
+                            } else if event.isToday {
+                                Text(event.hoursRemaining == 1 ? "HOUR" : "HOURS")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                                     .foregroundStyle(Color(hex: "#8E8E8E"))
                                     .tracking(1.6)

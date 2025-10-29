@@ -16,16 +16,37 @@ struct CountdownProvider: AppIntentTimelineProvider {
 
     // MARK: - Placeholder
     /// Returns a placeholder entry while widget is loading
-    /// Shows sample birthday for gallery preview
+    /// ALWAYS tries to show user's real next event first
+    /// Falls back to sample (lock screen) or nil (home screen) if no events exist
     func placeholder(in context: Context) -> CountdownEntry {
-        // Show hardcoded birthday sample for gallery
-        // This is what appears in the widget gallery
-        print("🔷 Placeholder called - showing sample birthday")
-        return CountdownEntry(date: Date(), event: .sample)
+        print("🔷 Placeholder called - family: \(context.family)")
+
+        // ALWAYS try to fetch user's next event from shared UserDefaults first
+        if let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app"),
+           let eventData = sharedDefaults.data(forKey: "nextEvent"),
+           let decoded = try? JSONDecoder().decode(SharedEventData.self, from: eventData) {
+
+            let event = WidgetEventData(
+                id: decoded.id,
+                name: decoded.name,
+                targetDate: decoded.targetDate,
+                createdDate: decoded.createdDate,
+                colorHex: decoded.colorHex,
+                iconName: decoded.iconName
+            )
+
+            print("🔷 Showing user's real event: \(event.name)")
+            return CountdownEntry(date: Date(), event: event)
+        }
+
+        // No real events found - show "No countdown" for all widget types
+        print("🔷 No events - showing empty state")
+        return CountdownEntry(date: Date(), event: nil)
     }
 
     // MARK: - Snapshot
     /// Returns a single entry for widget gallery and transient situations
+    /// ALWAYS tries to show user's real event based on configuration
     func snapshot(for configuration: SelectEventIntent, in context: Context) async -> CountdownEntry {
         print("📸 Snapshot called - isPreview: \(context.isPreview), family: \(context.family)")
         print("📸 Selected event ID: \(configuration.selectedEvent.id)")
@@ -34,11 +55,11 @@ struct CountdownProvider: AppIntentTimelineProvider {
         if let event = await getEvent(for: configuration) {
             print("✅ Showing real event: \(event.name)")
             return CountdownEntry(date: Date(), event: event)
-        } else {
-            // No events available - show setup guide instructions
-            print("✅ No events found - showing setup guide")
-            return CountdownEntry(date: Date(), event: nil)
         }
+
+        // No events available - show "No countdown" for all widget types
+        print("✅ No events - showing empty state")
+        return CountdownEntry(date: Date(), event: nil)
     }
 
     // MARK: - Timeline
@@ -79,6 +100,16 @@ struct CountdownProvider: AppIntentTimelineProvider {
                 let entry = CountdownEntry(date: currentDate, event: event)
                 let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
                 print("📊 Event completed - showing checkmark, next update in 24 hours")
+                return Timeline(entries: [entry], policy: .after(nextUpdate))
+            } else if event.isToday || event.startsToday {
+                // Within 24 hours (active or scheduled) - update every minute for hours countdown
+                let entry = CountdownEntry(date: currentDate, event: event)
+                let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+                if event.startsToday {
+                    print("📊 Scheduled event starting within 24h - next update in 1 minute")
+                } else {
+                    print("📊 Active event within 24h - next update in 1 minute")
+                }
                 return Timeline(entries: [entry], policy: .after(nextUpdate))
             } else {
                 // Normal countdown - update every 15 minutes

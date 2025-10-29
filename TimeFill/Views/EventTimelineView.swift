@@ -20,9 +20,19 @@ struct EventTimelineView: View {
         allEvents.sorted { $0.targetDate < $1.targetDate }
     }
 
-    // Get only upcoming events (future events)
+    // Get only upcoming events (future + active, not completed)
     private var upcomingEvents: [CountdownEvent] {
-        sortedEvents.filter { $0.targetDate >= currentTime }
+        sortedEvents.filter { event in
+            // Exclude completed events
+            guard event.targetDate >= currentTime else { return false }
+
+            // Exclude scheduled repeat occurrences (they appear only when countdown starts)
+            if event.isRepeatOccurrence && event.isScheduled {
+                return false
+            }
+
+            return true
+        }
     }
 
     var body: some View {
@@ -234,6 +244,14 @@ struct FilmFrameEventRow: View {
     @Bindable var event: CountdownEvent
     let currentTime: Date
 
+    // Calculate progress percentage
+    private var progress: Double {
+        guard !event.isScheduled else { return 0.0 }
+        let totalTime = event.targetDate.timeIntervalSince(event.createdDate)
+        let elapsedTime = currentTime.timeIntervalSince(event.createdDate)
+        return min(max(elapsedTime / totalTime, 0.0), 1.0)
+    }
+
     var body: some View {
         HStack(spacing: 0) {
             // Left perforations
@@ -246,32 +264,68 @@ struct FilmFrameEventRow: View {
             }
 
             // Film frame content - simplified
-            VStack(spacing: 12) {
-                // Event icon
-                ZStack {
-                    Circle()
-                        .fill(Color(hex: event.colorHex).opacity(0.3))
-                        .frame(width: 48, height: 48)
+            ZStack(alignment: .topTrailing) {
+                VStack(spacing: 12) {
+                    // Event icon
+                    ZStack {
+                        Circle()
+                            .fill(Color(hex: event.colorHex).opacity(0.3))
+                            .frame(width: 48, height: 48)
 
-                    Image(systemName: event.iconName)
-                        .font(.system(size: 20))
-                        .foregroundStyle(Color(hex: event.colorHex))
+                        Image(systemName: event.iconName)
+                            .font(.system(size: 20))
+                            .foregroundStyle(Color(hex: event.colorHex))
+                    }
+
+                    // Event name - centered
+                    Text(event.name)
+                        .font(.system(.body, design: .rounded))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
                 }
+                .padding(16)
 
-                // Event name - centered
-                Text(event.name)
-                    .font(.system(.body, design: .rounded))
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
+                // Progress percentage indicator - top right corner
+                if progress > 0 {
+                    Text("\(Int(progress * 100))%")
+                        .font(.system(.caption2, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(
+                            Capsule()
+                                .fill(Color(hex: event.colorHex).opacity(0.9))
+                        )
+                        .padding(8)
+                }
             }
-            .padding(16)
             .frame(maxWidth: .infinity)
             .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.white.opacity(0.05))
+                ZStack(alignment: .leading) {
+                    // Base background
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.white.opacity(0.05))
+
+                    // Progress background indicator
+                    GeometryReader { geometry in
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(
+                                LinearGradient(
+                                    colors: [
+                                        Color(hex: event.colorHex).opacity(0.15),
+                                        Color(hex: event.colorHex).opacity(0.05)
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(width: geometry.size.width * progress)
+                    }
+                }
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 8)

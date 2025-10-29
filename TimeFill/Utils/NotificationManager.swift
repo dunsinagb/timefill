@@ -154,12 +154,21 @@ class NotificationManager: ObservableObject {
                 content.body = "🎊 The moment has arrived! Your countdown is complete!"
             }
             else {
+                // Calculate hours remaining for more accurate messaging
+                let hoursUntil = Int(event.targetDate.timeIntervalSince(date) / 3600)
                 let daysUntil = calendar.dateComponents([.day], from: date, to: event.targetDate).day ?? 0
 
-                if daysUntil == 0 {
+                // Use hours to determine better messages
+                if hoursUntil <= 6 {
+                    // Within 6 hours - truly imminent
                     content.subtitle = event.name
                     content.body = "🎉 Today is the day!"
-                } else if daysUntil == 1 {
+                } else if hoursUntil <= 24 {
+                    // Within 24 hours but more than 6 hours
+                    content.subtitle = event.name
+                    content.body = "⏰ Almost here! \(hoursUntil) hours to go"
+                } else if hoursUntil <= 48 {
+                    // Within 48 hours - tomorrow
                     content.subtitle = event.name
                     content.body = "📅 Tomorrow is the big day!"
                 } else if daysUntil == 7 {

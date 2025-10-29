@@ -22,6 +22,20 @@ enum SortOption: String, CaseIterable {
     }
 }
 
+enum FilterOption: String, CaseIterable {
+    case all = "All"
+    case upcoming = "Upcoming"
+    case past = "Past"
+
+    var icon: String {
+        switch self {
+        case .all: return "square.grid.2x2"
+        case .upcoming: return "clock.arrow.circlepath"
+        case .past: return "checkmark.circle"
+        }
+    }
+}
+
 struct HomeView: View {
     @Binding var showAddEventFromLanding: Bool
     @Environment(\.modelContext) private var modelContext
@@ -32,19 +46,46 @@ struct HomeView: View {
     @AppStorage("showYearOverview") private var showYearOverview = true
     @State private var yearViewMode: YearViewMode = .year
     @State private var sortOption: SortOption = .date
+    @State private var filterOption: FilterOption = .all
     @State private var showingSortMenu = false
     @State private var triggerAnimation = false
     @State private var triggerYearMonthAnimation = false
     @State private var reanimateEventID: UUID?
 
     private var events: [CountdownEvent] {
+        // Filter out scheduled repeat occurrences (hide future auto-created repeats)
+        let repeatFilteredEvents = allEvents.filter { event in
+            // Show all events that are either:
+            // 1. Not scheduled yet (countdown has started)
+            // 2. Not a repeat occurrence (original events)
+            // 3. Scheduled repeat occurrences that start today or have already started
+            if event.isRepeatOccurrence && event.isScheduled {
+                return false  // Hide scheduled repeat occurrences
+            }
+            return true
+        }
+
+        // Apply time-based filter (All, Upcoming, Past)
+        let filteredEvents: [CountdownEvent]
+        switch filterOption {
+        case .all:
+            filteredEvents = repeatFilteredEvents
+        case .upcoming:
+            // Show scheduled + active events (not completed)
+            filteredEvents = repeatFilteredEvents.filter { !$0.isCompleted }
+        case .past:
+            // Show only completed events
+            filteredEvents = repeatFilteredEvents.filter { $0.isCompleted }
+        }
+
+        // Apply sorting
         switch sortOption {
         case .date:
-            return allEvents.sorted { $0.targetDate < $1.targetDate }
+            return filteredEvents.sorted { $0.targetDate < $1.targetDate }
         case .name:
-            return allEvents.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+            return filteredEvents.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         case .progress:
-            return allEvents.sorted {
+            return filteredEvents.sorted {
                 let progress0 = calculateProgress(for: $0)
                 let progress1 = calculateProgress(for: $1)
                 return progress0 > progress1 // Highest progress first
@@ -65,8 +106,8 @@ struct HomeView: View {
                 Color.timeFillDarkBg
                     .ignoresSafeArea()
 
-                if events.isEmpty {
-                    // Empty state
+                if allEvents.isEmpty {
+                    // Empty state - no events in database at all
                     VStack(spacing: 16) {
                         Image(systemName: "hourglass")
                             .font(.system(size: 64))
@@ -102,6 +143,50 @@ struct HomeView: View {
                                 YearOverviewCard(mode: $yearViewMode, shouldAnimate: $triggerYearMonthAnimation)
                             }
 
+                            // Filter options
+                            HStack(spacing: 8) {
+                                ForEach(FilterOption.allCases, id: \.self) { option in
+                                    Button(action: {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            filterOption = option
+                                        }
+                                    }) {
+                                        HStack(spacing: 6) {
+                                            Image(systemName: option.icon)
+                                                .font(.system(size: 14))
+                                            Text(option.rawValue)
+                                                .font(.system(.subheadline, design: .rounded))
+                                                .fontWeight(.medium)
+                                        }
+                                        .foregroundStyle(filterOption == option ? .white : .gray)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(filterOption == option ? Color.timeFillCyan : Color.white.opacity(0.1))
+                                        )
+                                    }
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.horizontal)
+
+                            // Empty state for filtered results
+                            if events.isEmpty {
+                                VStack(spacing: 12) {
+                                    Image(systemName: filterOption == .upcoming ? "clock.arrow.circlepath" : "checkmark.circle")
+                                        .font(.system(size: 48))
+                                        .foregroundStyle(.gray.opacity(0.6))
+                                        .padding(.top, 40)
+
+                                    Text("No \(filterOption.rawValue.lowercased()) events")
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundStyle(.gray)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 60)
+                            }
+
                             ForEach(events) { event in
                                 NavigationLink(destination: DetailView(event: event)
                                     .environment(\.triggerReanimation, { eventID in
@@ -124,6 +209,7 @@ struct HomeView: View {
                                     )
                                 }
                                 .buttonStyle(.plain)
+                                .transition(.opacity.combined(with: .move(edge: .top)))
                             }
                         }
                         .padding()
@@ -250,6 +336,62 @@ struct EventCardView: View {
         return min(days, totalDays)
     }
 
+    // Calculate hours remaining for scheduled events starting today
+    private var hoursUntilStart: Int {
+        let components = Calendar.current.dateComponents([.hour], from: currentTime, to: event.createdDate)
+        return max(components.hour ?? 0, 0)
+    }
+
+    // Calculate actual days remaining (using full days, not calendar days)
+    private var actualDaysRemaining: Int {
+        let components = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: currentTime, to: event.targetDate)
+        return max(components.day ?? 0, 0)
+    }
+
+    // Calculate total hours remaining (for events within 24 hours)
+    private var totalHoursRemaining: Int {
+        let interval = event.targetDate.timeIntervalSince(currentTime)
+        return max(Int(interval / 3600), 0)
+    }
+
+    // Check if event ends within 24 hours
+    private var endsWithin24Hours: Bool {
+        return totalHoursRemaining < 24
+    }
+
+    // Calculate total hours until start (for scheduled events within 24 hours)
+    private var totalHoursUntilStart: Int {
+        let interval = event.createdDate.timeIntervalSince(currentTime)
+        return max(Int(interval / 3600), 0)
+    }
+
+    // Check if event starts within 24 hours
+    private var startsWithin24Hours: Bool {
+        return totalHoursUntilStart < 24
+    }
+
+    // Get display text for scheduled events
+    private var scheduledDisplayText: String {
+        if startsWithin24Hours {
+            return "Starts in \(totalHoursUntilStart)H"
+        } else if event.daysUntilStart == 1 {
+            return "Starts in 1D"
+        } else {
+            return "Starts in \(event.daysUntilStart)D"
+        }
+    }
+
+    // Get display text for active events
+    private var activeDisplayText: String {
+        if endsWithin24Hours {
+            return "\(totalHoursRemaining)H Left · \(Int(currentProgress * 100))%"
+        } else if actualDaysRemaining == 1 {
+            return "1D Left · \(Int(currentProgress * 100))%"
+        } else {
+            return "\(actualDaysRemaining)D Left · \(Int(currentProgress * 100))%"
+        }
+    }
+
     var body: some View {
         HStack(spacing: 16) {
             // Icon
@@ -262,8 +404,9 @@ struct EventCardView: View {
                     .font(.system(size: 24))
                     .foregroundStyle(Color(hex: event.colorHex))
 
-                // Scheduled badge for future events
+                // Top badge: Scheduled or Completed
                 if event.isScheduled {
+                    // Scheduled badge for future events (top right)
                     Circle()
                         .fill(Color.timeFillDarkBg)
                         .frame(width: 20, height: 20)
@@ -273,9 +416,8 @@ struct EventCardView: View {
                                 .foregroundStyle(Color(hex: event.colorHex))
                         )
                         .offset(x: 18, y: -18)
-                }
-                // Checkmark badge for completed events
-                else if currentProgress >= 1.0 {
+                } else if currentProgress >= 1.0 {
+                    // Checkmark badge for completed events (top right)
                     Circle()
                         .fill(Color.timeFillDarkBg)
                         .frame(width: 20, height: 20)
@@ -285,6 +427,19 @@ struct EventCardView: View {
                                 .foregroundStyle(Color(hex: event.colorHex))
                         )
                         .offset(x: 18, y: -18)
+                }
+
+                // Bottom badge: Repeat (can show with any top badge)
+                if event.repeats {
+                    Circle()
+                        .fill(Color.timeFillDarkBg)
+                        .frame(width: 20, height: 20)
+                        .overlay(
+                            Image(systemName: "repeat.circle.fill")
+                                .font(.system(size: 20))
+                                .foregroundStyle(Color(hex: event.colorHex))
+                        )
+                        .offset(x: 18, y: 18)
                 }
             }
 
@@ -297,13 +452,13 @@ struct EventCardView: View {
                     .lineLimit(2)
                     .truncationMode(.tail)
 
-                // Show "Starts in X days" for scheduled events
+                // Show time remaining for scheduled or active events
                 if event.isScheduled {
-                    Text("Starts in \(event.daysUntilStart)D")
+                    Text(scheduledDisplayText)
                         .font(.system(.subheadline, design: .rounded))
                         .foregroundStyle(.gray)
                 } else {
-                    Text("\(event.daysRemaining)D · \(Int(currentProgress * 100))%")
+                    Text(activeDisplayText)
                         .font(.system(.subheadline, design: .rounded))
                         .foregroundStyle(.gray)
                 }
