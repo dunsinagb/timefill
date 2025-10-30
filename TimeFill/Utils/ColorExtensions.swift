@@ -94,14 +94,20 @@ struct ColorPickerViewController: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIColorPickerViewController {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = UIColor(selectedColor)
-        picker.supportsAlpha = false
+        // Ensure UI updates happen on main thread
+        DispatchQueue.main.async {
+            picker.selectedColor = UIColor(selectedColor)
+            picker.supportsAlpha = false
+        }
         picker.delegate = context.coordinator
         return picker
     }
 
     func updateUIViewController(_ uiViewController: UIColorPickerViewController, context: Context) {
-        uiViewController.selectedColor = UIColor(selectedColor)
+        // Ensure updates happen on main thread to prevent freezing
+        DispatchQueue.main.async {
+            uiViewController.selectedColor = UIColor(selectedColor)
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -116,15 +122,19 @@ struct ColorPickerViewController: UIViewControllerRepresentable {
         }
 
         func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-            // Called when user dismisses the picker
-            parent.dismiss()
+            // Called when user dismisses the picker - ensure on main thread
+            DispatchQueue.main.async {
+                self.parent.dismiss()
+            }
         }
 
         func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-            // Update color as user picks
-            parent.selectedColor = Color(color)
-            if !continuously {
-                parent.onColorSelected(Color(color))
+            // Update color as user picks - ensure on main thread
+            DispatchQueue.main.async {
+                self.parent.selectedColor = Color(color)
+                if !continuously {
+                    self.parent.onColorSelected(Color(color))
+                }
             }
         }
     }

@@ -15,5 +15,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Pick colors from your camera using the eyedropper tool</string>
 </dict>
 </plist>
