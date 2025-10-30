@@ -462,20 +462,6 @@ struct AddEventView: View {
                                 }
                             }
                         }
-                        .sheet(isPresented: $showingCustomColorPicker) {
-                            ColorPickerViewController(
-                                selectedColor: $customPickedColor,
-                                onColorSelected: { color in
-                                    // Create custom theme from picked color
-                                    let hexString = color.toHex()
-                                    let newCustomTheme = ColorTheme(hex: hexString, name: "Custom")
-                                    customColorTheme = newCustomTheme
-                                    selectedColor = newCustomTheme
-                                }
-                            )
-                            .presentationDetents([.height(580)])
-                            .presentationDragIndicator(.visible)
-                        }
 
                         // Icon picker
                         VStack(alignment: .leading, spacing: 12) {
@@ -553,6 +539,20 @@ struct AddEventView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .background(
+            ColorPickerWrapper(
+                selectedColor: $customPickedColor,
+                isPresented: $showingCustomColorPicker,
+                onColorSelected: { color in
+                    // Create custom theme from picked color
+                    let hexString = color.toHex()
+                    let newCustomTheme = ColorTheme(hex: hexString, name: "Custom")
+                    customColorTheme = newCustomTheme
+                    selectedColor = newCustomTheme
+                }
+            )
+            .frame(width: 0, height: 0)
+        )
     }
 
     private func saveEvent() {

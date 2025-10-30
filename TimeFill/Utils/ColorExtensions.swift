@@ -85,51 +85,78 @@ extension Color {
     }
 }
 
-// MARK: - Native iOS Color Picker
-// Directly shows UIColorPickerViewController with Grid/Spectrum/Sliders/Eyedropper
-struct ColorPickerViewController: UIViewControllerRepresentable {
+// MARK: - Native iOS Color Picker Wrapper
+// Uses hidden UIViewController to present color picker properly
+struct ColorPickerWrapper: UIViewControllerRepresentable {
     @Binding var selectedColor: Color
+    @Binding var isPresented: Bool
     let onColorSelected: (Color) -> Void
-    @Environment(\.dismiss) private var dismiss
 
-    func makeUIViewController(context: Context) -> UIColorPickerViewController {
-        let picker = UIColorPickerViewController()
-        // Ensure UI updates happen on main thread
-        DispatchQueue.main.async {
-            picker.selectedColor = UIColor(selectedColor)
-            picker.supportsAlpha = false
-        }
-        picker.delegate = context.coordinator
-        return picker
+    func makeUIViewController(context: Context) -> WrapperViewController {
+        return WrapperViewController()
     }
 
-    func updateUIViewController(_ uiViewController: UIColorPickerViewController, context: Context) {
-        // Ensure updates happen on main thread to prevent freezing
-        DispatchQueue.main.async {
-            uiViewController.selectedColor = UIColor(selectedColor)
+    func updateUIViewController(_ uiViewController: WrapperViewController, context: Context) {
+        // Present picker when isPresented becomes true
+        if isPresented && !context.coordinator.isPresenting {
+            context.coordinator.isPresenting = true
+
+            let picker = UIColorPickerViewController()
+            picker.selectedColor = UIColor(selectedColor)
+            picker.supportsAlpha = false
+            picker.delegate = context.coordinator
+
+            // Configure sheet presentation for 580pt height
+            if let sheet = picker.sheetPresentationController {
+                sheet.detents = [.custom(resolver: { _ in 580 })]
+                sheet.prefersGrabberVisible = true
+            }
+
+            // Present on next run loop to avoid timing issues
+            DispatchQueue.main.async {
+                uiViewController.present(picker, animated: true)
+            }
+        }
+        // Dismiss picker when isPresented becomes false
+        else if !isPresented && context.coordinator.isPresenting {
+            context.coordinator.isPresenting = false
+
+            DispatchQueue.main.async {
+                uiViewController.presentedViewController?.dismiss(animated: true)
+            }
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(parent: self)
+    }
+
+    // Wrapper view controller - empty, just for presenting
+    class WrapperViewController: UIViewController {
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = .clear
+            view.isUserInteractionEnabled = false
+        }
     }
 
     class Coordinator: NSObject, UIColorPickerViewControllerDelegate {
-        let parent: ColorPickerViewController
+        let parent: ColorPickerWrapper
+        var isPresenting = false
 
-        init(_ parent: ColorPickerViewController) {
+        init(parent: ColorPickerWrapper) {
             self.parent = parent
         }
 
         func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-            // Called when user dismisses the picker - ensure on main thread
+            // User dismissed - update state but DON'T dismiss parent view
             DispatchQueue.main.async {
-                self.parent.dismiss()
+                self.parent.isPresented = false
             }
         }
 
         func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-            // Update color as user picks - ensure on main thread
+            // Update color on main thread
             DispatchQueue.main.async {
                 self.parent.selectedColor = Color(color)
                 if !continuously {
