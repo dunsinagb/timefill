@@ -17,30 +17,37 @@ struct CountdownProvider: AppIntentTimelineProvider {
     // MARK: - Placeholder
     /// Returns a placeholder entry while widget is loading
     /// ALWAYS tries to show user's real next event first
-    /// Falls back to sample (lock screen) or nil (home screen) if no events exist
+    /// Falls back to nil if no upcoming events exist
     func placeholder(in context: Context) -> CountdownEntry {
         print("🔷 Placeholder called - family: \(context.family)")
 
-        // ALWAYS try to fetch user's next event from shared UserDefaults first
+        // ALWAYS try to fetch user's next UPCOMING event (with smart filtering)
         if let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app"),
-           let eventData = sharedDefaults.data(forKey: "nextEvent"),
-           let decoded = try? JSONDecoder().decode(SharedEventData.self, from: eventData) {
+           let allEventsData = sharedDefaults.data(forKey: "allEvents"),
+           let allEvents = try? JSONDecoder().decode([SharedEventData].self, from: allEventsData) {
 
-            let event = WidgetEventData(
-                id: decoded.id,
-                name: decoded.name,
-                targetDate: decoded.targetDate,
-                createdDate: decoded.createdDate,
-                colorHex: decoded.colorHex,
-                iconName: decoded.iconName
-            )
+            // Filter for upcoming events and sort by date
+            let upcomingEvents = allEvents
+                .filter { $0.targetDate > Date() }
+                .sorted { $0.targetDate < $1.targetDate }
 
-            print("🔷 Showing user's real event: \(event.name)")
-            return CountdownEntry(date: Date(), event: event)
+            if let nextEventData = upcomingEvents.first {
+                let event = WidgetEventData(
+                    id: nextEventData.id,
+                    name: nextEventData.name,
+                    targetDate: nextEventData.targetDate,
+                    createdDate: nextEventData.createdDate,
+                    colorHex: nextEventData.colorHex,
+                    iconName: nextEventData.iconName
+                )
+
+                print("🔷 Showing user's real upcoming event: \(event.name)")
+                return CountdownEntry(date: Date(), event: event)
+            }
         }
 
-        // No real events found - show "No countdown" for all widget types
-        print("🔷 No events - showing empty state")
+        // No upcoming events found - show "No countdown" for all widget types
+        print("🔷 No upcoming events - showing empty state")
         return CountdownEntry(date: Date(), event: nil)
     }
 
@@ -147,8 +154,13 @@ struct CountdownProvider: AppIntentTimelineProvider {
             // Get the specific event the user selected
             let event = await getEventByID(selectedEventID)
 
-            if event == nil {
-                print("⚠️ Selected event not found - showing setup guide")
+            // If selected event is completed or not found, automatically switch to next event
+            if let event = event, event.isCompleted {
+                print("⚠️ Selected event '\(event.name)' is completed - switching to next upcoming event")
+                return await getNextEvent()
+            } else if event == nil {
+                print("⚠️ Selected event not found - switching to next upcoming event")
+                return await getNextEvent()
             }
 
             return event
@@ -156,7 +168,8 @@ struct CountdownProvider: AppIntentTimelineProvider {
     }
 
     // MARK: - Fetch Next Event
-    /// Fetch the next upcoming event from shared UserDefaults
+    /// Fetch the next upcoming event - ALWAYS filters to ensure we get upcoming event
+    /// This prevents showing stale completed events when app hasn't updated UserDefaults
     private func getNextEvent() async -> WidgetEventData? {
         // Use App Group to share data between app and widget
         guard let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app") else {
@@ -164,26 +177,33 @@ struct CountdownProvider: AppIntentTimelineProvider {
             return nil
         }
 
-        // Try to get event data from shared UserDefaults
-        guard let eventData = sharedDefaults.data(forKey: "nextEvent") else {
-            print("❌ No 'nextEvent' data found in UserDefaults")
+        // Fetch ALL events and filter for upcoming ourselves
+        // Don't trust "nextEvent" key as it may be stale if app hasn't been opened
+        guard let allEventsData = sharedDefaults.data(forKey: "allEvents"),
+              let allEvents = try? JSONDecoder().decode([SharedEventData].self, from: allEventsData) else {
+            print("❌ No 'allEvents' data found in UserDefaults")
             return nil
         }
 
-        guard let decoded = try? JSONDecoder().decode(SharedEventData.self, from: eventData) else {
-            print("❌ Failed to decode nextEvent data")
+        // Filter for upcoming events and sort by date
+        let upcomingEvents = allEvents
+            .filter { $0.targetDate > Date() }
+            .sorted { $0.targetDate < $1.targetDate }
+
+        guard let nextEventData = upcomingEvents.first else {
+            print("❌ No upcoming events found (all \(allEvents.count) events are completed)")
             return nil
         }
 
-        print("✅ Successfully loaded next event: \(decoded.name)")
+        print("✅ Found next upcoming event: \(nextEventData.name) (filtered from \(allEvents.count) total)")
 
         return WidgetEventData(
-            id: decoded.id,
-            name: decoded.name,
-            targetDate: decoded.targetDate,
-            createdDate: decoded.createdDate,
-            colorHex: decoded.colorHex,
-            iconName: decoded.iconName
+            id: nextEventData.id,
+            name: nextEventData.name,
+            targetDate: nextEventData.targetDate,
+            createdDate: nextEventData.createdDate,
+            colorHex: nextEventData.colorHex,
+            iconName: nextEventData.iconName
         )
     }
 

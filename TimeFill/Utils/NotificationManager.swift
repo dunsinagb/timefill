@@ -158,15 +158,24 @@ class NotificationManager: ObservableObject {
                 let hoursUntil = Int(event.targetDate.timeIntervalSince(date) / 3600)
                 let daysUntil = calendar.dateComponents([.day], from: date, to: event.targetDate).day ?? 0
 
-                // Use hours to determine better messages
-                if hoursUntil <= 6 {
-                    // Within 6 hours - truly imminent
+                // Check if notification date and event date are on the same calendar day
+                let isSameDay = calendar.isDate(date, inSameDayAs: event.targetDate)
+
+                // Use hours and calendar days to determine better messages
+                if isSameDay && hoursUntil <= 6 {
+                    // Same day AND within 6 hours - truly imminent
                     content.subtitle = event.name
                     content.body = "🎉 Today is the day!"
                 } else if hoursUntil <= 24 {
-                    // Within 24 hours but more than 6 hours
-                    content.subtitle = event.name
-                    content.body = "⏰ Almost here! \(hoursUntil) hours to go"
+                    // Within 24 hours
+                    if isSameDay {
+                        content.subtitle = event.name
+                        content.body = "⏰ Almost here! \(hoursUntil) hours to go"
+                    } else {
+                        // Different day but within 24 hours means tomorrow
+                        content.subtitle = event.name
+                        content.body = "📅 Tomorrow is the big day!"
+                    }
                 } else if hoursUntil <= 48 {
                     // Within 48 hours - tomorrow
                     content.subtitle = event.name

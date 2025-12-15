@@ -55,8 +55,13 @@ struct EventQuery: EntityQuery {
             return []
         }
 
-        print("✅ Found \(events.count) events for selection")
-        return events.map { event in
+        // Filter out completed events and sort by date (soonest first)
+        let upcomingEvents = events
+            .filter { event in event.targetDate > Date() }
+            .sorted { $0.targetDate < $1.targetDate }
+
+        print("✅ Found \(upcomingEvents.count) upcoming events for selection (filtered and sorted from \(events.count) total)")
+        return upcomingEvents.map { event in
             EventEntity(id: event.id, name: event.name)
         }
     }

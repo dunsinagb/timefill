@@ -22,6 +22,7 @@ struct DetailView: View {
     @State private var triggerHeatmapAnimation = false
     @State private var forceHeatmapReAnimate = false
     @State private var wasEdited = false
+    @AppStorage("hapticsEnabled") private var hapticsEnabled = true
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -192,53 +193,53 @@ struct DetailView: View {
             )
             .ignoresSafeArea()
 
-            ScrollView {
-                VStack(spacing: 32) {
-                    // Event title
-                    Text(event.name)
-                        .font(.system(.largeTitle, design: .rounded))
-                        .fontWeight(.bold)
+            VStack(spacing: 20) {
+                // Event title
+                Text(event.name)
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 4)
+
+                // Scheduled for
+                VStack(spacing: 8) {
+                    Text("Scheduled for")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundStyle(.gray)
+
+                    Text(event.targetDate, format: .dateTime.weekday().month().day().year())
+                        .font(.system(.title3, design: .rounded))
+                        .fontWeight(.semibold)
                         .foregroundStyle(.white)
-                        .multilineTextAlignment(.center)
 
-                    // Scheduled for
-                    VStack(spacing: 8) {
-                        Text("Scheduled for")
-                            .font(.system(.subheadline, design: .rounded))
-                            .foregroundStyle(.gray)
+                    Text(event.targetDate, format: .dateTime.hour().minute())
+                        .font(.system(.title3, design: .rounded))
+                        .foregroundStyle(.white)
+                }
 
-                        Text(event.targetDate, format: .dateTime.weekday().month().day().year())
-                            .font(.system(.title3, design: .rounded))
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-
-                        Text(event.targetDate, format: .dateTime.hour().minute())
-                            .font(.system(.title3, design: .rounded))
-                            .foregroundStyle(.white)
-                    }
-
-                    // Large heatmap
-                    LargeSandFillView(
-                        progress: currentProgress,
-                        color: Color(hex: event.colorHex),
-                        totalDays: totalDays,
-                        elapsedDays: daysSinceStart,
-                        shouldAnimate: triggerHeatmapAnimation,
-                        forceReAnimate: forceHeatmapReAnimate,
-                        targetDate: event.targetDate,
-                        actualDaysRemaining: daysRemaining
-                    )
-                    .padding(.vertical)
+                // Large heatmap
+                LargeSandFillView(
+                    progress: currentProgress,
+                    color: Color(hex: event.colorHex),
+                    totalDays: totalDays,
+                    elapsedDays: daysSinceStart,
+                    shouldAnimate: triggerHeatmapAnimation,
+                    forceReAnimate: forceHeatmapReAnimate,
+                    targetDate: event.targetDate,
+                    actualDaysRemaining: daysRemaining
+                )
+                .padding(.vertical, 8)
 
                     // Countdown display
                     if event.isScheduled {
                         // Scheduled event - show days/hours until start or time if today
                         if event.startsToday {
                             // Starts within 24 hours - show time countdown
-                            VStack(spacing: 12) {
-                                VStack(spacing: 12) {
+                            VStack(spacing: 8) {
+                                VStack(spacing: 10) {
                                     Image(systemName: "clock.fill")
-                                        .font(.system(size: 64))
+                                        .font(.system(size: 56))
                                         .foregroundStyle(Color(hex: event.colorHex))
 
                                     // Check if actually today vs tomorrow
@@ -267,15 +268,15 @@ struct DetailView: View {
                                         .font(.system(.subheadline, design: .rounded))
                                         .foregroundStyle(.white.opacity(0.7))
                                         .multilineTextAlignment(.center)
-                                        .padding(.top, 4)
+                                        .padding(.top, 2)
                                 }
                             }
                         } else {
                             // Multiple days until start
-                            VStack(spacing: 12) {
-                                VStack(spacing: 12) {
+                            VStack(spacing: 8) {
+                                VStack(spacing: 10) {
                                     Image(systemName: "clock.fill")
-                                        .font(.system(size: 64))
+                                        .font(.system(size: 56))
                                         .foregroundStyle(Color(hex: event.colorHex))
 
                                     Text("Starts in \(event.daysUntilStart) \(event.daysUntilStart == 1 ? "day" : "days")")
@@ -303,12 +304,49 @@ struct DetailView: View {
                                         .font(.system(.subheadline, design: .rounded))
                                         .foregroundStyle(.white.opacity(0.7))
                                         .multilineTextAlignment(.center)
-                                        .padding(.top, 4)
+                                        .padding(.top, 2)
                                 }
                             }
                         }
+                    } else if event.isInCountUpPhase {
+                        // Count-up phase for repeat events (0 to 2 minutes after completion)
+                        VStack(spacing: 8) {
+                            VStack(spacing: 10) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 56))
+                                    .foregroundStyle(Color(hex: event.colorHex))
+
+                                Text("Countdown Complete!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+
+                                Text("Resetting in...")
+                                    .font(.system(.subheadline, design: .rounded))
+                                    .foregroundStyle(.gray)
+                                    .padding(.top, 4)
+
+                                // Count-up timer
+                                HStack(spacing: 0) {
+                                    CountdownUnit(value: event.countUpComponents.minutes, label: "Minutes")
+                                    CountdownUnit(value: event.countUpComponents.seconds, label: "Seconds")
+                                }
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(hex: event.colorHex).opacity(0.2))
+                            )
+
+                            // Repeat message (outside box)
+                            Text(repeatMessage)
+                                .font(.system(.subheadline, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.7))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 2)
+                        }
                     } else if !isCompleted {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 8) {
                             HStack(spacing: 0) {
                                 CountdownUnit(value: daysRemaining, label: "Days")
                                 CountdownUnit(value: hoursRemaining, label: "Hours")
@@ -327,15 +365,15 @@ struct DetailView: View {
                                     .font(.system(.subheadline, design: .rounded))
                                     .foregroundStyle(.white.opacity(0.7))
                                     .multilineTextAlignment(.center)
-                                    .padding(.top, 4)
+                                    .padding(.top, 2)
                             }
                         }
                     } else {
-                        // Completion message
-                        VStack(spacing: 12) {
-                            VStack(spacing: 12) {
+                        // Completion message (non-repeat events)
+                        VStack(spacing: 8) {
+                            VStack(spacing: 10) {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 64))
+                                    .font(.system(size: 56))
                                     .foregroundStyle(Color(hex: event.colorHex))
 
                                 Text("Countdown Complete!")
@@ -351,38 +389,62 @@ struct DetailView: View {
                                     .font(.system(.subheadline, design: .rounded))
                                     .foregroundStyle(.white.opacity(0.7))
                                     .multilineTextAlignment(.center)
-                                    .padding(.top, 4)
+                                    .padding(.top, 2)
                             }
                         }
                     }
 
-                    Spacer(minLength: 60)
-                }
-                .padding()
+                Spacer(minLength: 40)
             }
+            .padding(.horizontal)
+            .padding(.bottom, 8)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                HStack(spacing: 16) {
+                HStack(spacing: 8) {
                     // Info button
-                    Button(action: { showingInfo = true }) {
+                    Button(action: {
+                        if hapticsEnabled {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
+                        showingInfo = true
+                    }) {
                         Image(systemName: "info.circle")
+                            .font(.system(size: 20))
                             .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
                     }
 
                     // Menu button
                     Menu {
-                        Button(action: { showingEdit = true }) {
+                        Button(action: {
+                            if hapticsEnabled {
+                                let generator = UIImpactFeedbackGenerator(style: .light)
+                                generator.impactOccurred()
+                            }
+                            showingEdit = true
+                        }) {
                             Label("Edit", systemImage: "slider.horizontal.3")
                         }
 
-                        Button(role: .destructive, action: { showingDeleteAlert = true }) {
+                        Button(role: .destructive, action: {
+                            if hapticsEnabled {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                generator.impactOccurred()
+                            }
+                            showingDeleteAlert = true
+                        }) {
                             Label("Delete", systemImage: "trash")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
+                            .font(.system(size: 20))
                             .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
                     }
                 }
             }
@@ -395,6 +457,13 @@ struct DetailView: View {
         }
         .onReceive(timer) { time in
             currentTime = time
+
+            // Check if repeat event should reset
+            if event.shouldResetRepeat {
+                Task { @MainActor in
+                    EventRepeatManager.shared.handleRepeatLogic(for: event, context: modelContext)
+                }
+            }
         }
         .sheet(isPresented: $showingInfo) {
             EventInfoSheet(event: event)
@@ -606,7 +675,7 @@ struct EditEventView: View {
                 Color.timeFillDarkBg
                     .ignoresSafeArea()
 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 24) {
                         // Event name
                         VStack(alignment: .leading, spacing: 8) {
@@ -1146,6 +1215,11 @@ struct EventInfoSheet: View {
                             icon: "calendar.badge.clock",
                             color: .orange
                         )
+
+                        // Repeat information (if event repeats)
+                        if event.repeats {
+                            RepeatInfoCard(event: event)
+                        }
                     }
                     .padding(.horizontal)
 
@@ -1214,5 +1288,140 @@ struct InfoCard: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(color.opacity(0.3), lineWidth: 1)
         )
+    }
+}
+
+// MARK: - Repeat Info Card
+struct RepeatInfoCard: View {
+    @Bindable var event: CountdownEvent
+
+    private var repeatMessage: String {
+        let interval = event.repeatInterval
+        let calendar = Calendar.current
+
+        switch event.repeatType {
+        case "Daily":
+            if interval == 1 {
+                return "This countdown repeats every day"
+            } else {
+                return "This countdown repeats every \(interval) days"
+            }
+
+        case "Weekly":
+            let dayOfWeek = dayOfWeekName(from: event.targetDate)
+            if interval == 1 {
+                return "This countdown repeats every week on \(dayOfWeek)"
+            } else {
+                return "This countdown repeats every \(interval) weeks on \(dayOfWeek)"
+            }
+
+        case "Monthly":
+            let dayOfMonth = calendar.component(.day, from: event.targetDate)
+            let ordinalDay = ordinalString(for: dayOfMonth)
+            if interval == 1 {
+                return "This countdown repeats every month on the \(ordinalDay)"
+            } else {
+                return "This countdown repeats every \(interval) months on the \(ordinalDay)"
+            }
+
+        case "Yearly":
+            if event.yearlyRepeatStyle == "relativeWeekday" {
+                let dayOfMonth = calendar.component(.day, from: event.targetDate)
+                let weekdayOrdinal = (dayOfMonth - 1) / 7 + 1
+                let ordinalWords = ["", "first", "second", "third", "fourth", "fifth"]
+                let ordinalWord = weekdayOrdinal <= 5 ? ordinalWords[weekdayOrdinal] : "\(weekdayOrdinal)th"
+
+                let weekdayName = dayOfWeekName(from: event.targetDate)
+                let monthName = monthName(from: event.targetDate)
+
+                if interval == 1 {
+                    return "This countdown repeats every year on the \(ordinalWord) \(weekdayName) of \(monthName)"
+                } else {
+                    return "This countdown repeats every \(interval) years on the \(ordinalWord) \(weekdayName) of \(monthName)"
+                }
+            } else {
+                let monthName = monthName(from: event.targetDate)
+                let dayOfMonth = calendar.component(.day, from: event.targetDate)
+                let ordinalDay = ordinalString(for: dayOfMonth)
+                if interval == 1 {
+                    return "This countdown repeats every year on \(monthName) \(ordinalDay)"
+                } else {
+                    return "This countdown repeats every \(interval) years on \(monthName) \(dayOfMonth)"
+                }
+            }
+
+        default:
+            return "This countdown repeats"
+        }
+    }
+
+    private var nextOccurrenceMessage: String? {
+        guard let nextDate = event.nextOccurrenceDate(after: event.targetDate) else {
+            return nil
+        }
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d, yyyy"
+        return "After completion, will repeat on \(formatter.string(from: nextDate))"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: "repeat.circle.fill")
+                    .font(.system(size: 20))
+                    .foregroundStyle(Color(hex: event.colorHex))
+                    .frame(width: 30)
+
+                Text("Repeat Pattern")
+                    .font(.system(.subheadline, design: .rounded))
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white.opacity(0.6))
+                    .textCase(.uppercase)
+                    .tracking(0.5)
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(repeatMessage)
+                    .font(.system(.body, design: .rounded))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+
+                if let nextMessage = nextOccurrenceMessage {
+                    Text(nextMessage)
+                        .font(.system(.caption, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(hex: event.colorHex).opacity(0.1))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(hex: event.colorHex).opacity(0.3), lineWidth: 1)
+        )
+    }
+
+    // Helper functions
+    private func dayOfWeekName(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        return formatter.string(from: date)
+    }
+
+    private func monthName(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter.string(from: date)
+    }
+
+    private func ordinalString(for day: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        return formatter.string(from: NSNumber(value: day)) ?? "\(day)"
     }
 }

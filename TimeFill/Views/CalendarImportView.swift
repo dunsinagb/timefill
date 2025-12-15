@@ -21,6 +21,19 @@ struct UniqueEvent: Identifiable {
     }
 }
 
+// Group events by month and year
+struct EventGroup: Identifiable {
+    let id: String
+    let monthYear: String
+    let events: [UniqueEvent]
+
+    init(monthYear: String, events: [UniqueEvent]) {
+        self.id = monthYear
+        self.monthYear = monthYear
+        self.events = events
+    }
+}
+
 struct CalendarImportView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -28,6 +41,7 @@ struct CalendarImportView: View {
 
     @State private var selectedEvents: Set<String> = []
     @State private var calendarEvents: [UniqueEvent] = []
+    @State private var groupedEvents: [EventGroup] = []
     @State private var showingPermissionAlert = false
 
     // Optional callback to dismiss parent sheet
@@ -113,14 +127,28 @@ struct CalendarImportView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
 
-                        ScrollView {
-                            VStack(spacing: 12) {
-                                ForEach(calendarEvents) { uniqueEvent in
-                                    CalendarEventRow(
-                                        event: uniqueEvent.event,
-                                        isSelected: selectedEvents.contains(uniqueEvent.id)
-                                    ) {
-                                        toggleSelection(uniqueEvent)
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 24) {
+                                ForEach(groupedEvents) { group in
+                                    VStack(alignment: .leading, spacing: 12) {
+                                        // Month/Year header
+                                        Text(group.monthYear)
+                                            .font(.system(.headline, design: .rounded))
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.white)
+                                            .padding(.horizontal, 4)
+
+                                        // Events in this month
+                                        VStack(spacing: 12) {
+                                            ForEach(group.events) { uniqueEvent in
+                                                CalendarEventRow(
+                                                    event: uniqueEvent.event,
+                                                    isSelected: selectedEvents.contains(uniqueEvent.id)
+                                                ) {
+                                                    toggleSelection(uniqueEvent)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -167,6 +195,34 @@ struct CalendarImportView: View {
     private func loadCalendarEvents() {
         let events = importer.getUpcomingEvents()
         calendarEvents = events.map { UniqueEvent(event: $0) }
+
+        // Group events by month and year
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+
+        var groupDict: [String: [UniqueEvent]] = [:]
+
+        for uniqueEvent in calendarEvents {
+            let monthYear = formatter.string(from: uniqueEvent.event.startDate)
+            if groupDict[monthYear] == nil {
+                groupDict[monthYear] = []
+            }
+            groupDict[monthYear]?.append(uniqueEvent)
+        }
+
+        // Sort groups chronologically and create EventGroup objects
+        let sortedKeys = groupDict.keys.sorted { key1, key2 in
+            guard let date1 = formatter.date(from: key1),
+                  let date2 = formatter.date(from: key2) else {
+                return key1 < key2
+            }
+            return date1 < date2
+        }
+
+        groupedEvents = sortedKeys.map { key in
+            EventGroup(monthYear: key, events: groupDict[key] ?? [])
+        }
     }
 
     private func toggleSelection(_ uniqueEvent: UniqueEvent) {

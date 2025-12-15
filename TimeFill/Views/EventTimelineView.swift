@@ -59,7 +59,7 @@ struct EventTimelineView: View {
                             .foregroundStyle(.gray)
                     }
                 } else {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         VStack(spacing: 0) {
                             // Film perforations at top
                             FilmPerforations()
@@ -275,6 +275,19 @@ struct FilmFrameEventRow: View {
                         Image(systemName: event.iconName)
                             .font(.system(size: 20))
                             .foregroundStyle(Color(hex: event.colorHex))
+
+                        // Repeat indicator badge
+                        if event.repeats {
+                            Circle()
+                                .fill(Color.timeFillDarkBg)
+                                .frame(width: 18, height: 18)
+                                .overlay(
+                                    Image(systemName: "repeat.circle.fill")
+                                        .font(.system(size: 18))
+                                        .foregroundStyle(Color(hex: event.colorHex))
+                                )
+                                .offset(x: 16, y: 16)
+                        }
                     }
 
                     // Event name - centered

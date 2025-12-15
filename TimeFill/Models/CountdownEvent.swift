@@ -101,6 +101,43 @@ final class CountdownEvent {
         Date() >= targetDate
     }
 
+    // For repeat events: check if it's time to reset (2 minutes after completion)
+    var shouldResetRepeat: Bool {
+        guard repeats && isCompleted else { return false }
+
+        // Reset after 2 minutes (120 seconds)
+        let resetTime = targetDate.addingTimeInterval(120)
+        return Date() >= resetTime
+    }
+
+    // Time elapsed since completion (for count-up display)
+    var timeSinceCompletion: TimeInterval {
+        guard isCompleted else { return 0 }
+        return Date().timeIntervalSince(targetDate)
+    }
+
+    // Time remaining until repeat reset (out of 2 minutes)
+    var timeUntilRepeatReset: TimeInterval {
+        guard repeats && isCompleted else { return 0 }
+
+        let resetTime = targetDate.addingTimeInterval(120) // 2 minutes
+        return max(resetTime.timeIntervalSince(Date()), 0)
+    }
+
+    // Get count-up components (mins, secs since completion, capped at 2 minutes)
+    var countUpComponents: (minutes: Int, seconds: Int) {
+        let elapsed = min(timeSinceCompletion, 120) // Cap at 2 minutes
+        let minutes = Int(elapsed / 60)
+        let seconds = Int(elapsed.truncatingRemainder(dividingBy: 60))
+
+        return (minutes, seconds)
+    }
+
+    // Check if in count-up phase (completed but not yet reset)
+    var isInCountUpPhase: Bool {
+        return repeats && isCompleted && !shouldResetRepeat
+    }
+
     // Check if event repeats
     var repeats: Bool {
         repeatType != "Never"

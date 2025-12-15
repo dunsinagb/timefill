@@ -15,6 +15,7 @@
 		011 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012 /* HomeView.swift */; };
 		013 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014 /* AddEventView.swift */; };
 		015 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016 /* DetailView.swift */; };
+		015B860F1E7F438291ECCEFC /* EventRepeatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6A5FC00184C28A0AD976C /* EventRepeatManager.swift */; };
 		017 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018 /* SettingsView.swift */; };
 		101 /* EventTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102 /* EventTimelineView.swift */; };
 		103 /* CalendarImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104 /* CalendarImporter.swift */; };
@@ -23,12 +24,17 @@
 		109 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110 /* NotificationSettingsView.swift */; };
 		111 /* ReanimationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112 /* ReanimationKey.swift */; };
 		46492247AA5D4113B669AC7671ADB192 /* DetailViewEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B133CD36FCBD424591AE86FF65568407 /* DetailViewEnvironmentKey.swift */; };
+		7B71D0C826DD42EC9306BAA4 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1B67EB010E4BB68DA7794A /* TipJarView.swift */; };
+		B28E710D4F99474386509509 /* TipJarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE0DEADC5B42029BA89FDE /* TipJarViewModel.swift */; };
 		E978A7512E9570D300465616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E978A7502E9570D300465616 /* Assets.xcassets */; };
 		E9D8A2682E95E7B600C23B7E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D8A2672E95E7B600C23B7E /* WidgetKit.framework */; };
 		E9D8A26A2E95E7B600C23B7E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D8A2692E95E7B600C23B7E /* SwiftUI.framework */; };
 		E9D8A27B2E95E7B900C23B7E /* TimeFillWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9D8A2652E95E7B600C23B7E /* TimeFillWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E9D8A28F2E95F3DA00C23B7E /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D8A28E2E95F3DA00C23B7E /* WidgetDataManager.swift */; };
 		E9D8A29D2E97588100C23B7E /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D8A29C2E97588100C23B7E /* LandingView.swift */; };
+		E9ED1E2D2EC14D3E007D1188 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9ED1E2C2EC14D3E007D1188 /* StoreKit.framework */; };
+		E9ED1EFA2EC16EB9007D1188 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = E9ED1EF92EC16EB9007D1188 /* Configuration.storekit */; };
+		E9ED1EFB2EC16EB9007D1188 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = E9ED1EF92EC16EB9007D1188 /* Configuration.storekit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,12 +72,15 @@
 		016 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		018 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		019 /* TimeFill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeFill.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FCE0DEADC5B42029BA89FDE /* TipJarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarViewModel.swift; sourceTree = "<group>"; };
 		102 /* EventTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTimelineView.swift; sourceTree = "<group>"; };
 		104 /* CalendarImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImporter.swift; sourceTree = "<group>"; };
 		106 /* CalendarImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImportView.swift; sourceTree = "<group>"; };
 		108 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		110 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		112 /* ReanimationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReanimationKey.swift; sourceTree = "<group>"; };
+		1D1B67EB010E4BB68DA7794A /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
+		29B6A5FC00184C28A0AD976C /* EventRepeatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepeatManager.swift; sourceTree = "<group>"; };
 		B133CD36FCBD424591AE86FF65568407 /* DetailViewEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewEnvironmentKey.swift; sourceTree = "<group>"; };
 		E978A7502E9570D300465616 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9D8A2652E95E7B600C23B7E /* TimeFillWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimeFillWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +90,8 @@
 		E9D8A28A2E95F1F900C23B7E /* TimeFillWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeFillWidgetExtension.entitlements; sourceTree = "<group>"; };
 		E9D8A28E2E95F3DA00C23B7E /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
 		E9D8A29C2E97588100C23B7E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		E9ED1E2C2EC14D3E007D1188 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		E9ED1EF92EC16EB9007D1188 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -102,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9ED1E2D2EC14D3E007D1188 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +143,7 @@
 		022 /* TimeFill */ = {
 			isa = PBXGroup;
 			children = (
+				E9ED1EF92EC16EB9007D1188 /* Configuration.storekit */,
 				E9D8A2892E95F1AE00C23B7E /* TimeFill.entitlements */,
 				E978A7502E9570D300465616 /* Assets.xcassets */,
 				002 /* TimeFillApp.swift */,
@@ -171,6 +184,7 @@
 				102 /* EventTimelineView.swift */,
 				106 /* CalendarImportView.swift */,
 				110 /* NotificationSettingsView.swift */,
+				1D1B67EB010E4BB68DA7794A /* TipJarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +198,8 @@
 				108 /* NotificationManager.swift */,
 				112 /* ReanimationKey.swift */,
 				B133CD36FCBD424591AE86FF65568407 /* DetailViewEnvironmentKey.swift */,
+				29B6A5FC00184C28A0AD976C /* EventRepeatManager.swift */,
+				0FCE0DEADC5B42029BA89FDE /* TipJarViewModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -191,6 +207,7 @@
 		E9D8A2662E95E7B600C23B7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9ED1E2C2EC14D3E007D1188 /* StoreKit.framework */,
 				E9D8A2672E95E7B600C23B7E /* WidgetKit.framework */,
 				E9D8A2692E95E7B600C23B7E /* SwiftUI.framework */,
 			);
@@ -284,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E978A7512E9570D300465616 /* Assets.xcassets in Resources */,
+				E9ED1EFB2EC16EB9007D1188 /* Configuration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9ED1EFA2EC16EB9007D1188 /* Configuration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +338,9 @@
 				109 /* NotificationSettingsView.swift in Sources */,
 				111 /* ReanimationKey.swift in Sources */,
 				46492247AA5D4113B669AC7671ADB192 /* DetailViewEnvironmentKey.swift in Sources */,
+				015B860F1E7F438291ECCEFC /* EventRepeatManager.swift in Sources */,
+				7B71D0C826DD42EC9306BAA4 /* TipJarView.swift in Sources */,
+				B28E710D4F99474386509509 /* TipJarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +486,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TimeFill/TimeFill.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5YC4QBHFLS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -479,7 +501,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timefill.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -499,7 +521,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TimeFill/TimeFill.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5YC4QBHFLS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -514,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timefill.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -535,7 +557,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = TimeFillWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5YC4QBHFLS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeFillWidget/Info.plist;
@@ -568,7 +590,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = TimeFillWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5YC4QBHFLS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeFillWidget/Info.plist;

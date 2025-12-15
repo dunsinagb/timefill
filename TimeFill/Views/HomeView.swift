@@ -25,12 +25,14 @@ enum SortOption: String, CaseIterable {
 enum FilterOption: String, CaseIterable {
     case all = "All"
     case upcoming = "Upcoming"
+    case recurring = "Recurring"
     case past = "Past"
 
     var icon: String {
         switch self {
         case .all: return "square.grid.2x2"
         case .upcoming: return "clock.arrow.circlepath"
+        case .recurring: return "repeat.circle"
         case .past: return "checkmark.circle"
         }
     }
@@ -44,6 +46,7 @@ struct HomeView: View {
     @State private var showingAddEvent = false
     @State private var showingCalendarImport = false
     @AppStorage("showYearOverview") private var showYearOverview = true
+    @AppStorage("hapticsEnabled") private var hapticsEnabled = true
     @State private var yearViewMode: YearViewMode = .year
     @State private var sortOption: SortOption = .date
     @State private var filterOption: FilterOption = .all
@@ -53,29 +56,20 @@ struct HomeView: View {
     @State private var reanimateEventID: UUID?
 
     private var events: [CountdownEvent] {
-        // Filter out scheduled repeat occurrences (hide future auto-created repeats)
-        let repeatFilteredEvents = allEvents.filter { event in
-            // Show all events that are either:
-            // 1. Not scheduled yet (countdown has started)
-            // 2. Not a repeat occurrence (original events)
-            // 3. Scheduled repeat occurrences that start today or have already started
-            if event.isRepeatOccurrence && event.isScheduled {
-                return false  // Hide scheduled repeat occurrences
-            }
-            return true
-        }
-
-        // Apply time-based filter (All, Upcoming, Past)
+        // Apply time-based filter (All, Upcoming, Recurring, Past)
         let filteredEvents: [CountdownEvent]
         switch filterOption {
         case .all:
-            filteredEvents = repeatFilteredEvents
+            filteredEvents = allEvents
         case .upcoming:
             // Show scheduled + active events (not completed)
-            filteredEvents = repeatFilteredEvents.filter { !$0.isCompleted }
+            filteredEvents = allEvents.filter { !$0.isCompleted }
+        case .recurring:
+            // Show only events that have repeat enabled
+            filteredEvents = allEvents.filter { $0.repeats }
         case .past:
             // Show only completed events
-            filteredEvents = repeatFilteredEvents.filter { $0.isCompleted }
+            filteredEvents = allEvents.filter { $0.isCompleted }
         }
 
         // Apply sorting
@@ -123,7 +117,13 @@ struct HomeView: View {
                             .foregroundStyle(.gray)
                             .multilineTextAlignment(.center)
 
-                        Button(action: { showingAddEvent = true }) {
+                        Button(action: {
+                            if hapticsEnabled {
+                                let generator = UIImpactFeedbackGenerator(style: .light)
+                                generator.impactOccurred()
+                            }
+                            showingAddEvent = true
+                        }) {
                             Label("Add Event", systemImage: "plus.circle.fill")
                                 .font(.system(.headline, design: .rounded))
                                 .foregroundStyle(.white)
@@ -136,7 +136,7 @@ struct HomeView: View {
                     .padding()
                 } else {
                     // Events list
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         VStack(spacing: 16) {
                             // Year/Month Overview Card
                             if showYearOverview {
@@ -144,37 +144,40 @@ struct HomeView: View {
                             }
 
                             // Filter options
-                            HStack(spacing: 8) {
+                            HStack(spacing: 6) {
                                 ForEach(FilterOption.allCases, id: \.self) { option in
                                     Button(action: {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             filterOption = option
                                         }
                                     }) {
-                                        HStack(spacing: 6) {
+                                        HStack(spacing: 4) {
                                             Image(systemName: option.icon)
-                                                .font(.system(size: 14))
+                                                .font(.system(size: 11))
                                             Text(option.rawValue)
-                                                .font(.system(.subheadline, design: .rounded))
+                                                .font(.system(size: 11, design: .rounded))
                                                 .fontWeight(.medium)
                                         }
                                         .foregroundStyle(filterOption == option ? .white : .gray)
-                                        .padding(.horizontal, 16)
+                                        .frame(maxWidth: .infinity)
                                         .padding(.vertical, 8)
                                         .background(
-                                            RoundedRectangle(cornerRadius: 20)
+                                            RoundedRectangle(cornerRadius: 16)
                                                 .fill(filterOption == option ? Color.timeFillCyan : Color.white.opacity(0.1))
                                         )
                                     }
+                                    .sensoryFeedback(.selection, trigger: filterOption == option) { _, newValue in
+                                        hapticsEnabled && newValue
+                                    }
                                 }
                             }
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity)
                             .padding(.horizontal)
 
                             // Empty state for filtered results
                             if events.isEmpty {
                                 VStack(spacing: 12) {
-                                    Image(systemName: filterOption == .upcoming ? "clock.arrow.circlepath" : "checkmark.circle")
+                                    Image(systemName: filterOption.icon)
                                         .font(.system(size: 48))
                                         .foregroundStyle(.gray.opacity(0.6))
                                         .padding(.top, 40)
@@ -256,7 +259,13 @@ struct HomeView: View {
                     // Sort button
                     Menu {
                         ForEach(SortOption.allCases, id: \.self) { option in
-                            Button(action: { sortOption = option }) {
+                            Button(action: {
+                                if hapticsEnabled {
+                                    let generator = UIImpactFeedbackGenerator(style: .light)
+                                    generator.impactOccurred()
+                                }
+                                sortOption = option
+                            }) {
                                 HStack {
                                     Text(option.rawValue)
                                     if sortOption == option {
@@ -274,13 +283,25 @@ struct HomeView: View {
 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     // Toggle year overview visibility
-                    Button(action: { showYearOverview.toggle() }) {
+                    Button(action: {
+                        if hapticsEnabled {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
+                        showYearOverview.toggle()
+                    }) {
                         Image(systemName: showYearOverview ? "eye.fill" : "eye.slash.fill")
                             .font(.title3)
                             .foregroundStyle(.gray)
                     }
 
-                    Button(action: { showingAddEvent = true }) {
+                    Button(action: {
+                        if hapticsEnabled {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
+                        showingAddEvent = true
+                    }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.title3)
                             .foregroundStyle(Color.timeFillCyan)
@@ -310,6 +331,7 @@ struct HomeView: View {
 }
 
 struct EventCardView: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var event: CountdownEvent
     @Binding var shouldAnimate: Bool
     var forceAnimate: Bool = false
@@ -487,6 +509,13 @@ struct EventCardView: View {
         )
         .onReceive(timer) { time in
             currentTime = time
+
+            // Check if repeat event should reset
+            if event.shouldResetRepeat {
+                Task { @MainActor in
+                    EventRepeatManager.shared.handleRepeatLogic(for: event, context: modelContext)
+                }
+            }
         }
         .onChange(of: forceAnimate) { _, newValue in
             if newValue {
@@ -507,6 +536,7 @@ struct YearOverviewCard: View {
     @Binding var shouldAnimate: Bool
     @State private var currentTime = Date()
     @State private var animationTrigger = false
+    @AppStorage("hapticsEnabled") private var hapticsEnabled = true
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -574,6 +604,10 @@ struct YearOverviewCard: View {
                 // Toggle between Year/Month
                 HStack(spacing: 0) {
                     Button(action: {
+                        if hapticsEnabled {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
                         mode = .year
                         triggerAnimation()
                     }) {
@@ -588,6 +622,10 @@ struct YearOverviewCard: View {
                     }
 
                     Button(action: {
+                        if hapticsEnabled {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
                         mode = .month
                         triggerAnimation()
                     }) {

@@ -67,14 +67,14 @@ struct ModularCountdownView: View {
             // Event title at top - truncate if too long
             if event.name.count <= 18 {
                 Text(event.name)
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)
                     .truncationMode(.tail)
             } else {
                 // Show first word only if too long
                 Text(event.name.components(separatedBy: " ").first ?? event.name)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.95))
                     .lineLimit(1)
                     .truncationMode(.tail)
@@ -83,7 +83,7 @@ struct ModularCountdownView: View {
             Spacer()
 
             // Icon and countdown - horizontally aligned in center
-            HStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .center, spacing: 10) {
                 // Icon - changes based on event state at entry time
                 if event.isScheduled {
                     // Scheduled icon for future events
@@ -161,7 +161,7 @@ struct ModularCountdownView: View {
                     // Label - changes based on state
                     if event.isScheduled {
                         if event.startsToday {
-                            Text(event.hoursUntilStart == 1 ? "HOUR" : "HOURS")
+                            Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                 .font(.system(size: 10, weight: .semibold, design: .rounded))
                                 .foregroundStyle(Color(hex: "#8E8E8E"))
                                 .tracking(1.5)
@@ -177,19 +177,19 @@ struct ModularCountdownView: View {
                         Text("")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                     } else if entry.isInFinalMinuteAtEntry {
-                        Text("SECONDS")
+                        Text("SECONDS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                             .foregroundStyle(Color(hex: "#8E8E8E"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     } else if event.isToday {
-                        Text(event.hoursRemaining == 1 ? "HOUR" : "HOURS")
+                        Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                             .foregroundStyle(Color(hex: "#8E8E8E"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     } else {
-                        Text(event.daysRemaining == 1 ? "DAY" : "DAYS")
+                        Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                             .foregroundStyle(Color(hex: "#8E8E8E"))
                             .tracking(1.5)
@@ -200,9 +200,18 @@ struct ModularCountdownView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             Spacer()
+                .frame(height: 4)
+
+            // Battery indicator - compact visualization
+            if !entry.isCompletedAtEntry {
+                WidgetBatteryView(progress: event.progress, color: event.color)
+            }
+
+            Spacer()
+                .frame(height: 2)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -309,7 +318,7 @@ struct ModularCountdownView: View {
                             // Label - changes based on state
                             if event.isScheduled {
                                 if event.startsToday {
-                                    Text(event.hoursUntilStart == 1 ? "HOUR" : "HOURS")
+                                    Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                         .font(.system(size: 11, weight: .semibold, design: .rounded))
                                         .foregroundStyle(Color(hex: "#8E8E8E"))
                                         .tracking(1.6)
@@ -327,19 +336,19 @@ struct ModularCountdownView: View {
                                     .foregroundStyle(event.color)
                                     .tracking(1.6)
                             } else if entry.isInFinalMinuteAtEntry {
-                                Text("SECONDS")
+                                Text("SECONDS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                                     .foregroundStyle(Color(hex: "#8E8E8E"))
                                     .tracking(1.6)
                                     .textCase(.uppercase)
                             } else if event.isToday {
-                                Text(event.hoursRemaining == 1 ? "HOUR" : "HOURS")
+                                Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                                     .foregroundStyle(Color(hex: "#8E8E8E"))
                                     .tracking(1.6)
                                     .textCase(.uppercase)
                             } else {
-                                Text(event.daysRemaining == 1 ? "DAY" : "DAYS")
+                                Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                                     .foregroundStyle(Color(hex: "#8E8E8E"))
                                     .tracking(1.6)
@@ -356,11 +365,20 @@ struct ModularCountdownView: View {
                     }
 
                     Spacer()
+                        .frame(height: 6)
+
+                    // Battery indicator - compact visualization
+                    if !entry.isCompletedAtEntry {
+                        WidgetBatteryView(progress: event.progress, color: event.color)
+                    }
+
+                    Spacer()
+                        .frame(height: 4)
                 }
                 .frame(maxWidth: geometry.size.width - 102)  // Total width minus icon (70) and spacing/padding (32)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
         }
     }
 }

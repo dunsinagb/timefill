@@ -52,7 +52,7 @@ struct RectangularLockView: View {
                                 if event.startsToday {
                                     Text("\(event.hoursUntilStart)")
                                         .font(.system(size: 18, weight: .bold, design: .rounded))
-                                    Text(event.hoursUntilStart == 1 ? "HR" : "HRS")
+                                    Text(event.hoursUntilStart == 1 ? "HR LEFT" : "HRS LEFT")
                                         .font(.system(size: 9, weight: .semibold, design: .rounded))
                                         .foregroundStyle(.secondary)
                                 } else {
@@ -68,19 +68,19 @@ struct RectangularLockView: View {
                             } else if entry.isInFinalMinuteAtEntry {
                                 Text("\(entry.secondsRemainingAtEntry)")
                                     .font(.system(size: 18, weight: .bold, design: .rounded))
-                                Text("SEC")
+                                Text("SEC LEFT")
                                     .font(.system(size: 9, weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                             } else if event.isToday {
                                 Text("\(event.hoursRemaining)")
                                     .font(.system(size: 18, weight: .bold, design: .rounded))
-                                Text(event.hoursRemaining == 1 ? "HR" : "HRS")
+                                Text(event.hoursRemaining == 1 ? "HR LEFT" : "HRS LEFT")
                                     .font(.system(size: 9, weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                             } else {
                                 Text("\(event.daysRemaining)")
                                     .font(.system(size: 18, weight: .bold, design: .rounded))
-                                Text(event.daysRemaining == 1 ? "DAY" : "DAYS")
+                                Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                                     .font(.system(size: 9, weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                             }

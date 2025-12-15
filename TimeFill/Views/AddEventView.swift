@@ -122,7 +122,7 @@ struct AddEventView: View {
                 Color.timeFillDarkBg
                     .ignoresSafeArea()
 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 24) {
                         // Event name
                         VStack(alignment: .leading, spacing: 8) {
@@ -583,10 +583,8 @@ struct AddEventView: View {
             NotificationManager.shared.scheduleNotifications(for: newEvent)
         }
 
-        // If event repeats, create next occurrence
-        if repeatType != "Never" {
-            createNextOccurrence(from: newEvent)
-        }
+        // Repeat logic now handled by EventRepeatManager automatically when event completes
+        // No need to pre-create next occurrence
 
         dismiss()
     }
@@ -628,35 +626,6 @@ struct AddEventView: View {
         let monthName = formatter.string(from: targetDate)
 
         return "e.g., \(ordinalWord) \(weekdayName) of \(monthName)"
-    }
-
-    private func createNextOccurrence(from event: CountdownEvent) {
-        guard let nextDate = event.nextOccurrenceDate(after: event.targetDate) else { return }
-
-        let nextEvent = CountdownEvent(
-            name: event.name,
-            targetDate: nextDate,
-            colorHex: event.colorHex,
-            iconName: event.iconName,
-            repeatType: event.repeatType,
-            repeatInterval: event.repeatInterval,
-            yearlyRepeatStyle: event.yearlyRepeatStyle,
-            isRepeatOccurrence: true  // Mark as auto-created repeat occurrence
-        )
-
-        // Calculate the time difference between original start and target
-        let timeDifference = event.targetDate.timeIntervalSince(event.createdDate)
-
-        // Set the created date for next event based on the new target date
-        nextEvent.createdDate = Date(timeInterval: -timeDifference, since: nextDate)
-
-        modelContext.insert(nextEvent)
-
-        // Schedule notifications for the next occurrence
-        let preferences = NotificationPreferences.load()
-        if preferences.isEnabled {
-            NotificationManager.shared.scheduleNotifications(for: nextEvent)
-        }
     }
 }
 

@@ -66,20 +66,30 @@ struct SimpleLockScreenProvider: TimelineProvider {
     }
 
     // Fetch next event from shared UserDefaults
+    // ALWAYS filters to ensure we get the real next upcoming event
     private func fetchNextEvent() -> WidgetEventData? {
         guard let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app"),
-              let eventData = sharedDefaults.data(forKey: "nextEvent"),
-              let decoded = try? JSONDecoder().decode(SharedEventData.self, from: eventData) else {
+              let allEventsData = sharedDefaults.data(forKey: "allEvents"),
+              let allEvents = try? JSONDecoder().decode([SharedEventData].self, from: allEventsData) else {
+            return nil
+        }
+
+        // Filter for upcoming events and sort by date
+        let upcomingEvents = allEvents
+            .filter { $0.targetDate > Date() }
+            .sorted { $0.targetDate < $1.targetDate }
+
+        guard let nextEventData = upcomingEvents.first else {
             return nil
         }
 
         return WidgetEventData(
-            id: decoded.id,
-            name: decoded.name,
-            targetDate: decoded.targetDate,
-            createdDate: decoded.createdDate,
-            colorHex: decoded.colorHex,
-            iconName: decoded.iconName
+            id: nextEventData.id,
+            name: nextEventData.name,
+            targetDate: nextEventData.targetDate,
+            createdDate: nextEventData.createdDate,
+            colorHex: nextEventData.colorHex,
+            iconName: nextEventData.iconName
         )
     }
 }

@@ -186,34 +186,86 @@ struct LargeSandFillView: View {
             let maxBoxesPerRow = Int((maxWidth - spacing) / (boxSize + spacing))
             let rows = Int(ceil(Double(totalDays) / Double(maxBoxesPerRow)))
 
-            VStack(spacing: spacing) {
-                ForEach(0..<rows, id: \.self) { row in
-                    HStack(spacing: spacing) {
-                        ForEach(0..<maxBoxesPerRow, id: \.self) { col in
-                            let index = row * maxBoxesPerRow + col
+            // Calculate max height based on screen size and number of rows
+            // iPhone 16e (smaller) vs 16 Pro (larger) screen sizes
+            let screenHeight = UIScreen.main.bounds.height
+            let calculatedHeight = CGFloat(rows) * (boxSize + spacing) + spacing
 
-                            if index < totalDays {
-                                let isElapsed = index < animatedDays
+            // Adaptive max height based on screen size - VERY COMPACT to fit everything
+            // iPhone SE/Mini: 140px, Standard: 160px, Pro/Max: 180px
+            let maxScrollHeight: CGFloat = screenHeight < 700 ? 140 : (screenHeight < 850 ? 160 : 180)
 
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(isElapsed ? color : Color.white.opacity(0.12))
-                                    .frame(width: boxSize, height: boxSize)
-                                    .overlay(
+            // Only use ScrollView if content exceeds max height
+            let needsScrolling = calculatedHeight > maxScrollHeight
+
+            // Wrap day boxes in ScrollView with max height (or display directly if not needed)
+            Group {
+                if needsScrolling {
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: spacing) {
+                            ForEach(0..<rows, id: \.self) { row in
+                                HStack(spacing: spacing) {
+                                    ForEach(0..<maxBoxesPerRow, id: \.self) { col in
+                                        let index = row * maxBoxesPerRow + col
+
+                                        if index < totalDays {
+                                            let isElapsed = index < animatedDays
+
+                                            RoundedRectangle(cornerRadius: 2)
+                                                .fill(isElapsed ? color : Color.white.opacity(0.12))
+                                                .frame(width: boxSize, height: boxSize)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 2)
+                                                        .stroke(Color.white.opacity(isElapsed ? 0.2 : 0.05), lineWidth: 0.5)
+                                                )
+                                                .scaleEffect(isElapsed ? 1.0 : 0.85)
+                                                .animation(
+                                                    .spring(response: 2.5, dampingFraction: 0.8)
+                                                    .delay(Double(index) * 0.01),
+                                                    value: animatedDays
+                                                )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .frame(maxWidth: maxWidth, alignment: .center)
+                        .padding(.vertical, 4)
+                    }
+                    .frame(maxHeight: maxScrollHeight)
+                } else {
+                    // No scrolling needed - display all boxes
+                    VStack(spacing: spacing) {
+                        ForEach(0..<rows, id: \.self) { row in
+                            HStack(spacing: spacing) {
+                                ForEach(0..<maxBoxesPerRow, id: \.self) { col in
+                                    let index = row * maxBoxesPerRow + col
+
+                                    if index < totalDays {
+                                        let isElapsed = index < animatedDays
+
                                         RoundedRectangle(cornerRadius: 2)
-                                            .stroke(Color.white.opacity(isElapsed ? 0.2 : 0.05), lineWidth: 0.5)
-                                    )
-                                    .scaleEffect(isElapsed ? 1.0 : 0.85)
-                                    .animation(
-                                        .spring(response: 2.5, dampingFraction: 0.8)
-                                        .delay(Double(index) * 0.01),
-                                        value: animatedDays
-                                    )
+                                            .fill(isElapsed ? color : Color.white.opacity(0.12))
+                                            .frame(width: boxSize, height: boxSize)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 2)
+                                                    .stroke(Color.white.opacity(isElapsed ? 0.2 : 0.05), lineWidth: 0.5)
+                                            )
+                                            .scaleEffect(isElapsed ? 1.0 : 0.85)
+                                            .animation(
+                                                .spring(response: 2.5, dampingFraction: 0.8)
+                                                .delay(Double(index) * 0.01),
+                                                value: animatedDays
+                                            )
+                                    }
+                                }
                             }
                         }
                     }
+                    .frame(maxWidth: maxWidth, alignment: .center)
+                    .padding(.vertical, 4)
                 }
             }
-            .frame(maxWidth: maxWidth, alignment: .center)
             .onAppear {
                 // If shouldAnimate is already true when view appears,
                 // set days immediately without animation

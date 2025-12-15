@@ -76,11 +76,13 @@ struct ContentView: View {
     }
 
     /// Delete completed events if auto-delete setting is enabled
+    /// Note: Repeat events are never auto-deleted (they reset after 2 minutes)
     private func deleteCompletedEventsIfNeeded() {
         guard autoDeleteCompleted else { return }
 
         let now = Date()
-        let completedEvents = allEvents.filter { $0.targetDate < now }
+        // Only delete NON-REPEATING completed events
+        let completedEvents = allEvents.filter { $0.targetDate < now && !$0.repeats }
 
         // Delete completed events
         for event in completedEvents {

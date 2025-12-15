@@ -29,7 +29,7 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 32) {
                     // App Header
                     VStack(spacing: 16) {
@@ -93,6 +93,47 @@ struct SettingsView: View {
 
                     // Settings Sections
                     VStack(spacing: 20) {
+                        // Tip Jar Section
+                        VStack(spacing: 12) {
+                            SectionHeader(title: "Support")
+
+                            NavigationLink(destination: TipJarView()) {
+                                HStack {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundStyle(
+                                            LinearGradient(
+                                                colors: [.red, .pink, .purple],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                        .frame(width: 24)
+
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Tip Jar")
+                                            .font(.system(.body, design: .rounded))
+                                            .fontWeight(.medium)
+                                            .foregroundStyle(.white)
+
+                                        Text("Support the app's development")
+                                            .font(.system(.caption, design: .rounded))
+                                            .foregroundStyle(.gray)
+                                    }
+
+                                    Spacer()
+
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundStyle(.gray)
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.white.opacity(0.05))
+                                )
+                            }
+                        }
+
                         // Contact Section
                         VStack(spacing: 12) {
                             SectionHeader(title: "Contact")

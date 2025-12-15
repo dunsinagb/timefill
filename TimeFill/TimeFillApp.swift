@@ -55,6 +55,10 @@ struct TimeFillApp: App {
                     .environmentObject(notificationManager)
                     .onAppear {
                         setupNotifications()
+                        // Process repeat events on app launch
+                        Task { @MainActor in
+                            EventRepeatManager.shared.updateRepeatingEvents(context: sharedModelContainer.mainContext)
+                        }
                         // Force widget refresh when app launches
                         WidgetCenter.shared.reloadAllTimelines()
                         print("🔄 Forced widget reload on app launch")
@@ -73,6 +77,10 @@ struct TimeFillApp: App {
         .modelContainer(sharedModelContainer)
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
+                // Check for completed repeat events when app becomes active
+                Task { @MainActor in
+                    EventRepeatManager.shared.handleAppDidBecomeActive(context: sharedModelContainer.mainContext)
+                }
                 // Force widget refresh when app becomes active
                 WidgetCenter.shared.reloadAllTimelines()
                 print("🔄 Forced widget reload - app became active")
