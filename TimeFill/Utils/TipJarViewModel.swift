@@ -26,7 +26,7 @@ class TipJarViewModel: ObservableObject {
         loadError = nil
 
         do {
-            let ids = ["com.timefill.app.tip.small", "com.timefill.app.tip.medium", "com.timefill.app.tip.big", "com.timefill.app.tip.huge", "com.timefill.app.tip.massive"]
+            let ids = ["com.timefill.app.tips.smalls", "com.timefill.app.tips.mediums", "com.timefill.app.tips.bigs", "com.timefill.app.tips.huges", "com.timefill.app.tips.massives"]
             print("🛒 Requesting products with IDs: \(ids)")
 
             products = try await Product.products(for: ids)
