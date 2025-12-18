@@ -1,0 +1,115 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "D77D37E4",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "41A90A7D",
+      "localizations" : [
+        {
+          "description" : "Helps with server costs.",
+          "displayName" : "Small Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.timefill.app.small.tip",
+      "promotionalImageID" : "AE7CFDFD",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "27B37142",
+      "localizations" : [
+        {
+          "description" : "Really helps with server costs.",
+          "displayName" : "Medium Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.timefill.app.medium.tip",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "5712DE99",
+      "localizations" : [
+        {
+          "description" : "WOW! Awesome! Thanks!",
+          "displayName" : "Big Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.timefill.app.big.tip",
+      "referenceName" : "Big Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "3A8CE6FC",
+      "localizations" : [
+        {
+          "description" : "YOU absolute LEGEND!",
+          "displayName" : "Huge Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.timefill.app.huge.tip",
+      "referenceName" : "Huge Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "67091604",
+      "localizations" : [
+        {
+          "description" : "A Loss For Words. Speechless",
+          "displayName" : "Massive Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.timefill.app.massive.tip",
+      "referenceName" : "Massive Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
