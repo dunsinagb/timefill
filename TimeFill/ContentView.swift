@@ -64,7 +64,7 @@ struct ContentView: View {
             handleDeepLink(url)
         }
     }
-    
+
     private func scheduleNotificationsIfNeeded() {
         guard notificationManager.isAuthorized else { return }
 

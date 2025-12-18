@@ -16,11 +16,11 @@ struct TipJarView: View {
 
     // Custom descriptions for each tip level
     private let tipDescriptions: [String: String] = [
-        "com.timefill.app.tip.small": "Helps with server costs.",
-        "com.timefill.app.tip.medium": "Really helps with server costs.",
-        "com.timefill.app.tip.big": "WOW! Awesome! Thanks!",
-        "com.timefill.app.tip.huge": "YOU absolute LEGEND!",
-        "com.timefill.app.tip.massive": "A Loss For Words. Speechless"
+        "com.timefill.app.small.tip": "Helps with server costs.",
+        "com.timefill.app.medium.tip": "Really helps with server costs.",
+        "com.timefill.app.big.tip": "WOW! Awesome! Thanks!",
+        "com.timefill.app.huge.tip": "YOU absolute LEGEND!",
+        "com.timefill.app.massive.tip": "A Loss For Words. Speechless"
     ]
 
     var body: some View {
