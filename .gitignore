@@ -97,3 +97,15 @@ iOSInjectionProject/
 *.mobileprovision
 *.cer
 *.certSigningRequest
+
+# Build logs
+build_*.log
+**/build_*.log
+
+# Backup and helper scripts
+*.backup
+add_files_to_xcode.py
+fix_project.py
+
+# Generated docs
+COMPREHENSIVE_HAPTICS_IMPLEMENTATION.md

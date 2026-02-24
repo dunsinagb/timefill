@@ -18,6 +18,9 @@ struct ContentView: View {
     @EnvironmentObject var notificationManager: NotificationManager
     @Environment(\.modelContext) private var modelContext
     @AppStorage("autoDeleteCompleted") private var autoDeleteCompleted = false
+    @AppStorage("lastReviewPromptVersion") private var lastReviewVersion = ""
+    @AppStorage("hasCompletedReview") private var hasCompletedReview = false
+    @State private var showingUpdateReviewPrompt = false
 
     var body: some View {
         ZStack {
@@ -43,10 +46,9 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            // Schedule notifications for existing events
             scheduleNotificationsIfNeeded()
-            // Check for completed events to delete
             deleteCompletedEventsIfNeeded()
+            checkForAppUpdateReview()
         }
         .onChange(of: allEvents) { _, _ in
             // Reschedule notifications when events change
@@ -62,6 +64,9 @@ struct ContentView: View {
         }
         .onOpenURL { url in
             handleDeepLink(url)
+        }
+        .sheet(isPresented: $showingUpdateReviewPrompt) {
+            ReviewPromptView()
         }
     }
 
@@ -94,6 +99,16 @@ struct ContentView: View {
             try? modelContext.save()
             print("🗑️ Auto-deleted \(completedEvents.count) completed event(s)")
         }
+    }
+
+    private func checkForAppUpdateReview() {
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        if !lastReviewVersion.isEmpty && lastReviewVersion != currentVersion && !hasCompletedReview {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                showingUpdateReviewPrompt = true
+            }
+        }
+        lastReviewVersion = currentVersion
     }
 
     /// Handle deep link from widget tap

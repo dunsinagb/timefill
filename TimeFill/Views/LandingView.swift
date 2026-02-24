@@ -71,12 +71,12 @@ struct LandingView: View {
                     HStack(spacing: 8) {
                         ZStack(alignment: .leading) {
                             // Battery outline
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 14)
                                 .stroke(Color.timeFillCyan, lineWidth: 6)
                                 .frame(width: 140, height: 60)
 
                             // Battery fill - animated
-                            RoundedRectangle(cornerRadius: 9)
+                            RoundedRectangle(cornerRadius: 12)
                                 .fill(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
@@ -92,7 +92,7 @@ struct LandingView: View {
                         }
 
                         // Battery tip
-                        RoundedRectangle(cornerRadius: 3)
+                        RoundedRectangle(cornerRadius: 6)
                             .fill(Color.timeFillCyan)
                             .frame(width: 8, height: 30)
                     }

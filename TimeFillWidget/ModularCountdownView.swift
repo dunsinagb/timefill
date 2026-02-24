@@ -81,33 +81,30 @@ struct ModularCountdownView: View {
             }
 
             Spacer()
+                .frame(maxHeight: 6)
 
-            // Icon and countdown - horizontally aligned in center
+            // Icon and countdown - horizontally aligned
             HStack(alignment: .center, spacing: 10) {
                 // Icon - changes based on event state at entry time
                 if event.isScheduled {
-                    // Scheduled icon for future events
                     Image(systemName: "clock.fill")
                         .font(.system(size: 38, weight: .semibold))
                         .foregroundStyle(event.color)
                         .frame(width: 44, height: 44)
                         .minimumScaleFactor(0.8)
                 } else if entry.isCompletedAtEntry {
-                    // Checkmark when completed
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 38, weight: .semibold))
                         .foregroundStyle(event.color)
                         .frame(width: 44, height: 44)
                         .minimumScaleFactor(0.8)
                 } else if entry.isInFinalMinuteAtEntry {
-                    // Stopwatch in final minute
                     Image(systemName: "stopwatch.fill")
                         .font(.system(size: 38, weight: .semibold))
                         .foregroundStyle(.orange)
                         .frame(width: 44, height: 44)
                         .minimumScaleFactor(0.8)
                 } else {
-                    // Regular event icon
                     Image(systemName: event.iconName)
                         .font(.system(size: 38, weight: .semibold))
                         .foregroundStyle(event.color)
@@ -115,9 +112,8 @@ struct ModularCountdownView: View {
                         .minimumScaleFactor(0.8)
                 }
 
-                // Countdown number + label
+                // Countdown number + label + battery
                 VStack(alignment: .center, spacing: 2) {
-                    // Large number - shows hours for scheduled if < 24h
                     if event.isScheduled {
                         if event.startsToday {
                             Text("\(event.hoursUntilStart)")
@@ -158,7 +154,6 @@ struct ModularCountdownView: View {
                             .minimumScaleFactor(0.7)
                     }
 
-                    // Label - changes based on state
                     if event.isScheduled {
                         if event.startsToday {
                             Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
@@ -195,20 +190,15 @@ struct ModularCountdownView: View {
                             .tracking(1.5)
                             .textCase(.uppercase)
                     }
+
+                    // Battery indicator - aligned under label
+                    if !entry.isCompletedAtEntry {
+                        WidgetBatteryView(progress: event.progress, color: event.color)
+                            .padding(.top, 6)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-
-            Spacer()
-                .frame(height: 4)
-
-            // Battery indicator - compact visualization
-            if !entry.isCompletedAtEntry {
-                WidgetBatteryView(progress: event.progress, color: event.color)
-            }
-
-            Spacer()
-                .frame(height: 2)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)

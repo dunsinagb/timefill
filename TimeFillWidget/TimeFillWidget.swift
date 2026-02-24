@@ -70,6 +70,36 @@ struct ModularCountdownWidget: Widget {
     }
 }
 
+// MARK: - Dot Ring Countdown Widget
+/// Circular dot-based countdown widget - user can select any event
+struct DotRingCountdownWidget: Widget {
+    let kind: String = "DotRingCountdownWidget"
+
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(
+            kind: kind,
+            intent: SelectEventIntent.self,
+            provider: CountdownProvider()
+        ) { entry in
+            DotRingCountdownView(entry: entry)
+                .containerBackground(for: .widget) {
+                    LinearGradient(
+                        colors: [
+                            Color(hex: "#0F0F0F"),
+                            Color(hex: "#0A0A0A")
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
+        }
+        .configurationDisplayName("Dot Ring Countdown")
+        .description("Circular dot-based countdown visualization.")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
+    }
+}
+
 // MARK: - Previews
 // Gallery shows sample birthday event, timeline shows sample data
 #Preview("Minimal Small", as: .systemSmall) {

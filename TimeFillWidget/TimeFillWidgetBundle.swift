@@ -14,6 +14,7 @@ struct TimeFillWidgetBundle: WidgetBundle {
         // Home screen countdown widgets
         MinimalCountdownWidget()
         ModularCountdownWidget()
+        DotRingCountdownWidget()
 
         // Lock screen countdown widget
         LockScreenCountdownWidget()

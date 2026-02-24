@@ -17,19 +17,19 @@ struct WidgetBatteryFill: View {
             // Battery outline
             ZStack(alignment: .leading) {
                 // Background
-                RoundedRectangle(cornerRadius: 4)
+                RoundedRectangle(cornerRadius: 7)
                     .stroke(Color.white.opacity(0.3), lineWidth: 2)
                     .frame(width: 80, height: 24)
 
                 // Fill
-                RoundedRectangle(cornerRadius: 3)
+                RoundedRectangle(cornerRadius: 6)
                     .fill(color)
                     .frame(width: max(76 * progress, 0), height: 20)
                     .padding(.leading, 2)
             }
 
             // Battery tip
-            RoundedRectangle(cornerRadius: 1)
+            RoundedRectangle(cornerRadius: 3)
                 .fill(Color.white.opacity(0.3))
                 .frame(width: 3, height: 12)
         }

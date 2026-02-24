@@ -16,17 +16,11 @@ class WidgetDataManager {
     private init() {}
 
     // MARK: - Update Widget Data
-    /// Update the next event data for widgets to display
-    func updateNextEvent(_ event: CountdownEvent?) {
-        guard let sharedDefaults = sharedDefaults else {
-            print("❌ Failed to access shared UserDefaults")
-            return
-        }
-
+    /// Write the next event to shared UserDefaults (does NOT trigger timeline reload)
+    private func writeNextEvent(_ event: CountdownEvent?, to sharedDefaults: UserDefaults) {
         if let event = event {
-            // Convert to codable struct
             let sharedEvent = SharedEventData(
-                id: event.id.uuidString,  // Convert PersistentIdentifier to String
+                id: event.id.uuidString,
                 name: event.name,
                 targetDate: event.targetDate,
                 createdDate: event.createdDate,
@@ -34,29 +28,21 @@ class WidgetDataManager {
                 iconName: event.iconName
             )
 
-            // Encode and save
             if let encoded = try? JSONEncoder().encode(sharedEvent) {
                 sharedDefaults.set(encoded, forKey: "nextEvent")
-                sharedDefaults.synchronize()  // Force save
                 print("✅ Widget data updated for: \(event.name)")
-                print("✅ Event ID: \(event.id.uuidString)")
-                print("✅ Target date: \(event.targetDate)")
             } else {
                 print("❌ Failed to encode event")
             }
         } else {
-            // Clear widget data
             sharedDefaults.removeObject(forKey: "nextEvent")
             print("🗑️ Widget data cleared")
         }
-
-        // Request widget timeline reload
-        WidgetCenter.shared.reloadAllTimelines()
-        print("🔄 Requested widget reload")
     }
 
     // MARK: - Update with Events Array
-    /// Find the next upcoming event and update widget, also save all events for selection
+    /// Write all event data to shared UserDefaults, then trigger a single widget reload.
+    /// All data is flushed before the reload so widgets always read fresh data.
     func updateWithEvents(_ events: [CountdownEvent]) {
         guard let sharedDefaults = sharedDefaults else {
             print("❌ Failed to access shared UserDefaults in updateWithEvents")
@@ -72,7 +58,6 @@ class WidgetDataManager {
 
         print("📊 Found \(upcomingEvents.count) upcoming events")
 
-        // Get the next event
         let nextEvent = upcomingEvents.first
 
         if let nextEvent = nextEvent {
@@ -81,10 +66,10 @@ class WidgetDataManager {
             print("⚠️ No upcoming events found")
         }
 
-        // Update next event
-        updateNextEvent(nextEvent)
+        // 1. Write next event
+        writeNextEvent(nextEvent, to: sharedDefaults)
 
-        // Save all events for widget selection menu
+        // 2. Write all events for widget timeline providers
         let allEventsData: [SharedEventData] = events.map { event in
             SharedEventData(
                 id: event.id.uuidString,
@@ -96,7 +81,12 @@ class WidgetDataManager {
             )
         }
 
-        // Also save simplified list for selection menu
+        if let allEventsEncoded = try? JSONEncoder().encode(allEventsData) {
+            sharedDefaults.set(allEventsEncoded, forKey: "allEvents")
+            print("✅ Saved \(allEventsData.count) full events")
+        }
+
+        // 3. Write simplified list for widget selection menu
         let eventListItems: [SharedEventListItem] = events.map { event in
             SharedEventListItem(
                 id: event.id.uuidString,
@@ -105,18 +95,17 @@ class WidgetDataManager {
             )
         }
 
-        // Encode and save both
-        if let allEventsEncoded = try? JSONEncoder().encode(allEventsData) {
-            sharedDefaults.set(allEventsEncoded, forKey: "allEvents")
-            print("✅ Saved \(allEventsData.count) full events")
-        }
-
         if let listItemsEncoded = try? JSONEncoder().encode(eventListItems) {
             sharedDefaults.set(listItemsEncoded, forKey: "eventList")
             print("✅ Saved \(eventListItems.count) event list items")
         }
 
-        print("✅ Saved \(events.count) events for widget selection")
+        // 4. Force flush to disk before triggering widget reload
+        sharedDefaults.synchronize()
+
+        // 5. NOW trigger widget reload — all data is guaranteed to be readable
+        WidgetCenter.shared.reloadAllTimelines()
+        print("🔄 Requested widget reload (all data written first)")
     }
 }
 

@@ -217,12 +217,12 @@ struct WidgetBatteryView: View {
             // Battery body
             ZStack(alignment: .leading) {
                 // Background outline
-                RoundedRectangle(cornerRadius: 2.5)
+                RoundedRectangle(cornerRadius: 6)
                     .stroke(Color.white.opacity(0.3), lineWidth: 2)
                     .frame(width: 70, height: 20)
 
                 // Fill - animated progress
-                RoundedRectangle(cornerRadius: 2)
+                RoundedRectangle(cornerRadius: 5)
                     .fill(color)
                     .frame(width: max(64 * progress, 0), height: 14)
                     .padding(.leading, 3)
@@ -230,7 +230,7 @@ struct WidgetBatteryView: View {
             .frame(width: 70, height: 20)
 
             // Battery tip
-            RoundedRectangle(cornerRadius: 1.5)
+            RoundedRectangle(cornerRadius: 3)
                 .fill(Color.white.opacity(0.3))
                 .frame(width: 3, height: 10)
         }

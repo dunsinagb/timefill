@@ -132,6 +132,43 @@ struct SettingsView: View {
                                         .fill(Color.white.opacity(0.05))
                                 )
                             }
+
+                            // Interruptly App Link
+                            Button(action: {
+                                if let url = URL(string: "https://apps.apple.com/us/app/interruptly/id6759235005") {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                HStack {
+                                    Image("InterruptlyIcon")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5))
+
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Discover Interruptly")
+                                            .font(.system(.body, design: .rounded))
+                                            .fontWeight(.medium)
+                                            .foregroundStyle(.white)
+
+                                        Text("A pattern awareness & habit tracking app")
+                                            .font(.system(.caption, design: .rounded))
+                                            .foregroundStyle(.gray)
+                                    }
+
+                                    Spacer()
+
+                                    Image(systemName: "arrow.up.right")
+                                        .font(.caption)
+                                        .foregroundStyle(.gray)
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.white.opacity(0.05))
+                                )
+                            }
                         }
 
                         // Contact Section
@@ -230,6 +267,83 @@ struct SettingsView: View {
                                 .font(.system(.caption, design: .rounded))
                                 .foregroundStyle(.gray)
                                 .multilineTextAlignment(.center)
+                        }
+
+                        // Community Section
+                        VStack(spacing: 12) {
+                            SectionHeader(title: "Community")
+
+                            VStack(spacing: 8) {
+                                // Website Link
+                                Button(action: {
+                                    if let url = URL(string: "https://timefill.app") {
+                                        UIApplication.shared.open(url)
+                                    }
+                                }) {
+                                    HStack {
+                                        Image(systemName: "globe")
+                                            .foregroundStyle(Color.timeFillCyan)
+                                            .frame(width: 24)
+
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text("Website")
+                                                .font(.system(.body, design: .rounded))
+                                                .fontWeight(.medium)
+                                                .foregroundStyle(.white)
+
+                                            Text("Visit timefill.app")
+                                                .font(.system(.caption, design: .rounded))
+                                                .foregroundStyle(.gray)
+                                        }
+
+                                        Spacer()
+
+                                        Image(systemName: "arrow.up.right")
+                                            .font(.caption)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color.white.opacity(0.05))
+                                    )
+                                }
+
+                                // Discord Link
+                                Button(action: {
+                                    if let url = URL(string: "https://discord.gg/YZJGS54yR") {
+                                        UIApplication.shared.open(url)
+                                    }
+                                }) {
+                                    HStack {
+                                        Image(systemName: "message.fill")
+                                            .foregroundStyle(Color.timeFillCyan)
+                                            .frame(width: 24)
+
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text("Discord Community")
+                                                .font(.system(.body, design: .rounded))
+                                                .fontWeight(.medium)
+                                                .foregroundStyle(.white)
+
+                                            Text("Join our Discord server")
+                                                .font(.system(.caption, design: .rounded))
+                                                .foregroundStyle(.gray)
+                                        }
+
+                                        Spacer()
+
+                                        Image(systemName: "arrow.up.right")
+                                            .font(.caption)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color.white.opacity(0.05))
+                                    )
+                                }
+                            }
                         }
 
                         // Rate on App Store

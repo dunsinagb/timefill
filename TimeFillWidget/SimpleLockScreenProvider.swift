@@ -45,24 +45,66 @@ struct SimpleLockScreenProvider: TimelineProvider {
             return
         }
 
-        // Create entry with event
-        let entry = CountdownEntry(date: currentDate, event: event)
+        var entries: [CountdownEntry] = []
+        entries.append(CountdownEntry(date: currentDate, event: event))
 
         // Determine next update time based on event state
-        let nextUpdate: Date
+        var refreshDate: Date
         if event.isInFinalMinute {
-            // Update every second in final minute
-            nextUpdate = currentDate.addingTimeInterval(1)
+            // In final minute - create per-second entries up to completion
+            let secondsRemaining = event.secondsRemaining
+            for second in 1...secondsRemaining {
+                let entryDate = currentDate.addingTimeInterval(TimeInterval(second))
+                entries.append(CountdownEntry(date: entryDate, event: event))
+            }
+            // Add completion entry
+            entries.append(CountdownEntry(date: event.targetDate.addingTimeInterval(0.5), event: event))
+            // Add transition entry showing the next event
+            let nextEvent = fetchNextEventAfter(event.targetDate)
+            entries.append(CountdownEntry(date: event.targetDate.addingTimeInterval(2), event: nextEvent))
+            refreshDate = event.targetDate.addingTimeInterval(60)
         } else if event.isToday || event.startsToday {
-            // Update every minute when within 24 hours (active or scheduled)
-            nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+            let nextMinute = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+            refreshDate = nextMinute
+            // If event completes before the next minute update, add a transition entry
+            if event.targetDate <= nextMinute && !event.isScheduled {
+                let nextEvent = fetchNextEventAfter(event.targetDate)
+                entries.append(CountdownEntry(date: event.targetDate.addingTimeInterval(1), event: nextEvent))
+                refreshDate = event.targetDate.addingTimeInterval(60)
+            }
         } else {
-            // Update every 15 minutes normally
-            nextUpdate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+            refreshDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
         }
 
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+        let timeline = Timeline(entries: entries, policy: .after(refreshDate))
         completion(timeline)
+    }
+
+    // Fetch the next upcoming event whose targetDate is after the specified date.
+    // Used to pre-compute which event to show when the current one completes.
+    private func fetchNextEventAfter(_ date: Date) -> WidgetEventData? {
+        guard let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app"),
+              let allEventsData = sharedDefaults.data(forKey: "allEvents"),
+              let allEvents = try? JSONDecoder().decode([SharedEventData].self, from: allEventsData) else {
+            return nil
+        }
+
+        let upcomingEvents = allEvents
+            .filter { $0.targetDate > date }
+            .sorted { $0.targetDate < $1.targetDate }
+
+        guard let nextEventData = upcomingEvents.first else {
+            return nil
+        }
+
+        return WidgetEventData(
+            id: nextEventData.id,
+            name: nextEventData.name,
+            targetDate: nextEventData.targetDate,
+            createdDate: nextEventData.createdDate,
+            colorHex: nextEventData.colorHex,
+            iconName: nextEventData.iconName
+        )
     }
 
     // Fetch next event from shared UserDefaults

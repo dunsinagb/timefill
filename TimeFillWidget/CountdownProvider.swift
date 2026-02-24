@@ -99,9 +99,14 @@ struct CountdownProvider: AppIntentTimelineProvider {
                 // Add final entry at target date to show "DONE" and checkmark
                 entries.append(CountdownEntry(date: event.targetDate.addingTimeInterval(0.5), event: event))
 
-                print("📊 Event in final minute - creating \(entries.count) entries (including completion entry)")
-                // After completion, update once per day
-                return Timeline(entries: entries, policy: .after(event.targetDate.addingTimeInterval(86400)))
+                // Pre-compute transition: show the next event right after completion
+                let nextEvent = await getNextEventAfter(event.targetDate)
+                let transitionDate = event.targetDate.addingTimeInterval(2)
+                entries.append(CountdownEntry(date: transitionDate, event: nextEvent))
+
+                print("📊 Event in final minute - creating \(entries.count) entries (with transition to: \(nextEvent?.name ?? "none"))")
+                // Refresh shortly after completion to get fresh data
+                return Timeline(entries: entries, policy: .after(event.targetDate.addingTimeInterval(60)))
             } else if event.isCompleted {
                 // Event completed - show checkmark, update once per day
                 let entry = CountdownEntry(date: currentDate, event: event)
@@ -110,14 +115,27 @@ struct CountdownProvider: AppIntentTimelineProvider {
                 return Timeline(entries: [entry], policy: .after(nextUpdate))
             } else if event.isToday || event.startsToday {
                 // Within 24 hours (active or scheduled) - update every minute for hours countdown
-                let entry = CountdownEntry(date: currentDate, event: event)
+                var entries: [CountdownEntry] = []
+                entries.append(CountdownEntry(date: currentDate, event: event))
+
                 let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+                var refreshDate = nextUpdate
+
+                // If the event completes before the next update, add a transition entry
+                if event.targetDate <= nextUpdate && !event.isScheduled {
+                    let nextEvent = await getNextEventAfter(event.targetDate)
+                    let transitionDate = event.targetDate.addingTimeInterval(1)
+                    entries.append(CountdownEntry(date: transitionDate, event: nextEvent))
+                    refreshDate = event.targetDate.addingTimeInterval(60)
+                    print("📊 Event completes within next minute - added transition to: \(nextEvent?.name ?? "none")")
+                }
+
                 if event.startsToday {
                     print("📊 Scheduled event starting within 24h - next update in 1 minute")
                 } else {
                     print("📊 Active event within 24h - next update in 1 minute")
                 }
-                return Timeline(entries: [entry], policy: .after(nextUpdate))
+                return Timeline(entries: entries, policy: .after(refreshDate))
             } else {
                 // Normal countdown - update every 15 minutes
                 let entry = CountdownEntry(date: currentDate, event: event)
@@ -196,6 +214,34 @@ struct CountdownProvider: AppIntentTimelineProvider {
         }
 
         print("✅ Found next upcoming event: \(nextEventData.name) (filtered from \(allEvents.count) total)")
+
+        return WidgetEventData(
+            id: nextEventData.id,
+            name: nextEventData.name,
+            targetDate: nextEventData.targetDate,
+            createdDate: nextEventData.createdDate,
+            colorHex: nextEventData.colorHex,
+            iconName: nextEventData.iconName
+        )
+    }
+
+    // MARK: - Fetch Next Event After a Given Date
+    /// Fetch the next upcoming event whose targetDate is after the specified date.
+    /// Used to pre-compute which event to show when the current one completes.
+    private func getNextEventAfter(_ date: Date) async -> WidgetEventData? {
+        guard let sharedDefaults = UserDefaults(suiteName: "group.com.timefill.app"),
+              let allEventsData = sharedDefaults.data(forKey: "allEvents"),
+              let allEvents = try? JSONDecoder().decode([SharedEventData].self, from: allEventsData) else {
+            return nil
+        }
+
+        let upcomingEvents = allEvents
+            .filter { $0.targetDate > date }
+            .sorted { $0.targetDate < $1.targetDate }
+
+        guard let nextEventData = upcomingEvents.first else {
+            return nil
+        }
 
         return WidgetEventData(
             id: nextEventData.id,

@@ -59,9 +59,8 @@ struct TimeFillApp: App {
                         Task { @MainActor in
                             EventRepeatManager.shared.updateRepeatingEvents(context: sharedModelContainer.mainContext)
                         }
-                        // Force widget refresh when app launches
-                        WidgetCenter.shared.reloadAllTimelines()
-                        print("🔄 Forced widget reload on app launch")
+                        // Write all event data to shared UserDefaults and reload widgets
+                        refreshWidgetData()
                     }
 
                 // Show landing page on first launch
@@ -81,10 +80,17 @@ struct TimeFillApp: App {
                 Task { @MainActor in
                     EventRepeatManager.shared.handleAppDidBecomeActive(context: sharedModelContainer.mainContext)
                 }
-                // Force widget refresh when app becomes active
-                WidgetCenter.shared.reloadAllTimelines()
-                print("🔄 Forced widget reload - app became active")
+                // Write all event data to shared UserDefaults and reload widgets
+                refreshWidgetData()
             }
+        }
+    }
+
+    private func refreshWidgetData() {
+        let context = sharedModelContainer.mainContext
+        let descriptor = FetchDescriptor<CountdownEvent>()
+        if let allEvents = try? context.fetch(descriptor) {
+            WidgetDataManager.shared.updateWithEvents(allEvents)
         }
     }
 

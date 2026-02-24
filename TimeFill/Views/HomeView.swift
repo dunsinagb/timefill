@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 enum SortOption: String, CaseIterable {
     case date = "Date"
@@ -54,6 +55,9 @@ struct HomeView: View {
     @State private var triggerAnimation = false
     @State private var triggerYearMonthAnimation = false
     @State private var reanimateEventID: UUID?
+    @AppStorage("hasPromptedReviewForFirstEvent") private var hasPromptedReview = false
+    @AppStorage("hasCompletedReview") private var hasCompletedReview = false
+    @State private var showingReviewPrompt = false
 
     private var events: [CountdownEvent] {
         // Apply time-based filter (All, Upcoming, Recurring, Past)
@@ -226,9 +230,14 @@ struct HomeView: View {
                             // Update widget data
                             updateWidgetData()
                         }
-                        .onChange(of: allEvents.count) { _, _ in
-                            // Update widget when events change
+                        .onChange(of: allEvents.count) { oldCount, newCount in
                             updateWidgetData()
+                            if newCount >= 1 && oldCount == 0 && !hasPromptedReview && !hasCompletedReview {
+                                hasPromptedReview = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    showingReviewPrompt = true
+                                }
+                            }
                         }
                     }
                 }
@@ -313,6 +322,9 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showingCalendarImport) {
                 CalendarImportView()
+            }
+            .sheet(isPresented: $showingReviewPrompt) {
+                ReviewPromptView()
             }
             .onChange(of: showAddEventFromLanding) { _, newValue in
                 if newValue {
@@ -693,6 +705,89 @@ struct RoundedCorner: Shape {
             cornerRadii: CGSize(width: radius, height: radius)
         )
         return Path(path.cgPath)
+    }
+}
+
+// MARK: - Review Prompt View
+struct ReviewPromptView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) private var requestReview
+    @AppStorage("hasCompletedReview") private var hasCompletedReview = false
+
+    var body: some View {
+        ZStack {
+            Color.timeFillDarkBg
+                .ignoresSafeArea()
+
+            VStack(spacing: 24) {
+                Spacer()
+
+                Image("SettingsLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(Color.timeFillCyan.opacity(0.3), lineWidth: 2)
+                    )
+                    .shadow(color: Color.timeFillCyan.opacity(0.2), radius: 10, x: 0, y: 5)
+
+                VStack(spacing: 8) {
+                    Text("Enjoying Time Fill?")
+                        .font(.system(.title2, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+
+                    Text("If you love using Time Fill, would you mind taking a moment to rate it? It really helps!")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundStyle(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 16)
+                }
+
+                HStack(spacing: 8) {
+                    Image(systemName: "star.fill")
+                    Image(systemName: "star.fill")
+                    Image(systemName: "star.fill")
+                    Image(systemName: "star.fill")
+                    Image(systemName: "star.fill")
+                }
+                .font(.system(size: 28))
+                .foregroundStyle(Color.timeFillCyan)
+
+                VStack(spacing: 12) {
+                    Button(action: {
+                        hasCompletedReview = true
+                        dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            requestReview()
+                        }
+                    }) {
+                        Text("Rate Time Fill")
+                            .font(.system(.headline, design: .rounded))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.timeFillCyan)
+                            .cornerRadius(14)
+                    }
+
+                    Button(action: { dismiss() }) {
+                        Text("Not Now")
+                            .font(.system(.subheadline, design: .rounded))
+                            .foregroundStyle(.gray)
+                    }
+                }
+                .padding(.horizontal, 24)
+
+                Spacer()
+            }
+            .padding()
+        }
+        .presentationDetents([.medium])
+        .presentationDragIndicator(.visible)
+        .preferredColorScheme(.dark)
     }
 }
 
