@@ -100,6 +100,64 @@ struct DotRingCountdownWidget: Widget {
     }
 }
 
+// MARK: - Year Progress Widget
+/// Large widget showing year progress as a beautiful dot grid
+struct YearProgressWidget: Widget {
+    let kind: String = "YearProgressWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(
+            kind: kind,
+            provider: CalendarProgressProvider()
+        ) { entry in
+            YearProgressWidgetView(entry: entry)
+                .containerBackground(for: .widget) {
+                    LinearGradient(
+                        colors: [
+                            Color(hex: "#0F0F0F"),
+                            Color(hex: "#0A0A0A")
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
+        }
+        .configurationDisplayName("Year Progress")
+        .description("See how much of the year has passed at a glance.")
+        .supportedFamilies([.systemLarge])
+        .contentMarginsDisabled()
+    }
+}
+
+// MARK: - Month Progress Widget
+/// Medium widget showing month progress as a dot ring
+struct MonthProgressWidget: Widget {
+    let kind: String = "MonthProgressWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(
+            kind: kind,
+            provider: CalendarProgressProvider()
+        ) { entry in
+            MonthProgressWidgetView(entry: entry)
+                .containerBackground(for: .widget) {
+                    LinearGradient(
+                        colors: [
+                            Color(hex: "#0F0F0F"),
+                            Color(hex: "#0A0A0A")
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
+        }
+        .configurationDisplayName("Month Progress")
+        .description("Track the current month's progress with a dot ring.")
+        .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
+    }
+}
+
 // MARK: - Previews
 // Gallery shows sample birthday event, timeline shows sample data
 #Preview("Minimal Small", as: .systemSmall) {

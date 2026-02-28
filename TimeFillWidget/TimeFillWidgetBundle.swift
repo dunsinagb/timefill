@@ -16,6 +16,10 @@ struct TimeFillWidgetBundle: WidgetBundle {
         ModularCountdownWidget()
         DotRingCountdownWidget()
 
+        // Calendar progress widgets
+        YearProgressWidget()
+        MonthProgressWidget()
+
         // Lock screen countdown widget
         LockScreenCountdownWidget()
 

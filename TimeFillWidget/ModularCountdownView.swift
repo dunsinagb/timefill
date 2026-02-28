@@ -44,6 +44,14 @@ struct ModularCountdownView: View {
             )
             .ignoresSafeArea()
 
+            RadialGradient(
+                colors: [event.color.opacity(0.025), .clear],
+                center: .center,
+                startRadius: 10,
+                endRadius: 160
+            )
+            .ignoresSafeArea()
+
             // Layout varies by widget size
             Group {
                 switch family {
@@ -158,13 +166,13 @@ struct ModularCountdownView: View {
                         if event.startsToday {
                             Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                 .font(.system(size: 10, weight: .semibold, design: .rounded))
-                                .foregroundStyle(Color(hex: "#8E8E8E"))
+                                .foregroundStyle(Color(hex: "#5A5A5A"))
                                 .tracking(1.5)
                                 .textCase(.uppercase)
                         } else {
                             Text("STARTS IN")
                                 .font(.system(size: 10, weight: .semibold, design: .rounded))
-                                .foregroundStyle(Color(hex: "#8E8E8E"))
+                                .foregroundStyle(Color(hex: "#5A5A5A"))
                                 .tracking(1.5)
                                 .textCase(.uppercase)
                         }
@@ -174,19 +182,19 @@ struct ModularCountdownView: View {
                     } else if entry.isInFinalMinuteAtEntry {
                         Text("SECONDS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     } else if event.isToday {
                         Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     } else {
                         Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     }
@@ -310,13 +318,13 @@ struct ModularCountdownView: View {
                                 if event.startsToday {
                                     Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                         .font(.system(size: 11, weight: .semibold, design: .rounded))
-                                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                                        .foregroundStyle(Color(hex: "#5A5A5A"))
                                         .tracking(1.6)
                                         .textCase(.uppercase)
                                 } else {
                                     Text("STARTS IN")
                                         .font(.system(size: 11, weight: .semibold, design: .rounded))
-                                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                                        .foregroundStyle(Color(hex: "#5A5A5A"))
                                         .tracking(1.6)
                                         .textCase(.uppercase)
                                 }
@@ -328,19 +336,19 @@ struct ModularCountdownView: View {
                             } else if entry.isInFinalMinuteAtEntry {
                                 Text("SECONDS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
-                                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                                    .foregroundStyle(Color(hex: "#5A5A5A"))
                                     .tracking(1.6)
                                     .textCase(.uppercase)
                             } else if event.isToday {
                                 Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
-                                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                                    .foregroundStyle(Color(hex: "#5A5A5A"))
                                     .tracking(1.6)
                                     .textCase(.uppercase)
                             } else {
                                 Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                                     .font(.system(size: 11, weight: .semibold, design: .rounded))
-                                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                                    .foregroundStyle(Color(hex: "#5A5A5A"))
                                     .tracking(1.6)
                                     .textCase(.uppercase)
                             }
@@ -349,7 +357,7 @@ struct ModularCountdownView: View {
                             if !entry.isInFinalMinuteAtEntry && !entry.isCompletedAtEntry {
                                 Text("\(Int(event.progress * 100))%")
                                     .font(.system(size: 10, weight: .medium, design: .rounded))
-                                    .foregroundStyle(Color(hex: "#6E6E6E"))
+                                    .foregroundStyle(Color(hex: "#5A5A5A"))
                             }
                         }
                     }

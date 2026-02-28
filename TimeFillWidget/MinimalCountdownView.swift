@@ -43,6 +43,14 @@ struct MinimalCountdownView: View {
             )
             .ignoresSafeArea()
 
+            RadialGradient(
+                colors: [event.color.opacity(0.025), .clear],
+                center: .center,
+                startRadius: 10,
+                endRadius: 120
+            )
+            .ignoresSafeArea()
+
             // Content - vertically centered with optical balance
             VStack(spacing: 0) {
                 Spacer()
@@ -137,13 +145,13 @@ struct MinimalCountdownView: View {
                     if event.startsToday {
                         Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     } else {
                         Text("STARTS IN")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                             .tracking(1.5)
                             .textCase(.uppercase)
                     }
@@ -154,19 +162,19 @@ struct MinimalCountdownView: View {
                 } else if entry.isInFinalMinuteAtEntry {
                     Text("SECONDS LEFT")
                         .font(.system(size: 10, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                         .tracking(1.5)
                         .textCase(.uppercase)
                 } else if event.isToday {
                     Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                         .font(.system(size: 10, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                         .tracking(1.5)
                         .textCase(.uppercase)
                 } else {
                     Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                         .font(.system(size: 10, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                         .tracking(1.5)
                         .textCase(.uppercase)
                 }
@@ -217,12 +225,12 @@ struct WidgetBatteryView: View {
             // Battery body
             ZStack(alignment: .leading) {
                 // Background outline
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color.white.opacity(0.3), lineWidth: 2)
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.white.opacity(0.15), lineWidth: 2)
                     .frame(width: 70, height: 20)
 
                 // Fill - animated progress
-                RoundedRectangle(cornerRadius: 5)
+                RoundedRectangle(cornerRadius: 7)
                     .fill(color)
                     .frame(width: max(64 * progress, 0), height: 14)
                     .padding(.leading, 3)
@@ -230,8 +238,8 @@ struct WidgetBatteryView: View {
             .frame(width: 70, height: 20)
 
             // Battery tip
-            RoundedRectangle(cornerRadius: 3)
-                .fill(Color.white.opacity(0.3))
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.white.opacity(0.15))
                 .frame(width: 3, height: 10)
         }
     }

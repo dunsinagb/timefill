@@ -93,12 +93,12 @@ struct CompactSandFillView: View {
             // Battery outline
             ZStack(alignment: .leading) {
                 // Background
-                RoundedRectangle(cornerRadius: 7)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.white.opacity(0.3), lineWidth: 2)
                     .frame(width: 80, height: 24)
 
                 // Fill - animated
-                RoundedRectangle(cornerRadius: 6)
+                RoundedRectangle(cornerRadius: 8)
                     .fill(color)
                     .frame(width: max(76 * animatedProgress, 0), height: 20)
                     .padding(.leading, 2)
@@ -107,7 +107,7 @@ struct CompactSandFillView: View {
             .clipped()
 
             // Battery tip
-            RoundedRectangle(cornerRadius: 3)
+            RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white.opacity(0.3))
                 .frame(width: 3, height: 12)
         }

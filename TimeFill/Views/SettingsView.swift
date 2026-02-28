@@ -524,7 +524,7 @@ struct SettingsView: View {
                             .font(.system(.caption, design: .rounded))
                             .foregroundStyle(.gray)
 
-                        Text("Version 1.0.0")
+                        Text("Version 1.5")
                             .font(.system(.caption2, design: .rounded))
                             .foregroundStyle(.gray.opacity(0.6))
                     }

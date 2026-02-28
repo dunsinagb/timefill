@@ -38,6 +38,14 @@ struct DotRingCountdownView: View {
             )
             .ignoresSafeArea()
 
+            RadialGradient(
+                colors: [event.color.opacity(0.025), .clear],
+                center: .center,
+                startRadius: 10,
+                endRadius: 160
+            )
+            .ignoresSafeArea()
+
             Group {
                 switch family {
                 case .systemSmall:
@@ -140,14 +148,14 @@ struct DotRingCountdownView: View {
                     if !entry.isCompletedAtEntry {
                         Text(event.formattedTargetDate)
                             .font(.system(size: 13, weight: .medium, design: .rounded))
-                            .foregroundStyle(Color(hex: "#8E8E8E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                     }
 
                     // Progress percentage
                     if !entry.isCompletedAtEntry && !entry.isInFinalMinuteAtEntry {
                         Text("\(Int(event.progress * 100))% complete")
                             .font(.system(size: 11, weight: .medium, design: .rounded))
-                            .foregroundStyle(event.color.opacity(0.8))
+                            .foregroundStyle(event.color.opacity(0.45))
                     } else if entry.isCompletedAtEntry {
                         Text("Completed")
                             .font(.system(size: 11, weight: .semibold, design: .rounded))
@@ -181,7 +189,7 @@ struct DotRingCountdownView: View {
                 if !entry.isCompletedAtEntry {
                     Text(event.formattedTargetDate)
                         .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(hex: "#8E8E8E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -218,32 +226,28 @@ struct DotRingCountdownView: View {
                         .foregroundStyle(entry.isCompletedAtEntry ? event.color : .white)
                     Text("complete")
                         .font(.system(size: 10, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(hex: "#6E6E6E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                 }
                 .frame(maxWidth: .infinity)
 
-                // Divider
                 Rectangle()
-                    .fill(Color.white.opacity(0.1))
+                    .fill(Color.white.opacity(0.06))
                     .frame(width: 1, height: 30)
 
-                // Days elapsed
                 VStack(spacing: 2) {
                     Text("\(elapsedDays(event: event))")
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     Text(elapsedDays(event: event) == 1 ? "day passed" : "days passed")
                         .font(.system(size: 10, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(hex: "#6E6E6E"))
+                        .foregroundStyle(Color(hex: "#5A5A5A"))
                 }
                 .frame(maxWidth: .infinity)
 
-                // Divider
                 Rectangle()
-                    .fill(Color.white.opacity(0.1))
+                    .fill(Color.white.opacity(0.06))
                     .frame(width: 1, height: 30)
 
-                // Days remaining
                 VStack(spacing: 2) {
                     if event.isToday && !entry.isCompletedAtEntry {
                         Text("\(event.hoursRemaining)")
@@ -251,14 +255,14 @@ struct DotRingCountdownView: View {
                             .foregroundStyle(.white)
                         Text(event.hoursRemaining == 1 ? "hour left" : "hours left")
                             .font(.system(size: 10, weight: .medium, design: .rounded))
-                            .foregroundStyle(Color(hex: "#6E6E6E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                     } else {
                         Text("\(event.daysRemaining)")
                             .font(.system(size: 22, weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                         Text(event.daysRemaining == 1 ? "day left" : "days left")
                             .font(.system(size: 10, weight: .medium, design: .rounded))
-                            .foregroundStyle(Color(hex: "#6E6E6E"))
+                            .foregroundStyle(Color(hex: "#5A5A5A"))
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -347,12 +351,12 @@ struct DotRingCountdownView: View {
             if event.startsToday {
                 Text(event.hoursUntilStart == 1 ? "HOUR LEFT" : "HOURS LEFT")
                     .font(.system(size: fontSize, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                    .foregroundStyle(Color(hex: "#5A5A5A"))
                     .tracking(1.2)
             } else {
                 Text("STARTS IN")
                     .font(.system(size: fontSize, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(hex: "#8E8E8E"))
+                    .foregroundStyle(Color(hex: "#5A5A5A"))
                     .tracking(1.2)
             }
         } else if entry.isCompletedAtEntry {
@@ -361,17 +365,17 @@ struct DotRingCountdownView: View {
         } else if entry.isInFinalMinuteAtEntry {
             Text("SECONDS")
                 .font(.system(size: fontSize, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(hex: "#8E8E8E"))
+                .foregroundStyle(Color(hex: "#5A5A5A"))
                 .tracking(1.2)
         } else if event.isToday {
             Text(event.hoursRemaining == 1 ? "HOUR LEFT" : "HOURS LEFT")
                 .font(.system(size: fontSize, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(hex: "#8E8E8E"))
+                .foregroundStyle(Color(hex: "#5A5A5A"))
                 .tracking(1.2)
         } else {
             Text(event.daysRemaining == 1 ? "DAY LEFT" : "DAYS LEFT")
                 .font(.system(size: fontSize, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(hex: "#8E8E8E"))
+                .foregroundStyle(Color(hex: "#5A5A5A"))
                 .tracking(1.2)
         }
     }
@@ -396,10 +400,21 @@ struct DotRingShape: View {
                 let y = sin(angle) * Double(radius)
                 let isFilled = index < filledCount
 
+                let rampOpacity = isFilled
+                    ? (filledCount > 1 ? 0.35 + 0.65 * (Double(index) / Double(filledCount - 1)) : 1.0)
+                    : 1.0
+
                 Circle()
-                    .fill(isFilled ? color : Color.white.opacity(0.15))
+                    .fill(isFilled ? color.opacity(rampOpacity) : Color.white.opacity(0.07))
                     .frame(width: dotSize, height: dotSize)
                     .offset(x: x, y: y)
+
+                if isFilled && index == filledCount - 1 {
+                    Circle()
+                        .stroke(color.opacity(0.5), lineWidth: 1)
+                        .frame(width: dotSize + 3, height: dotSize + 3)
+                        .offset(x: x, y: y)
+                }
             }
         }
         .frame(width: ringSize, height: ringSize)
